@@ -5,5 +5,5 @@ package edu.monash.fit2099.interfaces;
  * or downcasting references in the game.   
  */
 public interface ActionInterface {
-
+	
 }

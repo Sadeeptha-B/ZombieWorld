@@ -87,7 +87,6 @@ public class HuntBehaviour implements Behaviour {
 	}
 
 
-
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		return hunt(actor, map.locationOf(actor));
