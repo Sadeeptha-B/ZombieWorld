@@ -18,10 +18,10 @@ public class Menu {
 	public Action showMenu(Actor actor, Actions actions, Display display) {
 		ArrayList<Character> freeChars = new ArrayList<Character>();
 		HashMap<Character, Action> keyToActionMap = new HashMap<Character, Action>();
-
+																			
 		for (char i = 'a'; i <= 'z'; i++)
 			freeChars.add(i);
-
+			
 		// Show with the actions with hotkeys first;
 		for (Action action : actions.sorted(new SortHotkeysFirst())) {
 			String hotKey = action.hotkey();
@@ -50,6 +50,8 @@ public class Menu {
 	 * Inner class that provides the ability to compare two Actions.
 	 * 
 	 * This allows Actions to be sorted in order of their hotkeys. 
+	 *1
+	 *1
 	 *
 	 */
 	class SortHotkeysFirst implements Comparator<Action> {
