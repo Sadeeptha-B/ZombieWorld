@@ -14,7 +14,7 @@ public class Tree extends Ground {
 
 	public Tree() {
 		super('+');
-	}
+	}  
 
 	@Override
 	public void tick(Location location) {

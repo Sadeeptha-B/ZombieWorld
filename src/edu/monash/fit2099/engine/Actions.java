@@ -70,7 +70,7 @@ public class Actions implements Iterable<Action> {
 	 * Returns an Iterator for the underlying collection.
 	 * 
 	 * Implementing this method means that Actions implements the Iterable interface, which allows
-	 * you to use it in a foreach, e.g. <code>for (Action a: actions) {
+	 * you to use it in a for each, e.g. <code>for (Action a: actions) {
 	 *    ...
 	 *    </code>
 	 * 

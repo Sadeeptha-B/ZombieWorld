@@ -84,7 +84,6 @@ public class World {
 			for (GameMap gameMap : gameMaps) {
 				gameMap.tick();
 			}
-
 		}
 		display.println(endGameMessage());
 	}
@@ -132,6 +131,7 @@ public class World {
 			// Game rule. If it's on the ground you can pick it up.
 			actions.add(item.getPickUpAction());
 		}
+		
 		actions.add(new DoNothingAction());
 
 		Action action = actor.playTurn(actions, lastActionMap.get(actor), map, display);

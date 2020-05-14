@@ -40,11 +40,12 @@ public class AttackAction extends Action {
 		if (rand.nextBoolean()) {
 			return actor + " misses " + target + ".";
 		}
-
+			
 		int damage = weapon.damage();
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
 		target.hurt(damage);
+		//map.locationOf(actor).addItem(new Arm);
 		if (!target.isConscious()) {
 			Item corpse = new PortableItem("dead " + target, '%');
 			map.locationOf(target).addItem(corpse);

@@ -31,7 +31,7 @@ public class Zombie extends ZombieActor {
 	public IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(10, "punches");
 	}
-
+					
 	/**
 	 * If a Zombie can attack, it will.  If not, it will chase any human within 10 spaces.  
 	 * If no humans are close enough it will wander randomly.

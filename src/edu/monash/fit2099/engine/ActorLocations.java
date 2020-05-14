@@ -175,5 +175,6 @@ public class ActorLocations implements Iterable<Actor> {
 	@Override
 	public Iterator<Actor> iterator() {
 		return new ActorIterator(actorToLocation);
+		
 	}
 }
