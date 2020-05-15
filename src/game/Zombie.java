@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Random;
+
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
@@ -16,6 +18,9 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
  *
  */
 public class Zombie extends ZombieActor {
+	
+	protected Random rand = new Random();
+	
 	private Behaviour[] behaviours = {
 			new AttackBehaviour(ZombieCapability.ALIVE),
 			new HuntBehaviour(Human.class, 10),
@@ -29,7 +34,16 @@ public class Zombie extends ZombieActor {
 
 	@Override
 	public IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(10, "punches");
+		IntrinsicWeapon attack; 
+		
+		if (rand.nextBoolean()) {
+			attack = new IntrinsicWeapon(20,"bites");
+			heal(5);
+		} else {
+			attack = new IntrinsicWeapon(10, "punches");
+		}
+		
+		return attack;
 	}
 					
 	/**
@@ -43,6 +57,9 @@ public class Zombie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		if (rand.nextBoolean())
+			display.println(zombiePhrases());
+			
 		for (Behaviour behaviour : behaviours) {
 			Action action = behaviour.getAction(this, map);
 			if (action != null)
@@ -50,4 +67,14 @@ public class Zombie extends ZombieActor {
 		}
 		return new DoNothingAction();	
 	}
+	
+	// Not using the I/O interface : Display....
+	public String zombiePhrases() {
+		String[] phrases = {"Braaaainnns", "Dieeeee", "Humans yummy", "Arrrghhh", "Gaggghhh"};
+		int randomIndex = rand.nextInt(phrases.length);
+		return this + " says " + phrases[randomIndex];
+	}
+		
+	
+	
 }
