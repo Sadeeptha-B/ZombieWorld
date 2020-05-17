@@ -22,6 +22,7 @@ public class Zombie extends ZombieActor {
 	protected Random rand = new Random();
 	
 	private Behaviour[] behaviours = {
+			new PickUpBehaviour(),
 			new AttackBehaviour(ZombieCapability.ALIVE),
 			new HuntBehaviour(Human.class, 10),
 			new WanderBehaviour()
