@@ -4,6 +4,7 @@ import java.util.*;
 
 import game.Behaviour;
 import edu.monash.fit2099.engine.*;
+import game.Limb;
 
 
 public class Bug extends Actor {
@@ -37,4 +38,9 @@ public class Bug extends Actor {
 	protected IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(1, "stings");
 	}
+	
+	public Limb dismember() {
+		return null;
+	}
+	
 }

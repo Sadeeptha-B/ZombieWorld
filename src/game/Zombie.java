@@ -19,6 +19,9 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
  */
 public class Zombie extends ZombieActor {
 	
+	private int armCount = 2;
+	private int legCount = 2;
+	
 	protected Random rand = new Random();
 	
 	private Behaviour[] behaviours = {
@@ -68,13 +71,32 @@ public class Zombie extends ZombieActor {
 		return new DoNothingAction();	
 	}
 	
-	// Not using the I/O interface : Display....
+	
 	public String zombiePhrases() {
 		String[] phrases = {"Braaaainnns", "Dieeeee", "Humans yummy", "Arrrghhh", "Gaggghhh"};
 		int randomIndex = rand.nextInt(phrases.length);
 		return this + " says " + phrases[randomIndex];
 	}
+
+	
+	public Limb dismember() {
+		if ((armCount == 0) || (legCount== 0)){
+			return null;
+		}
+			
+		Limb fallenLimb;
 		
+		if (rand.nextInt(3) == 0) {
+			fallenLimb = new Arm();
+			armCount -= 1;
+		} else if (rand.nextInt(5) == 0){	
+			fallenLimb = new Leg();
+			legCount -= 1;	
+		} else {
+			return null;
+		}
+		return fallenLimb;
+	}
 	
 	
 }
