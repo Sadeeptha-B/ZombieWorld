@@ -1,6 +1,7 @@
 package game;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
@@ -27,12 +28,14 @@ public class Zombie extends ZombieActor {
 	private Behaviour[] behaviours = {
 			new PickUpBehaviour(),
 			new AttackBehaviour(ZombieCapability.ALIVE),
-			new HuntBehaviour(Human.class, 10),
-			new WanderBehaviour()
+			new HuntBehaviour(Human.class, 10, ZombieCapability.CAPABLE),
+			new WanderBehaviour(ZombieCapability.CAPABLE)
 	};
 
+	
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
+		this.addCapability(ZombieCapability.CAPABLE);
 	}
 	
 
@@ -63,6 +66,10 @@ public class Zombie extends ZombieActor {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		if (rand.nextBoolean())
 			display.println(zombiePhrases());
+		
+		if (legCount == 0) {
+			this.removeCapability(ZombieCapability.CAPABLE);
+		}
 			
 		for (Behaviour behaviour : behaviours) {
 			Action action = behaviour.getAction(this, map);
@@ -87,17 +94,17 @@ public class Zombie extends ZombieActor {
 			
 		Limb fallenLimb;
 		
-		if (rand.nextInt(3) == 0) {
+		if (rand.nextInt(2) == 0) {
 			fallenLimb = new Arm();
 			armCount -= 1;
-		} else if (rand.nextInt(5) == 0){	
+		} else if (rand.nextInt(4) == 0){	
 			fallenLimb = new Leg();
 			legCount -= 1;	
 		} else {
 			return null;
 		}
+		
 		return fallenLimb;
 	}
-	
 	
 }

@@ -18,7 +18,11 @@ import edu.monash.fit2099.engine.Location;
 public class WanderBehaviour implements Behaviour {
 	
 	private Random random = new Random();
+	private ZombieCapability movable;
 
+	public WanderBehaviour(ZombieCapability movable) {
+		this.movable = movable;
+	}
 
 	/**
 	 * Returns a MoveAction to wander to a random location, if possible.  
@@ -39,7 +43,7 @@ public class WanderBehaviour implements Behaviour {
             }
         }
 		
-		if (!actions.isEmpty()) {
+		if ((!actions.isEmpty()) && (actor.hasCapability(movable))){
 			return actions.get(random.nextInt(actions.size()));
 		}
 		else {
