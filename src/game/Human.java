@@ -40,6 +40,7 @@ public class Human extends ZombieActor {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// FIXME humans are pretty dumb, maybe they should at least run away from zombies?
 		return behaviour.getAction(this, map);
+
 	}
 
 }

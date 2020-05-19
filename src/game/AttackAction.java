@@ -45,9 +45,10 @@ public class AttackAction extends Action {
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
 		target.hurt(damage);
-		//map.locationOf(actor).addItem(new Arm);
+
 		if (!target.isConscious()) {
-			Item corpse = new PortableItem("dead " + target, '%');
+			
+			Item corpse = new Corpse("dead " + target, '%');
 			map.locationOf(target).addItem(corpse);
 			
 			Actions dropActions = new Actions();
