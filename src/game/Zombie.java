@@ -2,6 +2,7 @@ package game;
 
 import java.util.Random;
 
+import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
@@ -19,25 +20,40 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
  */
 public class Zombie extends ZombieActor {
 	
+	private int armCount = 2;
+	private int legCount = 2;
+	
 	protected Random rand = new Random();
 	
 	private Behaviour[] behaviours = {
 			new PickUpBehaviour(),
 			new AttackBehaviour(ZombieCapability.ALIVE),
-			new HuntBehaviour(Human.class, 10),
-			new WanderBehaviour()
+			new HuntBehaviour(Human.class, 10, ZombieCapability.CAPABLE),
+			new WanderBehaviour(ZombieCapability.CAPABLE)
 	};
 
+	
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
+		this.addCapability(ZombieCapability.CAPABLE);
 	}
 	
 
 	@Override
 	public IntrinsicWeapon getIntrinsicWeapon() {
 		IntrinsicWeapon attack; 
+		boolean condition = rand.nextBoolean();
 		
-		if (rand.nextBoolean()) {
+		switch (armCount) {
+		case 0:
+			condition = true;
+		case 1:
+			condition = rand.nextBoolean() | rand.nextBoolean();
+			break;
+		}
+		
+		
+		if (condition) {
 			attack = new IntrinsicWeapon(20,"bites");
 			heal(5);
 		} else {
@@ -46,7 +62,8 @@ public class Zombie extends ZombieActor {
 		
 		return attack;
 	}
-					
+	
+	
 	/**
 	 * If a Zombie can attack, it will.  If not, it will chase any human within 10 spaces.  
 	 * If no humans are close enough it will wander randomly.
@@ -60,6 +77,8 @@ public class Zombie extends ZombieActor {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		if (rand.nextBoolean())
 			display.println(zombiePhrases());
+		
+		limbCheck(map);
 			
 		for (Behaviour behaviour : behaviours) {
 			Action action = behaviour.getAction(this, map);
@@ -69,13 +88,59 @@ public class Zombie extends ZombieActor {
 		return new DoNothingAction();	
 	}
 	
-	// Not using the I/O interface : Display....
+	
 	public String zombiePhrases() {
 		String[] phrases = {"Braaaainnns", "Dieeeee", "Humans yummy", "Arrrghhh", "Gaggghhh"};
 		int randomIndex = rand.nextInt(phrases.length);
 		return this + " says " + phrases[randomIndex];
 	}
-		
+
 	
+	public Limb dismember() {
+		if ((armCount == 0) || (legCount== 0)){
+			return null;
+		}
+			
+		Limb fallenLimb;
+		
+		if (rand.nextInt(2) == 0) {
+			fallenLimb = new Arm();
+			armCount -= 1;
+		} else if (rand.nextInt(4) == 0){	
+			fallenLimb = new Leg();
+			legCount -= 1;	
+		} else {
+			return null;
+		}
+		
+		return fallenLimb;
+	}
+	
+	
+	private void limbCheck(GameMap map) {
+		if (legCount == 0) {
+			this.removeCapability(ZombieCapability.CAPABLE);
+		}
+		
+		switch(armCount) {
+		case 0:
+			dropItems(map);
+			break;
+		case 1:
+			if (rand.nextBoolean())
+				dropItems(map);
+			break;
+		}
+	}
+	
+	private void dropItems(GameMap map) {
+		Actions dropActions = new Actions();
+		for (Item item: this.getInventory())
+			dropActions.add(item.getDropAction());
+		for (Action drop : dropActions)
+			drop.execute(this, map);
+	}
+	
+	public void testmethod() {}
 	
 }

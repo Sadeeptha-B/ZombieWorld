@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
+import game.Limb;
 
 /**
  * Class representing the Player.
@@ -28,5 +29,9 @@ public class Player extends Actor {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		return menu.showMenu(this, actions, display);
+	}
+	
+	public Limb dismember() {
+		return null;
 	}
 }

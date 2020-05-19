@@ -21,16 +21,18 @@ import edu.monash.fit2099.engine.Location;
  *
  */
 public class HuntBehaviour implements Behaviour {
-
+	
 	private Class<?> targetClass;
 	private String targetName; 
 	private int maxRange;
 	private HashSet<Location> visitedLocations = new HashSet<Location>();
+	private ZombieCapability hunter;
 	
-	public HuntBehaviour(Class<?> cls, int range) {
+	public HuntBehaviour(Class<?> cls, int range, ZombieCapability hunter) {
 		this.targetClass = cls;
 		this.targetName = targetClass.getSimpleName();
 		this.maxRange = range;
+		this.hunter = hunter;
 	}
 	
 	private Action hunt(Actor actor, Location here) {
@@ -89,7 +91,10 @@ public class HuntBehaviour implements Behaviour {
 
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		return hunt(actor, map.locationOf(actor));
+		if (actor.hasCapability(hunter)) {
+			return hunt(actor, map.locationOf(actor));
+		}
+		return null;
 	}
 
 }

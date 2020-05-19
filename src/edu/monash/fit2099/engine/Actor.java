@@ -162,7 +162,6 @@ public abstract class Actor implements ActorInterface, Capable, Printable {
 	 * @return true if and only if the current Actor has the required capability
 	 */
 	public boolean hasCapability(Enum<?> capability) {
-
 		for (Item item : inventory) {
 			if (item.hasCapability(capability)) {
 				return true;

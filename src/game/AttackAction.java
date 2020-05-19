@@ -46,6 +46,15 @@ public class AttackAction extends Action {
 
 		target.hurt(damage);
 
+		
+		if (target instanceof Zombie) {
+			Limb fallenLimb = target.dismember();
+			if (fallenLimb != null) {
+				map.locationOf(actor).addItem(fallenLimb);
+				result += System.lineSeparator() + target + "'s " + fallenLimb.toString() + " falls off";
+			}
+		}
+		
 		if (!target.isConscious()) {
 			
 			Item corpse = new Corpse("dead " + target, '%');
