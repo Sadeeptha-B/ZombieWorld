@@ -14,7 +14,7 @@ public class Farmer extends Human {
 
 	public Farmer(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
-		this.addCapability(ZombieCapability.CAPABLE);
+		this.addCapability(ZombieCapability.MOBILE);
 	}
 	
 	@Override
@@ -25,7 +25,6 @@ public class Farmer extends Human {
 				return action;
 			
 		}
-		System.out.println("HIII");
-		return new WanderBehaviour(ZombieCapability.CAPABLE).getAction(this, map);
+		return new WanderBehaviour(ZombieCapability.MOBILE).getAction(this, map);
 	}
 }

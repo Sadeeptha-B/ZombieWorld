@@ -19,5 +19,9 @@ public class Crop extends Item {
 		}
 	}
 	
+	
+	public CraftableItem asCraftableItem(){
+		return null;
+	}
 
 }

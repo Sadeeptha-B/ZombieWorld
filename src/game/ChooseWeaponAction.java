@@ -7,17 +7,24 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.WeaponItem;
 
-
+/**
+ * Class to enable choosing of weapons. Called upon each turn if 
+ * 
+ * @author Sadeeptha Bandara
+ *
+ */
 public class ChooseWeaponAction extends Action {
 
-	protected ArrayList<Item> weapons = new ArrayList<Item>();
 	protected WeaponItem chosenWeapon;
+	
 	
 	public ChooseWeaponAction(WeaponItem weapon) {
 		chosenWeapon = weapon;
 	}
 	
-	
+	/**
+	 * Brings the chosen weapon to the beginning of the inventory
+	 */
 	public String execute(Actor actor, GameMap map) {
 		if (actor.getWeapon() == chosenWeapon)
 			return chosenWeapon + " is in use.";
@@ -39,6 +46,9 @@ public class ChooseWeaponAction extends Action {
 		return actor + " switched weapon to " + chosenWeapon;
 	}
 	
+	/**
+	 * Description for menu
+	 */
 	public String menuDescription(Actor actor) {
 		return "Choose weapon - " + chosenWeapon;
 	}

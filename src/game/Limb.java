@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.WeaponItem;
 
 
 /**
- * 
+ * Limb class is the parent class of arm and leg
  * 
  * @author Sadeeptha Bandara
  *
