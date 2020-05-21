@@ -36,14 +36,26 @@ public class PickUpBehaviour implements Behaviour{
 		if (!actor.getInventory().isEmpty()) {
 			return null;
 		}
-		for(Item item : map.locationOf(actor).getItems()) {
-			if (item instanceof WeaponItem)
-				actions.add(item.getPickUpAction());
+		if(actor instanceof Zombie) {
+			for(Item item : map.locationOf(actor).getItems()) {
+				if (item instanceof WeaponItem)
+					actions.add(item.getPickUpAction());
+			}
+		}
+		if (actor instanceof Human) {
+			for(Item item : map.locationOf(actor).getItems()){
+				if(item instanceof Crop) { 
+					Action action = item.getPickUpAction();
+					if(action != null)
+						actions.add(action);
+				}
+			}
 		}
 		if (! actions.isEmpty()) {
 			return actions.get(random.nextInt(actions.size()));
-		}
+			}
 		return null;
-	}
+	
+		}
 
-}
+	}

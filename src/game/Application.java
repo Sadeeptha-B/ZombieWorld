@@ -53,6 +53,7 @@ public class Application {
 		world.addPlayer(player, gameMap.at(42, 15));
 		
 	    // Place some random humans
+		gameMap.at(31, 7).addActor(new Farmer("Ceres", 'F', 75));
 		String[] humans = {"Carlton", "May", "Vicente", "Andrea", "Wendy",
 				"Elina", "Winter", "Clem", "Jacob", "Jaquelyn"};
 		int x, y;
