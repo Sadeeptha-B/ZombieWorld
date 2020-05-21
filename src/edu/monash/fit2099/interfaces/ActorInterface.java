@@ -9,4 +9,6 @@ import game.Limb;
 
 public interface ActorInterface {
 	public Limb dismember();
+	
+	public float getHealthPercantage();
 }

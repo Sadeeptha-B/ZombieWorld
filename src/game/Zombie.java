@@ -140,6 +140,12 @@ public class Zombie extends ZombieActor {
 		for (Action drop : dropActions)
 			drop.execute(this, map);
 	}
+
+
+	@Override
+	public float getHealthPercantage() {
+		return 0;
+	}
 	
 	
 	

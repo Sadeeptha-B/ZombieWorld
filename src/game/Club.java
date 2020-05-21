@@ -17,5 +17,15 @@ public class Club extends WeaponItem {
 	public CraftableItem asCraftableItem(){
 		return null;
 	}
+
+	@Override
+	public int returnHealPoints() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEdible() {
+		return false;
+	}
 	
 }

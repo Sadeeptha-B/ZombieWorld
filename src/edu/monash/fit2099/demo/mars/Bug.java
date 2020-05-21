@@ -42,5 +42,10 @@ public class Bug extends Actor {
 	public Limb dismember() {
 		return null;
 	}
+
+	@Override
+	public float getHealthPercantage() {
+		return 0;
+	}
 	
 }

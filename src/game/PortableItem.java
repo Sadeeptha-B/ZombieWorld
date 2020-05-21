@@ -17,5 +17,15 @@ public class PortableItem extends Item {
 	public CraftableItem asCraftableItem(){
 		return this instanceof CraftableItem ? (CraftableItem) this : null;
 	}
+
+	@Override
+	public int returnHealPoints() {
+		return 0;
+	}
+
+	@Override
+	public boolean isEdible() {
+		return false;
+	}
 	
 }

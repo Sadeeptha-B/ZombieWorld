@@ -1,6 +1,7 @@
 package game;
 
 import java.util.Random;
+
 import edu.monash.fit2099.engine.Location;
 
 /**
@@ -26,8 +27,12 @@ public class Corpse extends PortableItem {
 	 */
 	public void tick(Location location){
 		count++;
+		mutate(location);
+	}
+	
+	private void mutate(Location location) {
 		if (count > 5) {
-			if(rand.nextInt(10 - count) == 0) {
+			if(rand.nextInt(10 - count) == 0 && locationValid(location)) {
 				Zombie zombie = new Zombie(name);
 				location.addActor(zombie);
 				System.out.println(name + " has risen from the dead");
@@ -36,5 +41,12 @@ public class Corpse extends PortableItem {
 		}
 	}
 	
+	private boolean locationValid(Location location) {
+		if (location.containsAnActor()) {
+			count --;
+			return false;
+		}
+		return true;
+	}
 
 }

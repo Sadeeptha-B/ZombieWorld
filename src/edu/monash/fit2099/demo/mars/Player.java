@@ -34,4 +34,9 @@ public class Player extends Actor {
 	public Limb dismember() {
 		return null;
 	}
+
+	@Override
+	public float getHealthPercantage() {
+		return 0;
+	}
 }

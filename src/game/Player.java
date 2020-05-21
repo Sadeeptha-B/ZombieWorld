@@ -32,6 +32,9 @@ public class Player extends Human {
 			return lastAction.getNextAction();
 		
 		for (Item item : this.getInventory()) {
+			if (item.isEdible()) {
+				actions.add(new EatAction(item));
+			}
 			if (item.asCraftableItem() != null) {
 				actions.add(new CraftAction(item.asCraftableItem()));
 			}
