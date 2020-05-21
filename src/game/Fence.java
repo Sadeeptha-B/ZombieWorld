@@ -24,4 +24,9 @@ public class Fence extends Ground {
 	public boolean blocksThrownObjects() {
 		return true;
 	}
+
+	@Override
+	public boolean isHarvestable() {
+		return false;
+	}
 }

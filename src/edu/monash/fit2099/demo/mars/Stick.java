@@ -12,15 +12,14 @@ public class Stick extends WeaponItem {
 	public CraftableItem asCraftableItem(){
 		return null;
 	}
+	
 
 	@Override
-	public int returnHealPoints() {
-		return 0;
+	public int getHealPoints() {return 0;
 	}
-
+	
 	@Override
 	public boolean isEdible() {
 		return false;
 	}
-
 }

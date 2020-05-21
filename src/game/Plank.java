@@ -19,11 +19,11 @@ public class Plank extends WeaponItem {
 		return null;
 	}
 
-	@Override
-	public int returnHealPoints() {
-		return 0;
-	}
 
+	@Override
+	public int getHealPoints() {return 0;
+	}
+	
 	@Override
 	public boolean isEdible() {
 		return false;

@@ -14,4 +14,9 @@ public class Crater extends Ground {
 	public boolean canActorEnter(Actor a) {
 		return a.hasCapability(DemoCapabilities.SPACETRAVELLER);
 	}
+
+	@Override
+	public boolean isHarvestable() {
+		return false;
+	}
 }

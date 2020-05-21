@@ -5,8 +5,13 @@ import java.util.Random;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Item;
 
+/**
+ * behaviour for farmers to plant crops
+ * 
+ * @author Kaveesha Nissanka
+ *
+ */
 public class SowCropBehaviour implements Behaviour {
 	
 	protected Random rand = new Random();
@@ -14,15 +19,17 @@ public class SowCropBehaviour implements Behaviour {
 	public SowCropBehaviour(){
 		
 	}
-	
+	/**
+	 * 
+	 * returns a SowCropAction with a 33% chance
+	 * 
+	 * @param actor the actors that will grow the crops
+	 * 
+	 */
 	public Action getAction(Actor actor, GameMap map) {
-		for(Item item: map.locationOf(actor).getItems()) {
-			if(item.isEdible())
-				return null;
-		}
 			
 		if (rand.nextInt(3) == 0 && map.locationOf(actor).getGround() instanceof Dirt) {
-			return new SowCropAction(new Crop("crop",'_',false));
+			return new SowCropAction(new Crop());
 		}
 		return null;
 	}

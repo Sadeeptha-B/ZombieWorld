@@ -1,34 +1,44 @@
 package game;
 
-import edu.monash.fit2099.engine.Item;
+import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
-
-public class Crop extends Item {
-	
-	private int healPoints = 10;
-	
-	public Crop(String name, char displayChar, boolean portable) {
-		super(name,displayChar,portable);
-	}
+/**
+ * Class for the crops planted by farmers
+ * 
+ * @author Kaveesha Nissanka
+ *
+ */
+public class Crop extends Ground {
 	
 	private int count = 0;
+	private boolean harvestable = false;
 	
+	public Crop() {
+		super('_');
+	}
+	
+	
+	/**
+	 * 
+	 * the growth of the crops happen with each tick 
+	 * will grow after 20 ticks
+	 * @param map the location of the item
+	 * 
+	 */
 	public void tick(Location map) {
 		count++;
 		if (count > 20) {
-			this.displayChar = '$';
-			portable = true;
+			displayChar = '$';
+			harvestable = true;
 		}
 	}
 	public CraftableItem asCraftableItem() {
 		return null;
 	}
-	@Override
-	public int returnHealPoints() {
-		return healPoints;
+	
+	public boolean isHarvestable() {
+		return harvestable;
+		
 	}
-	@Override
-	public boolean isEdible() {
-		return true;
-	}
+	
 }

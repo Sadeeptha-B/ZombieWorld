@@ -10,4 +10,9 @@ public class Dirt extends Ground {
 	public Dirt() {
 		super('.');
 	}
+
+	@Override
+	public boolean isHarvestable() {
+		return false;
+	}
 }

@@ -26,4 +26,9 @@ public class Tree extends Ground {
 		if (age == 20)
 			displayChar = 'T';
 	}
+
+	@Override
+	public boolean isHarvestable() {
+		return false;
+	}
 }

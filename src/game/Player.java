@@ -35,7 +35,7 @@ public class Player extends Human {
 		if (lastAction.getNextAction() != null) 
 			return lastAction.getNextAction();
 	
-		addSpecificActions(actions);
+		addSpecificActions(actions, map);
 		Action action =  menu.showMenu(this, actions, display);
 
 		return action;
@@ -47,9 +47,10 @@ public class Player extends Human {
 	 * @param actions : Menu actions for player
 	 * @return  The actions class with new added actions
 	 */
-	private Actions addSpecificActions(Actions actions) {
+	private Actions addSpecificActions(Actions actions, GameMap map) {
 		HashSet<WeaponItem> weapons = new HashSet<WeaponItem>();
-		
+		if (map.locationOf(this).getGround() instanceof Crop)
+			actions.add(new HarvestAction());
 		for (Item item : this.getInventory()) {
 			if (item.isEdible()) {
 				actions.add(new EatAction(item));

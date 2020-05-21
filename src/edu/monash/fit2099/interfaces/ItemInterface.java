@@ -10,7 +10,7 @@ public interface ItemInterface {
 	
 	public CraftableItem asCraftableItem();
 	
-	public int returnHealPoints();
+	public int getHealPoints();
 	
 	public boolean isEdible();
 }

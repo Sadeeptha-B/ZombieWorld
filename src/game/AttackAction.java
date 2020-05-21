@@ -56,8 +56,13 @@ public class AttackAction extends Action {
 		}
 		
 		if (!target.isConscious()) {
-			
-			Item corpse = new Corpse("dead " + target, '%');
+			Item corpse;
+			if(target instanceof Human) {
+				corpse = new Corpse("dead " + target, '%', true);
+			}
+			else {
+				corpse = new Corpse("dead " + target, '%', false);
+			}
 			map.locationOf(target).addItem(corpse);
 			
 			Actions dropActions = new Actions();

@@ -16,9 +16,11 @@ public class Corpse extends PortableItem {
 	protected Random rand = new Random();
 	
 	public int count = 0;
+	public boolean diedAsHuman;
 	
-	public Corpse(String name, char displayChar) {
+	public Corpse(String name, char displayChar, boolean diedAsHuman) {
 		super(name, displayChar);
+		this.diedAsHuman = diedAsHuman;
 	}
 	/**
 	 * the tick method will create a Zombie after 5-10 turns
@@ -27,7 +29,8 @@ public class Corpse extends PortableItem {
 	 */
 	public void tick(Location location){
 		count++;
-		mutate(location);
+		if(diedAsHuman)
+			mutate(location);
 	}
 	
 	private void mutate(Location location) {

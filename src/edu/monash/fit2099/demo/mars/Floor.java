@@ -8,4 +8,9 @@ public class Floor extends Ground {
 	public Floor() {
 		super('.');
 	}
+
+	@Override
+	public boolean isHarvestable() {
+		return false;
+	}
 }
