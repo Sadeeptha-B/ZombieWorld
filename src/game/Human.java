@@ -13,9 +13,13 @@ import edu.monash.fit2099.engine.GameMap;
  *
  */
 public class Human extends ZombieActor {
+<<<<<<< HEAD
 	private Behaviour behaviours[] = {
 			new PickUpBehaviour()
 	};
+=======
+	private Behaviour behaviour = new WanderBehaviour(ZombieCapability.MOBILE);
+>>>>>>> branch 'master' of https://git.infotech.monash.edu/fit2099-s1-2020/JavaJuveniles/project.git
 
 	/**
 	 * The default constructor creates default Humans
@@ -24,7 +28,7 @@ public class Human extends ZombieActor {
 	 */
 	public Human(String name) {
 		super(name, 'H', 50, ZombieCapability.ALIVE);
-		this.addCapability(ZombieCapability.CAPABLE);
+		this.addCapability(ZombieCapability.MOBILE);
 	}
 	
 	/**

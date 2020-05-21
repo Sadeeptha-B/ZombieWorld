@@ -13,4 +13,9 @@ public class Club extends WeaponItem {
 	public Club() {
 		super("club", '|', 25, "whams");
 	}
+	
+	public CraftableItem asCraftableItem(){
+		return null;
+	}
+	
 }

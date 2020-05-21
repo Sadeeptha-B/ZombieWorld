@@ -15,4 +15,7 @@ public class Plank extends WeaponItem {
 		// TODO Auto-generated constructor stub
 	}
 
+	public CraftableItem asCraftableItem(){
+		return null;
+	}
 }
