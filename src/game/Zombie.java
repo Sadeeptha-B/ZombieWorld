@@ -28,14 +28,14 @@ public class Zombie extends ZombieActor {
 	private Behaviour[] behaviours = {
 			new PickUpBehaviour(),
 			new AttackBehaviour(ZombieCapability.ALIVE),
-			new HuntBehaviour(Human.class, 10, ZombieCapability.CAPABLE),
-			new WanderBehaviour(ZombieCapability.CAPABLE)
+			new HuntBehaviour(Human.class, 10, ZombieCapability.MOBILE),
+			new WanderBehaviour(ZombieCapability.MOBILE)
 	};
 
 	
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
-		this.addCapability(ZombieCapability.CAPABLE);
+		this.addCapability(ZombieCapability.MOBILE);
 	}
 	
 
@@ -119,7 +119,7 @@ public class Zombie extends ZombieActor {
 	
 	private void limbCheck(GameMap map) {
 		if (legCount == 0) {
-			this.removeCapability(ZombieCapability.CAPABLE);
+			this.removeCapability(ZombieCapability.MOBILE);
 		}
 		
 		switch(armCount) {
@@ -141,6 +141,6 @@ public class Zombie extends ZombieActor {
 			drop.execute(this, map);
 	}
 	
-	public void testmethod() {}
+	
 	
 }

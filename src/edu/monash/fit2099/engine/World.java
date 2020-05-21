@@ -126,6 +126,7 @@ public class World {
 			actions.add(destination.getMoveAction(actor, exit.getName(), exit.getHotKey()));
 		}
 
+
 		for (Item item : here.getItems()) {
 			actions.add(item.getAllowableActions());
 			// Game rule. If it's on the ground you can pick it up.

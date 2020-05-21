@@ -13,4 +13,7 @@ public class Mace extends WeaponItem {
 		super("mace", '!', 35, "ker-plunk");
 	}
 
+	public CraftableItem asCraftableItem(){
+		return null;
+	}
 }

@@ -13,7 +13,7 @@ import edu.monash.fit2099.engine.GameMap;
  *
  */
 public class Human extends ZombieActor {
-	private Behaviour behaviour = new WanderBehaviour(ZombieCapability.CAPABLE);
+	private Behaviour behaviour = new WanderBehaviour(ZombieCapability.MOBILE);
 
 	/**
 	 * The default constructor creates default Humans
@@ -22,7 +22,7 @@ public class Human extends ZombieActor {
 	 */
 	public Human(String name) {
 		super(name, 'H', 50, ZombieCapability.ALIVE);
-		this.addCapability(ZombieCapability.CAPABLE);
+		this.addCapability(ZombieCapability.MOBILE);
 	}
 	
 	/**

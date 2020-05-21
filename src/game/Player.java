@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
-
+import edu.monash.fit2099.engine.Item;
 
 /**
  * Class representing the Player.
@@ -30,10 +30,15 @@ public class Player extends Human {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null) 
 			return lastAction.getNextAction();
+		
+		for (Item item : this.getInventory()) {
+			if (item.asCraftableItem() != null) {
+				actions.add(new CraftAction(item.asCraftableItem()));
+			}
+		}
+		
 		Action action =  menu.showMenu(this, actions, display);
-//		if (action instanceof AttackAction) {
-//			//call method to chop off limbs 
-//		}
+
 		return action;
 		
 	}

@@ -1,5 +1,7 @@
 package game;
 
+import edu.monash.fit2099.engine.WeaponItem;
+
 
 /**
  * 
@@ -7,10 +9,11 @@ package game;
  * @author Sadeeptha Bandara
  *
  */
-public class Limb extends PortableItem{
+public abstract class Limb extends CraftableItem{
 
-	public Limb(String limbType, char displayChar) {
-		super(limbType,displayChar);
+	public Limb(String limbType, char displayChar, String craftedTo) {
+		super(limbType,displayChar, craftedTo);
 	}
 
+	public abstract WeaponItem craft();
 }
