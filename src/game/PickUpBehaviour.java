@@ -42,6 +42,7 @@ public class PickUpBehaviour implements Behaviour{
 					actions.add(item.getPickUpAction());
 			}
 		}
+		
 		if (actor instanceof Human) {
 			for(Item item : map.locationOf(actor).getItems()){
 				if(item.isEdible()) { 

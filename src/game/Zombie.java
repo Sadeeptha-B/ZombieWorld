@@ -15,7 +15,8 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
  * 
  * This Zombie is pretty boring.  It needs to be made more interesting.
  * 
- * @author ram
+ * @author ram, Student Sadeeptha Bandara
+ * 
  *
  */
 public class Zombie extends ZombieActor {
@@ -33,6 +34,12 @@ public class Zombie extends ZombieActor {
 	};
 
 	
+	/**
+	 * Constructor
+	 * 
+	 * Initializes the Zombie and adds capabilities of undead and mobile
+	 * @param name : Zombie's name
+	 */
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD);
 		this.addCapability(ZombieCapability.MOBILE);
@@ -40,6 +47,12 @@ public class Zombie extends ZombieActor {
 	
 
 	@Override
+	/**
+	 * Returns the intrinsic attack of a Zombie, if the Zombie does not have a
+	 * weapon
+	 * 
+	 * The attack depends on the arm count of the Zombie
+	 */
 	public IntrinsicWeapon getIntrinsicWeapon() {
 		IntrinsicWeapon attack; 
 		boolean condition = rand.nextBoolean();
@@ -88,7 +101,10 @@ public class Zombie extends ZombieActor {
 		return new DoNothingAction();	
 	}
 	
-	
+	/**
+	 * Generates a random phrase that the Zombie's will scream
+	 * @return : Zombie phrase
+	 */
 	public String zombiePhrases() {
 		String[] phrases = {"Braaaainnns", "Dieeeee", "Humans yummy", "Arrrghhh", "Gaggghhh"};
 		int randomIndex = rand.nextInt(phrases.length);
@@ -96,6 +112,13 @@ public class Zombie extends ZombieActor {
 	}
 
 	
+	/**
+	 * Called upon each attack on Zombie.
+	 * 
+	 * Randomly dictates limb fall and creates an Arm or Leg class accordingly
+	 * Returns a Limb class if a limb falls, else returns null
+	 * 
+	 */
 	public Limb dismember() {
 		if ((armCount == 0) || (legCount== 0)){
 			return null;
@@ -117,6 +140,11 @@ public class Zombie extends ZombieActor {
 	}
 	
 	
+	/**
+	 * Private method called by playTurn
+	 * To check the number of limbs each turn and drop Items accordingly.	
+	 * @param map : Gamemap, passed in by PlayTurn
+	 */
 	private void limbCheck(GameMap map) {
 		if (legCount == 0) {
 			this.removeCapability(ZombieCapability.MOBILE);
@@ -133,6 +161,12 @@ public class Zombie extends ZombieActor {
 		}
 	}
 	
+	
+	/**
+	 * Drops all items. Called by limbcheck randomly based on the count of limbs
+	 * 
+	 * @param map : Gamemap for getting the location at which to drop weapons 
+	 */
 	private void dropItems(GameMap map) {
 		Actions dropActions = new Actions();
 		for (Item item: this.getInventory())

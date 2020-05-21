@@ -41,7 +41,12 @@ public class Player extends Human {
 		return action;
 	}
 	
-	
+	/**
+	 * Private method to add specific actions, including crafting and choosing weapons.
+	 * 
+	 * @param actions : Menu actions for player
+	 * @return  The actions class with new added actions
+	 */
 	private Actions addSpecificActions(Actions actions) {
 		HashSet<WeaponItem> weapons = new HashSet<WeaponItem>();
 		
