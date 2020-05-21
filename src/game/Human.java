@@ -13,7 +13,13 @@ import edu.monash.fit2099.engine.GameMap;
  *
  */
 public class Human extends ZombieActor {
+<<<<<<< HEAD
+	private Behaviour behaviours[] = {
+			new PickUpBehaviour()
+	};
+=======
 	private Behaviour behaviour = new WanderBehaviour(ZombieCapability.MOBILE);
+>>>>>>> branch 'master' of https://git.infotech.monash.edu/fit2099-s1-2020/JavaJuveniles/project.git
 
 	/**
 	 * The default constructor creates default Humans
@@ -40,8 +46,15 @@ public class Human extends ZombieActor {
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// FIXME humans are pretty dumb, maybe they should at least run away from zombies?
-		
-		return behaviour.getAction(this, map);
+		for (Behaviour behaviour: behaviours) {
+			Action action = behaviour.getAction(this, map);
+			if(action != null) {
+				System.out.println("1");
+				return action;
+			}
+		}
+		System.out.println("2");
+		return new WanderBehaviour(ZombieCapability.CAPABLE).getAction(this, map);
 
 	}
 	
