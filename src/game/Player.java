@@ -1,10 +1,14 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
+import edu.monash.fit2099.engine.WeaponItem;
 import edu.monash.fit2099.engine.Item;
 
 /**
@@ -30,16 +34,32 @@ public class Player extends Human {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null) 
 			return lastAction.getNextAction();
+	
+		addSpecificActions(actions);
+		Action action =  menu.showMenu(this, actions, display);
+
+		return action;
+	}
+	
+	
+	private Actions addSpecificActions(Actions actions) {
+		HashSet<WeaponItem> weapons = new HashSet<WeaponItem>();
 		
 		for (Item item : this.getInventory()) {
 			if (item.asCraftableItem() != null) {
 				actions.add(new CraftAction(item.asCraftableItem()));
 			}
+			
+			if (item.asWeapon() != null ) {
+				weapons.add((WeaponItem) item.asWeapon());
+			}
 		}
 		
-		Action action =  menu.showMenu(this, actions, display);
+		if (weapons.size() > 1)
+			for (WeaponItem weapon: weapons) 
+				actions.add(new ChooseWeaponAction(weapon));
 
-		return action;
-		
+		return actions;
 	}
+	
 }
