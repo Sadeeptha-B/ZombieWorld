@@ -17,7 +17,7 @@ public class SowCropBehaviour implements Behaviour {
 	
 	public Action getAction(Actor actor, GameMap map) {
 		for(Item item: map.locationOf(actor).getItems()) {
-			if(item instanceof Item)
+			if(item.isEdible())
 				return null;
 		}
 			
