@@ -19,10 +19,10 @@ public class HarvestAction extends Action {
 	 * @param actor the actor of the action
 	 */
 	@Override
-	public String execute(Actor actor, GameMap map) {
+	public String execute(Actor actor, GameMap map) {	
 		if (!(actor instanceof Human))
 			throw new IllegalArgumentException("Only farmers and players can harvest");
-			
+		
 		Human human = (Human) actor;
 		map.locationOf(human).setGround(new Dirt());
 		human.harvest(map);

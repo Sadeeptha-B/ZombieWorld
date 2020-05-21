@@ -34,7 +34,6 @@ public class EatAction extends Action {
 	
 	@Override
 	public String menuDescription(Actor actor) {
-		
 		return actor + " eats " + food + " to gain " + food.getHealPoints() + " points";
 	}
 

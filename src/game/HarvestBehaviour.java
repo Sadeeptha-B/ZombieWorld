@@ -26,6 +26,9 @@ public class HarvestBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+		if (!(actor instanceof Human))
+			throw new IllegalArgumentException("Only farmers and players can harvest");
+		
 		if (map.locationOf(actor).getGround().isHarvestable())
 			return new HarvestAction();
 		return null;

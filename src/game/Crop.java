@@ -1,5 +1,7 @@
 package game;
 
+import edu.monash.fit2099.engine.Actions;
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 /**
@@ -36,6 +38,12 @@ public class Crop extends Ground {
 			harvestable = true;
 		}
 		
+	}
+	
+	public Actions allowableActions(Actor actor, Location location, String direction){
+		Actions actions = super.allowableActions(actor, location, direction);
+		actions.add(new HarvestAction());
+		return actions;
 	}
 	
 	

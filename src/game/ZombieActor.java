@@ -23,6 +23,18 @@ public abstract class ZombieActor extends Actor {
 	
 	
 	@Override
+	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		for (Behaviour behaviour: this.getBehaviours()) {
+			Action action = behaviour.getAction(this, map);
+			if(action != null) {
+				return action;
+			}
+		}
+		return new DoNothingAction();
+	}
+	
+	
+	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions list = super.getAllowableActions(otherActor, direction, map);
 		if (otherActor.hasCapability(ZombieCapability.UNDEAD) != this.hasCapability(ZombieCapability.UNDEAD))
@@ -43,16 +55,4 @@ public abstract class ZombieActor extends Actor {
 	
 	public abstract Behaviour[] getBehaviours();
 
-	
-	
-	@Override
-	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		for (Behaviour behaviour: this.getBehaviours()) {
-			Action action = behaviour.getAction(this, map);
-			if(action != null) {
-				return action;
-			}
-		}
-		return new DoNothingAction();
-	}
 }

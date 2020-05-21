@@ -44,19 +44,6 @@ public class Human extends ZombieActor {
 	}
 
 	
-//	@Override
-//	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-//		// FIXME humans are pretty dumb, maybe they should at least run away from zombies?
-//		for (Behaviour behaviour: behaviours) {
-//			Action action = behaviour.getAction(this, map);
-//			if(action != null) {
-//				return action;
-//			}
-//		}
-//		return new DoNothingAction();
-//
-//	}
-	
 	public Action pickUpItem(GameMap map) {
 		for (Item item: map.locationOf(this).getItems())
 			if (item.isEdible())
