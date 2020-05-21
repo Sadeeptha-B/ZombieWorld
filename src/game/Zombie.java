@@ -2,6 +2,7 @@ package game;
 
 import java.util.Random;
 
+import edu.monash.fit2099.engine.WeaponItem;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
@@ -41,8 +42,8 @@ public class Zombie extends ZombieActor {
 	 * @param name : Zombie's name
 	 */
 	public Zombie(String name) {
-		super(name, 'Z', 100, ZombieCapability.UNDEAD);
-		this.addCapability(ZombieCapability.MOBILE);
+		super(name, 'Z', 100, ZombieCapability.UNDEAD, ZombieCapability.MOBILE);
+		
 	}
 	
 
@@ -93,13 +94,11 @@ public class Zombie extends ZombieActor {
 		
 		limbCheck(map);
 			
-		for (Behaviour behaviour : behaviours) {
-			Action action = behaviour.getAction(this, map);
-			if (action != null)
-				return action;
-		}
-		return new DoNothingAction();	
+		Action action = super.playTurn(actions, lastAction, map, display);
+		return action;
 	}
+	
+	
 	
 	/**
 	 * Generates a random phrase that the Zombie's will scream
@@ -150,7 +149,7 @@ public class Zombie extends ZombieActor {
 			this.removeCapability(ZombieCapability.MOBILE);
 		}
 		
-		switch(armCount) {
+		switch(armCount){
 		case 0:
 			dropItems(map);
 			break;
@@ -175,12 +174,26 @@ public class Zombie extends ZombieActor {
 			drop.execute(this, map);
 	}
 
-
+	
+	public Action pickUpItem(GameMap map) {
+		for (Item item: map.locationOf(this).getItems())
+			if (item.asWeapon() != null)
+				return(item.getPickUpAction());
+		return null;
+	}
+	
+	
 	@Override
 	public float getHealthPercantage() {
 		return 0;
 	}
 	
+	public Corpse death() {
+		return super.death(false);
+	}
 	
+	public Behaviour[] getBehaviours() {
+		return this.behaviours;
+	}
 	
 }

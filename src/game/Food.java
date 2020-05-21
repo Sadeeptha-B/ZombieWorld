@@ -1,5 +1,9 @@
 package game;
 
+import java.util.List;
+
+import edu.monash.fit2099.engine.Action;
+
 /**
  * The food class
  * 
@@ -32,6 +36,12 @@ public class Food extends PortableItem {
 	@Override
 	public boolean isEdible() {
 		return true;
+	}
+	
+	public List<Action> getAllowableActions() {
+		List<Action> actions = super.getAllowableActions();
+		actions.add(new EatAction(this));
+		return actions;
 	}
 	
 	

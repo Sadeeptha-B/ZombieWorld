@@ -16,18 +16,17 @@ public class SowCropBehaviour implements Behaviour {
 	
 	protected Random rand = new Random();
 	
-	public SowCropBehaviour(){
-		
-	}
 	/**
 	 * 
-	 * returns a SowCropAction with a 33% chance
+	 * Returns a SowCropAction with a 33% chance
 	 * 
 	 * @param actor the actors that will grow the crops
 	 * 
 	 */
 	public Action getAction(Actor actor, GameMap map) {
-			
+		if (!(actor instanceof Farmer))
+			throw new IllegalArgumentException("Only farmers are allowed to sow crops");
+		
 		if (rand.nextInt(3) == 0 && map.locationOf(actor).getGround() instanceof Dirt) {
 			return new SowCropAction(new Crop());
 		}

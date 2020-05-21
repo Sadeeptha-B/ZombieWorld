@@ -3,6 +3,7 @@ package edu.monash.fit2099.demo.mars;
 import java.util.*;
 
 import game.Behaviour;
+import game.Corpse;
 import edu.monash.fit2099.engine.*;
 import game.Limb;
 
@@ -48,4 +49,11 @@ public class Bug extends Actor {
 		return 0;
 	}
 	
+	public Corpse death() {
+		return null;
+	}
+	
+	public Action pickUpItem(GameMap map) {
+		return null;
+	}
 }

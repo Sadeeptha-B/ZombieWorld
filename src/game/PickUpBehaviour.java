@@ -23,7 +23,13 @@ public class PickUpBehaviour implements Behaviour{
 	
 	/**
 	 * Returns a PickUpItemAction to pick up an Item 
-	 * if picking up is not possible or if the actor has an item in their inventory, returns null
+	 * Never meant to be called by player, therefore allows Zombie or
+	 * human to only have one item in inventory.
+	 * 
+	 * If picking up is not possible or if the actor has an item in their inventory, returns 
+	 * null.
+	 * If multiple objects are available for picking up, selects one in 
+	 * random
 	 * 
 	 * @param actor the Actor enacting the behaviour
 	 * @param map the map that actor is currently on
@@ -32,31 +38,20 @@ public class PickUpBehaviour implements Behaviour{
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+		if (actor instanceof Player)
+			throw new IllegalArgumentException("Actor cannot be player.");
+		
+		
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (!actor.getInventory().isEmpty()) {
 			return null;
 		}
-		if(actor instanceof Zombie) {
-			for(Item item : map.locationOf(actor).getItems()) {
-				if (item instanceof WeaponItem)
-					actions.add(item.getPickUpAction());
-			}
-		}
+		actions.add(actor.pickUpItem(map));
 		
-		if (actor instanceof Human) {
-			for(Item item : map.locationOf(actor).getItems()){
-				if(item.isEdible()) { 
-					Action action = item.getPickUpAction();
-					if(action != null)
-						actions.add(action);
-				}
-			}
-		}
-		if (! actions.isEmpty()) {
+		if (!actions.isEmpty()) {
 			return actions.get(random.nextInt(actions.size()));
-			}
-		return null;
-	
 		}
-
+		return null;
 	}
+
+}

@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
@@ -15,7 +16,7 @@ import edu.monash.fit2099.engine.Item;
  * Class representing the Player.
  */
 public class Player extends Human {
-
+	
 	private Menu menu = new Menu();
 
 	/**
@@ -29,6 +30,7 @@ public class Player extends Human {
 		super(name, displayChar, hitPoints);
 	}
       
+	
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
@@ -41,6 +43,8 @@ public class Player extends Human {
 		return action;
 	}
 	
+	
+	
 	/**
 	 * Private method to add specific actions, including crafting and choosing weapons.
 	 * 
@@ -49,16 +53,11 @@ public class Player extends Human {
 	 */
 	private Actions addSpecificActions(Actions actions, GameMap map) {
 		HashSet<WeaponItem> weapons = new HashSet<WeaponItem>();
+		
 		if (map.locationOf(this).getGround() instanceof Crop)
 			actions.add(new HarvestAction());
+		
 		for (Item item : this.getInventory()) {
-			if (item.isEdible()) {
-				actions.add(new EatAction(item));
-			}
-			if (item.asCraftableItem() != null) {
-				actions.add(new CraftAction(item.asCraftableItem()));
-			}
-			
 			if (item.asWeapon() != null ) {
 				weapons.add((WeaponItem) item.asWeapon());
 			}
@@ -70,5 +69,18 @@ public class Player extends Human {
 
 		return actions;
 	}
+	
+	
+	public void harvest(GameMap map) {
+		this.addItemToInventory(new Food());
+	}
+	
+//	@Override
+//	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
+//		Actions list = super.getAllowableActions(otherActor, direction, map);
+//		if (map.locationOf(this).getGround() instanceof Crop)
+//			list.add(new HarvestAction());
+//		return list;
+//	}
 	
 }

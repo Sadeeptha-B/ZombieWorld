@@ -17,7 +17,7 @@ public class HarvestBehaviour implements Behaviour {
 	}
 	
 	/**
-	 * returns a harvest action if the crop is harvestable
+	 * Returns a harvest action if the crop is harvestable
 	 * 
 	 * @param actor the actor
 	 * @param map the map that the actor is in

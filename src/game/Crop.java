@@ -20,25 +20,27 @@ public class Crop extends Ground {
 	
 	/**
 	 * 
-	 * the growth of the crops happen with each tick 
+	 * The growth of the crops happen with each tick 
 	 * will grow after 20 ticks
 	 * @param map the location of the item
 	 * 
 	 */
-	public void tick(Location map) {
+	public void tick(Location location) {
 		count++;
+		
+		if (location.getActor() instanceof Farmer)
+			count += 2;
+		
 		if (count > 20) {
 			displayChar = '$';
 			harvestable = true;
 		}
-	}
-	public CraftableItem asCraftableItem() {
-		return null;
+		
 	}
 	
+	
 	public boolean isHarvestable() {
-		return harvestable;
-		
+		return harvestable;	
 	}
 	
 }

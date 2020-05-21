@@ -21,21 +21,29 @@ public class Farmer extends Human {
 
 	public Farmer(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
-		this.addCapability(ZombieCapability.MOBILE);
 	}
+	
+	public Behaviour[] getBehaviours() {
+		return this.behaviours;
+	}
+	
+	public void harvest(GameMap map) {
+		map.locationOf(this).addItem(new Food());
+	}
+	
 	
 	/**
 	 * returns an action for the farmer to do
 	 * 
 	 */
-	@Override
-	public Action playTurn(Actions actions, Action lastAction, GameMap map,Display display) {
-		for (Behaviour behaviour: behaviours) {
-			Action action = behaviour.getAction(this, map);
-			if (action != null) 
-				return action;
-			
-		}
-		return new DoNothingAction();
-	}
+//	@Override
+//	public Action playTurn(Actions actions, Action lastAction, GameMap map,Display display) {
+//		for (Behaviour behaviour: behaviours) {
+//			Action action = behaviour.getAction(this, map);
+//			if (action != null) 
+//				return action;
+//			
+//		}
+//		return new DoNothingAction();
+//	}
 }

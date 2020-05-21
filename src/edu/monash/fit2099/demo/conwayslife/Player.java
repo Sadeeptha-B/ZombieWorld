@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
 import game.Limb;
+import game.Corpse;
 
 
 /**
@@ -71,5 +72,13 @@ public class Player extends Actor {
 	@Override
 	public float getHealthPercantage() {
 		return 0;
+	}
+	
+	public Corpse death() {
+		return null;
+	}
+	
+	public Action pickUpItem(GameMap map) {
+		return null;
 	}
 }

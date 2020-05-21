@@ -11,30 +11,25 @@ import edu.monash.fit2099.engine.GameMap;
  */
 public class HarvestAction extends Action {
 
-	public HarvestAction() {
-		
-	}
 	/**
-	 * executes the harvest action
+	 * Executes the harvest action
 	 * if the player harvests, the food is added to the inventory
-	 * if a human harvests the food is droppped to the ground
+	 * if a human harvests the food is dropped to the ground
 	 * 
 	 * @param actor the actor of the action
 	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		if(actor instanceof Player) {
-			map.locationOf(actor).setGround(new Dirt());
-			actor.addItemToInventory(new Food());
-			return menuDescription(actor);
-		}
-		if(actor instanceof Human) {
-			map.locationOf(actor).setGround(new Dirt());
-			map.locationOf(actor).addItem(new Food());
-			return menuDescription(actor);
-		}
-		return null;
+		if (!(actor instanceof Human))
+			throw new IllegalArgumentException("Only farmers and players can harvest");
+			
+		Human human = (Human) actor;
+		map.locationOf(human).setGround(new Dirt());
+		human.harvest(map);
+		return menuDescription(actor);
 	}
+	
+	
 	/**
 	 * 
 	 * returns the description of the action to be printed in the menu
@@ -44,7 +39,6 @@ public class HarvestAction extends Action {
 	 */
 	@Override
 	public String menuDescription(Actor actor) {
-		
 		return actor + " harvests the crop";
 	}
 

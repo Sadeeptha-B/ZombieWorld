@@ -14,10 +14,6 @@ import edu.monash.fit2099.engine.Item;
  */
 public class EatBehaviour implements Behaviour {
 
-	public EatBehaviour() {
-
-	}
-	
 	/**
 	 * returns an EatAction if the health of the actor is less than 75%
 	 * 
@@ -27,13 +23,13 @@ public class EatBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		if (actor.getHealthPercantage()<75)
+		if (!(actor instanceof Human))
+			throw new IllegalArgumentException("Only humans can eat");
+		
+		if (actor.getHealthPercantage()<75 )
 			for(Item item: actor.getInventory())
 				if(item.isEdible())
 					return new EatAction(item);
 		return null;
 	}
-	
-	
-
 }
