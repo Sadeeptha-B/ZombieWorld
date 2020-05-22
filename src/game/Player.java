@@ -34,6 +34,11 @@ public class Player extends Human {
 	
 	
 	@Override
+	/**
+	 * Called upon each turn for player
+	 * 
+	 * Displays teh menu of the actions available.
+	 */
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null) 
@@ -60,11 +65,11 @@ public class Player extends Human {
 			actions.add(new HarvestAction());
 		
 		for (Item item : this.getInventory()) {
-			if (item.isEdible()) 
-				actions.add(new EatAction(item));
+//			if (item.isEdible()) 
+//				actions.add(new EatAction(item));
 		
-			if (item.asCraftableItem() != null)
-				actions.add(new CraftAction(item.asCraftableItem()));
+//			if (item.asCraftableItem() != null)
+//				actions.add(new CraftAction(item.asCraftableItem()));
 			
 			if (item.asWeapon() != null ) 
 				weapons.add((WeaponItem) item.asWeapon());
@@ -78,7 +83,9 @@ public class Player extends Human {
 		return actions;
 	}
 	
-	
+	/**
+	 * Method for when player harvests crops.
+	 */
 	public void harvest(GameMap map) {
 		this.addItemToInventory(new Food());
 	}

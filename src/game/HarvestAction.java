@@ -32,7 +32,7 @@ public class HarvestAction extends Action {
 	
 	/**
 	 * 
-	 * returns the description of the action to be printed in the menu
+	 * Returns the description of the action to be printed in the menu
 	 * 
 	 * @param actor the actor of the action
 	 * 

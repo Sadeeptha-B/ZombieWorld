@@ -32,6 +32,8 @@ public class CraftAction extends Action {
 	 */
 	public String execute(Actor actor, GameMap map) {
 		actor.removeItemFromInventory(item);
+		map.locationOf(actor).removeItem(item);
+		
 		weapon = item.craft();
 		if (weapon != null) 
 			actor.addItemToInventory(weapon);

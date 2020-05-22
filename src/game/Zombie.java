@@ -41,16 +41,14 @@ public class Zombie extends ZombieActor {
 	 */
 	public Zombie(String name) {
 		super(name, 'Z', 100, ZombieCapability.UNDEAD, ZombieCapability.MOBILE);
-		
 	}
 	
 
 	@Override
 	/**
-	 * Returns the intrinsic attack of a Zombie, if the Zombie does not have a
-	 * weapon
+	 * Returns the intrinsic attack of a Zombie, which can be a bite or a punch
 	 * 
-	 * The attack depends on the arm count of the Zombie
+	 * The attack depends on the arm count of the Zombie, the checks are done by private method limbChecl
 	 */
 	public IntrinsicWeapon getIntrinsicWeapon() {
 		IntrinsicWeapon attack; 
@@ -70,6 +68,8 @@ public class Zombie extends ZombieActor {
 	/**
 	 * If a Zombie can attack, it will.  If not, it will chase any human within 10 spaces.  
 	 * If no humans are close enough it will wander randomly.
+	 * 
+	 * LimbCheck is used to determine whether to drop items.
 	 * 
 	 * @param actions list of possible Actions
 	 * @param lastAction previous Action, if it was a multiturn action
@@ -114,12 +114,10 @@ public class Zombie extends ZombieActor {
 		if ((armCount == 0) && (legCount== 0))
 			return null;	
 
-
 		if (legCount != 0 && rand.nextInt(4) == 0){	
 			legCount -= 1;	
 			return new Leg();
 		}
-
 
 		if (armCount != 0 && rand.nextInt(2) == 0) {
 			armCount -= 1;
@@ -132,8 +130,10 @@ public class Zombie extends ZombieActor {
 	
 	/**
 	 * Private method called by playTurn and IntrinsicWeapon
-	 * To check the number of limbs each turn and drop Items accordingly.	
-	 * @param map : Gamemap, passed in by PlayTurn
+	 * To check the number of limbs each turn decide on Intrinsic attack and 
+	 * drop item action.
+	 * 
+	 * @param map : GameMap, passed in by PlayTurn
 	 */
 	private boolean limbCheck(int flag) {
 		boolean biteProbability;
@@ -174,9 +174,9 @@ public class Zombie extends ZombieActor {
 	
 	
 	/**
-	 * Drops all items. Called by limbcheck randomly based on the count of limbs
+	 * Drops all items. Called by PlayTurn based on the results of limbCheck
 	 * 
-	 * @param map : Gamemap for getting the location at which to drop weapons 
+	 * @param map : GameMap for getting the location at which to drop weapons 
 	 */
 	private void dropItems(GameMap map) {
 		Actions dropActions = new Actions();
@@ -187,6 +187,11 @@ public class Zombie extends ZombieActor {
 	}
 
 	
+
+	/**
+	 * Enables the Zombie to pick up items
+	 * Zombie can only pick up items of weapon type.
+	 */
 	public Action pickUpItem(GameMap map) {
 		for (Item item: map.locationOf(this).getItems())
 			if (item.asWeapon() != null)
@@ -194,17 +199,22 @@ public class Zombie extends ZombieActor {
 		return null;
 	}
 	
-
-	
-	
+	/**
+	 * Creates corpse if Zombie dies.
+	 */
 	public Corpse death() {
 		return super.death(false);
 	}
 	
 	
-	
+	/**
+	 * Returns the behaviours of the Zombie.
+	 */
 	public Behaviour[] getBehaviours() {
-		return this.behaviours;
+		Behaviour [] behaviours = new Behaviour[this.behaviours.length];
+		for (int i = 0; i < this.behaviours.length; i++)
+			behaviours[i] = this.behaviours[i];
+		return behaviours;
 	}
 	
 }

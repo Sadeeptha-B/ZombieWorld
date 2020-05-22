@@ -13,15 +13,25 @@ public class Mace extends WeaponItem {
 		super("mace", '!', 35, "ker-plunks");
 	}
 
+	/**
+	 * Whether item is craftable item. Implements the method in ItemInterface.
+	 * Item is null, if not craftable
+	 */
 	public CraftableItem asCraftableItem(){
 		return null;
 	}
 
 	@Override
+	/**
+	 * Mace cannot heal
+	 */
 	public int getHealPoints() {return 0;
 	}
 	
 	@Override
+	/**
+	 * Returns whether edible
+	 */
 	public boolean isEdible() {
 		return false;
 	}

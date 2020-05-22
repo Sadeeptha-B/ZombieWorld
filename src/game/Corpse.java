@@ -35,11 +35,13 @@ public class Corpse extends PortableItem {
 			mutate(location);
 	}
 	
+
 	/**
 	 * It will turn the corpse into a zombie when called
 	 * 
 	 * @param location
 	 */
+
 	private void mutate(Location location) {
 		if(locationValid(location)) {
 			Zombie zombie = new Zombie(name);
@@ -51,6 +53,8 @@ public class Corpse extends PortableItem {
 	}
 	
 	/**
+	 * Whether or not locations is valid for transformation. (Addition of new actor to map)
+
 	 * Checks if the location is valid for zombies to respawn
 	 * 
 	 * @param location

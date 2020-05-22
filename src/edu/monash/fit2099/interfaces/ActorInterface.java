@@ -15,5 +15,4 @@ public interface ActorInterface {
 	public float getHealthPercantage();
 	public Corpse death();
 	public Action pickUpItem(GameMap map);
-	
 }

@@ -18,7 +18,7 @@ public class Food extends PortableItem {
 	}
 	
 	/**
-	 * gives the amount of health points that will be given to an actor upon consumption
+	 * Gives the amount of health points that will be given to an actor upon consumption
 	 * 
 	 * @return int the amount of health points
 	 */
@@ -28,7 +28,7 @@ public class Food extends PortableItem {
 	}
 	
 	/**
-	 * returns the edibility of the item
+	 * Returns the edibility of the item
 	 * 
 	 * @return boolean true
 	 * 
@@ -38,11 +38,14 @@ public class Food extends PortableItem {
 		return true;
 	}
 	
-//	public List<Action> getAllowableActions() {
-//		List<Action> actions = super.getAllowableActions();
-//		actions.add(new EatAction(this));
-//		return actions;
-//	}
+	/**
+	 * Allowable actions for food.
+	 */
+	public List<Action> getAllowableActions() {
+		List<Action> actions = super.getAllowableActions();
+		actions.add(new EatAction(this));
+		return actions;
+	}
 	
 	
 }
