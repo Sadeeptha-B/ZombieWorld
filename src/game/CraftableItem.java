@@ -1,11 +1,7 @@
 package game;
 
 import java.util.List;
-import java.util.ArrayList;
 import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.WeaponItem;
 
 
@@ -36,6 +32,7 @@ public abstract class CraftableItem extends PortableItem {
 	 */
 	public abstract WeaponItem craft();
 	
+
 	/**
 	 * Allowable actions for craftable items
 	 */
@@ -45,6 +42,6 @@ public abstract class CraftableItem extends PortableItem {
 		actions.add(new CraftAction(this));
 		return actions;
 	}
-	
+
 	
 }

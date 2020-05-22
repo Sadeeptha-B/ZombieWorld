@@ -113,13 +113,12 @@ public class Zombie extends ZombieActor {
 	public Limb dismember() {
 		if ((armCount == 0) && (legCount== 0))
 			return null;	
-		
-		
+
 		if (legCount != 0 && rand.nextInt(4) == 0){	
 			legCount -= 1;	
 			return new Leg();
 		}
-		
+
 		if (armCount != 0 && rand.nextInt(2) == 0) {
 			armCount -= 1;
 			return new Arm();
@@ -188,6 +187,7 @@ public class Zombie extends ZombieActor {
 	}
 
 	
+
 	/**
 	 * Enables the Zombie to pick up items
 	 * Zombie can only pick up items of weapon type.
