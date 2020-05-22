@@ -18,8 +18,9 @@ public class Human extends ZombieActor {
 
 	private Behaviour behaviours[] = {
 			new PickUpBehaviour(),
-			new WanderBehaviour(ZombieCapability.MOBILE),
-			new EatBehaviour()
+			new EatBehaviour(),
+			new WanderBehaviour(ZombieCapability.MOBILE)
+			
 	};
 
 	/**
