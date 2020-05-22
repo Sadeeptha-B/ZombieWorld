@@ -32,6 +32,11 @@ public class EatAction extends Action {
 		return menuDescription(actor);
 	}
 	
+	/**
+	 * 
+	 * returns the description of an actor eating to display in the menu
+	 * 
+	 */
 	@Override
 	public String menuDescription(Actor actor) {
 		return actor + " eats " + food + " to gain " + food.getHealPoints() + " points";

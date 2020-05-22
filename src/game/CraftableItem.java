@@ -39,7 +39,8 @@ public abstract class CraftableItem extends PortableItem {
 	
 //	public List<Action> getAllowableActions() {
 //		List<Action> actions = super.getAllowableActions();
-//		actions.add(new CraftAction(this));
+//		if(!actions.isEmpty())
+//			actions.add(new CraftAction(this));
 //		return actions;
 //	}
 	

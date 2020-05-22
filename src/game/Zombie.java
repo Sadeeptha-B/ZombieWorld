@@ -113,15 +113,15 @@ public class Zombie extends ZombieActor {
 	public Limb dismember() {
 		if ((armCount == 0) && (legCount== 0))
 			return null;	
-		
-		if (legCount != 0)
-			if (rand.nextInt(4) == 0){	
-				legCount -= 1;	
-				return new Leg();
-			}
-		
-		
-		if (rand.nextInt(2) == 0) {
+
+
+		if (legCount != 0 && rand.nextInt(4) == 0){	
+			legCount -= 1;	
+			return new Leg();
+		}
+
+
+		if (armCount != 0 && rand.nextInt(2) == 0) {
 			armCount -= 1;
 			return new Arm();
 		}
@@ -186,8 +186,6 @@ public class Zombie extends ZombieActor {
 			drop.execute(this, map);
 	}
 
-	
-	
 	
 	public Action pickUpItem(GameMap map) {
 		for (Item item: map.locationOf(this).getItems())

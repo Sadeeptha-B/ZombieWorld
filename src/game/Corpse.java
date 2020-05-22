@@ -15,8 +15,8 @@ public class Corpse extends PortableItem {
 	
 	protected Random rand = new Random();
 	
-	public int count = 0;
-	public boolean diedAsHuman;
+	private int count = 0;
+	private boolean diedAsHuman;
 	
 	public Corpse(String name, boolean diedAsHuman) {
 		super("dead " + name, '%');
@@ -24,28 +24,38 @@ public class Corpse extends PortableItem {
 	}
 	
 	/**
-	 * the tick method will create a Zombie after 5-10 turns
+	 * the tick method will call the mutate method after 5-10 turns for humans
 	 * 
 	 * @param location The location of the corpse 
 	 */
 	public void tick(Location location){
 		count++;
-		if(diedAsHuman)
+		boolean condition = count > 5 && rand.nextInt(10 - count) == 0;
+		if(diedAsHuman && condition)
 			mutate(location);
 	}
 	
+	/**
+	 * It will turn the corpse into a zombie when called
+	 * 
+	 * @param location
+	 */
 	private void mutate(Location location) {
-		//FIXME : Possible IllegalArgumentException
-		boolean condition = count > 5 && rand.nextInt(10 - count) == 0 && locationValid(location); 
-		if (condition) {
+		if(locationValid(location)) {
 			Zombie zombie = new Zombie(name);
 			location.addActor(zombie);
 			System.out.println(name + " has risen from the dead");
 			location.removeItem(this);
 		}
+		
 	}
 	
-	
+	/**
+	 * Checks if the location is valid for zombies to respawn
+	 * 
+	 * @param location
+	 * @return boolean, returns the validity of the respawn location of the zombies
+	 */
 	private boolean locationValid(Location location) {
 		if (location.containsAnActor()) {
 			count --;
