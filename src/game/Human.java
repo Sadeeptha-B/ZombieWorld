@@ -56,11 +56,6 @@ public class Human extends ZombieActor {
 		return this.behaviours;
 	}
 	
-	@Override
-	public float getHealthPercantage() {
-		return this.hitPoints/this.maxHitPoints;
-	}
-
 	
 	public Corpse death() {
 		return super.death(true);

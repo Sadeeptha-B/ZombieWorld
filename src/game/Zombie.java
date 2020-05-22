@@ -2,12 +2,10 @@ package game;
 
 import java.util.Random;
 
-import edu.monash.fit2099.engine.WeaponItem;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.IntrinsicWeapon;
 
@@ -34,7 +32,7 @@ public class Zombie extends ZombieActor {
 			new WanderBehaviour(ZombieCapability.MOBILE)
 	};
 
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -56,18 +54,9 @@ public class Zombie extends ZombieActor {
 	 */
 	public IntrinsicWeapon getIntrinsicWeapon() {
 		IntrinsicWeapon attack; 
-		boolean condition = rand.nextBoolean();
+		final int LIMB_CHECK_KEY = 1;
 		
-		switch (armCount) {
-		case 0:
-			condition = true;
-		case 1:
-			condition = rand.nextBoolean() | rand.nextBoolean();
-			break;
-		}
-		
-		
-		if (condition) {
+		if (limbCheck(LIMB_CHECK_KEY)) {
 			attack = new IntrinsicWeapon(20,"bites");
 			heal(5);
 		} else {
@@ -89,10 +78,13 @@ public class Zombie extends ZombieActor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		final int LIMB_CHECK_KEY = 0; 
+		
 		if (rand.nextBoolean())
 			display.println(zombiePhrases());
 		
-		limbCheck(map);
+		if(limbCheck(LIMB_CHECK_KEY))
+				dropItems(map);
 			
 		Action action = super.playTurn(actions, lastAction, map, display);
 		return action;
@@ -119,46 +111,66 @@ public class Zombie extends ZombieActor {
 	 * 
 	 */
 	public Limb dismember() {
-		if ((armCount == 0) || (legCount== 0)){
-			return null;
-		}
-			
-		Limb fallenLimb;
+		if ((armCount == 0) && (legCount== 0))
+			return null;	
+		
+		if (legCount != 0)
+			if (rand.nextInt(4) == 0){	
+				legCount -= 1;	
+				return new Leg();
+			}
+		
 		
 		if (rand.nextInt(2) == 0) {
-			fallenLimb = new Arm();
 			armCount -= 1;
-		} else if (rand.nextInt(4) == 0){	
-			fallenLimb = new Leg();
-			legCount -= 1;	
-		} else {
-			return null;
+			return new Arm();
 		}
-		
-		return fallenLimb;
+
+		return null;	
 	}
 	
 	
 	/**
-	 * Private method called by playTurn
+	 * Private method called by playTurn and IntrinsicWeapon
 	 * To check the number of limbs each turn and drop Items accordingly.	
 	 * @param map : Gamemap, passed in by PlayTurn
 	 */
-	private void limbCheck(GameMap map) {
-		if (legCount == 0) {
+	private boolean limbCheck(int flag) {
+		boolean biteProbability;
+		boolean drop = false;
+		
+		if (flag != 0 && flag != 1)
+			throw new IllegalArgumentException("LimbCheck only handles 0 and 1");
+		
+		if (legCount == 0) 
 			this.removeCapability(ZombieCapability.MOBILE);
-		}
+		
 		
 		switch(armCount){
 		case 0:
-			dropItems(map);
+			this.addCapability(ZombieCapability.ARMLESS);
+			drop = true;
+			biteProbability = true;
 			break;
 		case 1:
 			if (rand.nextBoolean())
-				dropItems(map);
+				drop = true;
+			biteProbability = rand.nextBoolean() | rand.nextBoolean();
 			break;
+		default:
+			biteProbability = rand.nextBoolean();
 		}
+		
+		
+		switch (flag) {
+		case 0:
+			return drop;
+		case 1:
+			return biteProbability;
+		}
+		return false;	
 	}
+	
 	
 	
 	/**
@@ -175,6 +187,8 @@ public class Zombie extends ZombieActor {
 	}
 
 	
+	
+	
 	public Action pickUpItem(GameMap map) {
 		for (Item item: map.locationOf(this).getItems())
 			if (item.asWeapon() != null)
@@ -182,15 +196,14 @@ public class Zombie extends ZombieActor {
 		return null;
 	}
 	
+
 	
-	@Override
-	public float getHealthPercantage() {
-		return 0;
-	}
 	
 	public Corpse death() {
 		return super.death(false);
 	}
+	
+	
 	
 	public Behaviour[] getBehaviours() {
 		return this.behaviours;

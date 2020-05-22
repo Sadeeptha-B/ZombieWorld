@@ -26,9 +26,8 @@ public abstract class ZombieActor extends Actor {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		for (Behaviour behaviour: this.getBehaviours()) {
 			Action action = behaviour.getAction(this, map);
-			if(action != null) {
+			if(action != null) 
 				return action;
-			}
 		}
 		return new DoNothingAction();
 	}
@@ -52,6 +51,11 @@ public abstract class ZombieActor extends Actor {
 		return null;
 	};
 	
+	
+	@Override
+	public float getHealthPercantage() {
+		return this.hitPoints/this.maxHitPoints;
+	}
 	
 	public abstract Behaviour[] getBehaviours();
 

@@ -41,6 +41,8 @@ public class PickUpBehaviour implements Behaviour{
 		if (actor instanceof Player)
 			throw new IllegalArgumentException("Actor cannot be player.");
 		
+		if (actor.hasCapability(ZombieCapability.ARMLESS))
+			return null;
 		
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (!actor.getInventory().isEmpty()) {

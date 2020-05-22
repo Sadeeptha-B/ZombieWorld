@@ -56,17 +56,24 @@ public class Player extends Human {
 	private Actions addSpecificActions(Actions actions, GameMap map) {
 		ArrayList<WeaponItem> weapons = new ArrayList<WeaponItem>();
 		
-//		if (map.locationOf(this).getGround() instanceof Crop)
-//			actions.add(new HarvestAction());
+		if (map.locationOf(this).getGround() instanceof Crop)
+			actions.add(new HarvestAction());
 		
+		for (Item item : this.getInventory()) {
+			if (item.isEdible()) 
+				actions.add(new EatAction(item));
 		
-		for (Item item : this.getInventory()) 
+			if (item.asCraftableItem() != null)
+				actions.add(new CraftAction(item.asCraftableItem()));
+			
 			if (item.asWeapon() != null ) 
 				weapons.add((WeaponItem) item.asWeapon());
-			
+		}
+		
 		if (weapons.size() > 1)
 			for (WeaponItem weapon: weapons) 
-				actions.add(new ChooseWeaponAction(weapon));
+				if (weapon != this.getWeapon())
+					actions.add(new ChooseWeaponAction(weapon));
 
 		return actions;
 	}
@@ -76,12 +83,5 @@ public class Player extends Human {
 		this.addItemToInventory(new Food());
 	}
 	
-//	@Override
-//	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-//		Actions list = super.getAllowableActions(otherActor, direction, map);
-//		if (map.locationOf(this).getGround() instanceof Crop)
-//			list.add(new HarvestAction());
-//		return list;
-//	}
 
 }

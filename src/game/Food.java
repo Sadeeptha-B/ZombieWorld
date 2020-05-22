@@ -38,11 +38,11 @@ public class Food extends PortableItem {
 		return true;
 	}
 	
-	public List<Action> getAllowableActions() {
-		List<Action> actions = super.getAllowableActions();
-		actions.add(new EatAction(this));
-		return actions;
-	}
+//	public List<Action> getAllowableActions() {
+//		List<Action> actions = super.getAllowableActions();
+//		actions.add(new EatAction(this));
+//		return actions;
+//	}
 	
 	
 }

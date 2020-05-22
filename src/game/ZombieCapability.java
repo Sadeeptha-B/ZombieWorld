@@ -4,4 +4,5 @@ public enum ZombieCapability {
 	UNDEAD,
 	ALIVE,
 	MOBILE,
+	ARMLESS
 }

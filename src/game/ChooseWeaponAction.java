@@ -26,8 +26,12 @@ public class ChooseWeaponAction extends Action {
 	 * Brings the chosen weapon to the beginning of the inventory
 	 */
 	public String execute(Actor actor, GameMap map) {
-		if (actor.getWeapon() == chosenWeapon)
-			return chosenWeapon + " is in use.";
+		if (!(actor instanceof Player))
+			throw new IllegalArgumentException("Only player can choose weapons");
+		
+		
+//		if (actor.getWeapon() == chosenWeapon)
+//			return chosenWeapon + " is in use.";
 		
 		
 		ArrayList<Item> inventory = new ArrayList<Item>();
