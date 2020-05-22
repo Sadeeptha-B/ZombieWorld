@@ -61,8 +61,8 @@ public class Player extends Human {
 	private Actions addSpecificActions(Actions actions, GameMap map) {
 		ArrayList<WeaponItem> weapons = new ArrayList<WeaponItem>();
 		
-//		if (map.locationOf(this).getGround() instanceof Crop)
-//			actions.add(new HarvestAction());
+		if (map.locationOf(this).getGround() instanceof Crop)
+			actions.add(new HarvestAction());
 		
 		for (Item item : this.getInventory()) {
 //			if (item.isEdible()) 
