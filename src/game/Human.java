@@ -31,6 +31,7 @@ public class Human extends ZombieActor {
 		super(name, 'H', 50, ZombieCapability.ALIVE, ZombieCapability.MOBILE);
 	}
 	
+	
 	/**
 	 * The protected constructor can be used to create subtypes
 	 * of Human, such as the Player
@@ -44,6 +45,10 @@ public class Human extends ZombieActor {
 	}
 
 	
+	/**
+	 * Enables Humans to pick up items
+	 * Humans can only pick up items of type: food
+	 */
 	public Action pickUpItem(GameMap map) {
 		for (Item item: map.locationOf(this).getItems())
 			if (item.isEdible())
@@ -52,14 +57,27 @@ public class Human extends ZombieActor {
 	}
 	
 
+	/**
+	 * Returns the behaviours of a Human
+	 */
 	public Behaviour[] getBehaviours() {
-		return this.behaviours;
+		Behaviour [] behaviours = new Behaviour[this.behaviours.length];
+		for (int i = 0; i < this.behaviours.length; i++)
+			behaviours[i] = this.behaviours[i];
+		return behaviours;
 	}
 	
-	
+
+	/**
+	 * Creates corpse if a Human dies.
+	 */
 	public Corpse death() {
 		return super.death(true);
 	}
 	
+	/**
+	 * Harvesting for humans. Only human types, players and farmers harvest
+	 * Hence, does not implement. 
+	 */
 	public void harvest(GameMap map) {};
 }

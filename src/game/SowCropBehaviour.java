@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 
 /**
- * behaviour for farmers to plant crops
+ * Behaviour for farmers to plant crops
  * 
  * @author Kaveesha Nissanka
  *

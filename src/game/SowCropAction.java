@@ -20,6 +20,8 @@ public class SowCropAction extends Action {
 	public SowCropAction(Crop crop) {
 		this.crop = crop;
 	}
+	
+	
 	/**
 	 * sets the ground as a crop class
 	 * 

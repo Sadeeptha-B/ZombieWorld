@@ -23,10 +23,19 @@ public class Farmer extends Human {
 		super(name, displayChar, hitPoints);
 	}
 	
+	/**
+	 * Returns the behaviours of a farmer.
+	 */
 	public Behaviour[] getBehaviours() {
-		return this.behaviours;
+		Behaviour [] behaviours = new Behaviour[this.behaviours.length];
+		for (int i = 0; i < this.behaviours.length; i++)
+			behaviours[i] = this.behaviours[i];
+		return behaviours;
 	}
 	
+	/**
+	 * Harvesting for farmer. Farmers drops ripened crops at location
+	 */
 	public void harvest(GameMap map) {
 		map.locationOf(this).addItem(new Food());
 	}

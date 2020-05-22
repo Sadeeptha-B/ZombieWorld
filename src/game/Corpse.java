@@ -34,6 +34,7 @@ public class Corpse extends PortableItem {
 			mutate(location);
 	}
 	
+	
 	private void mutate(Location location) {
 		//FIXME : Possible IllegalArgumentException
 		boolean condition = count > 5 && rand.nextInt(10 - count) == 0 && locationValid(location); 
@@ -45,7 +46,9 @@ public class Corpse extends PortableItem {
 		}
 	}
 	
-	
+	/**
+	 * Whether or not locations is valid for transformation. (Addition of new actor to map)
+	 */
 	private boolean locationValid(Location location) {
 		if (location.containsAnActor()) {
 			count --;

@@ -28,8 +28,7 @@ public class PickUpBehaviour implements Behaviour{
 	 * 
 	 * If picking up is not possible or if the actor has an item in their inventory, returns 
 	 * null.
-	 * If multiple objects are available for picking up, selects one in 
-	 * random
+	 * If multiple objects are available for picking up, selects one in random.
 	 * 
 	 * @param actor the Actor enacting the behaviour
 	 * @param map the map that actor is currently on
@@ -44,11 +43,13 @@ public class PickUpBehaviour implements Behaviour{
 		if (actor.hasCapability(ZombieCapability.ARMLESS))
 			return null;
 		
+		
 		ArrayList<Action> actions = new ArrayList<Action>();
 		if (!actor.getInventory().isEmpty()) {
 			return null;
 		}
 		actions.add(actor.pickUpItem(map));
+		
 		
 		if (!actions.isEmpty()) {
 			return actions.get(random.nextInt(actions.size()));

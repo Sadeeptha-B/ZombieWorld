@@ -29,6 +29,7 @@ public class EatAction extends Action {
 	public String execute(Actor actor, GameMap map) {
 		actor.heal(food.getHealPoints());
 		actor.removeItemFromInventory(food);
+		map.locationOf(actor).removeItem(food);
 		return menuDescription(actor);
 	}
 	
