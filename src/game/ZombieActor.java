@@ -63,7 +63,7 @@ public abstract class ZombieActor extends Actor {
 	/**
 	 * Creates corpse for ZombieActor if killed and returns it
 	 * Method is called whenever an actor dies
-	 * @param diedAs : Boolean that holds whether or not dead actor is a human
+	 * @param diedAsHuman : Boolean that holds whether or not dead actor is a human
 	 * @return	: Created Corpse class
 	 */
 	public Corpse death(boolean diedAsHuman) {
@@ -83,7 +83,10 @@ public abstract class ZombieActor extends Actor {
 	 *  Get the health percentage of actor 
 	 */
 	public float getHealthPercantage() {
-		return this.hitPoints/this.maxHitPoints;
+		float hitpoints = this.hitPoints;
+		float maxHitPoints = this.maxHitPoints;
+		float percentage = (hitpoints/maxHitPoints) * 100;
+		return (int) Math.round(percentage);
 	}
 	
 	
@@ -92,6 +95,19 @@ public abstract class ZombieActor extends Actor {
 	 */
 	public abstract Behaviour[] getBehaviours();
 
+	
+	/**
+	 * Drops all items. For dropping all items, for a given actor, when needed
+	 * 
+	 * @param map : GameMap for getting the location at which to drop weapons 
+	 */
+	public void dropItems(GameMap map) {
+		Actions dropActions = new Actions();
+		for (Item item: this.getInventory())
+			dropActions.add(item.getDropAction());
+		for (Action drop : dropActions)
+			drop.execute(this, map);
+	}
 	
 
 }

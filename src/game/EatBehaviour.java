@@ -26,7 +26,7 @@ public class EatBehaviour implements Behaviour {
 		if (!(actor instanceof Human))
 			throw new IllegalArgumentException("Only humans can eat");
 		
-		if (actor.getHealthPercantage()<0.75 )
+		if (actor.getHealthPercantage()< 75 )
 			for(Item item: actor.getInventory())
 				if(item.isEdible())
 					return new EatAction(item);

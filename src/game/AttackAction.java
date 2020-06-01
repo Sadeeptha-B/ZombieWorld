@@ -56,11 +56,7 @@ public class AttackAction extends Action {
 			Item corpse = target.death();
 			map.locationOf(target).addItem(corpse);
 			
-			Actions dropActions = new Actions();
-			for (Item item : target.getInventory())
-				dropActions.add(item.getDropAction());
-			for (Action drop : dropActions)		
-				drop.execute(target, map);
+			target.dropItems(map);
 			map.removeActor(target);	
 			
 			result += System.lineSeparator() + target + " is killed.";

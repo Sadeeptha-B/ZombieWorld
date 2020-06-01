@@ -133,6 +133,11 @@ public class Zombie extends ZombieActor {
 	 * To check the number of limbs each turn decide on Intrinsic attack and 
 	 * drop item action.
 	 * 
+	 * Flags 
+	 * 0 : Drop items
+	 * 1 : Intrinsic Attack
+	 * 
+	 * 
 	 * @param map : GameMap, passed in by PlayTurn
 	 */
 	private boolean limbCheck(int flag) {
@@ -168,24 +173,9 @@ public class Zombie extends ZombieActor {
 		case 1:
 			return biteProbability;
 		}
-		return false;	
+	
+		throw new IllegalArgumentException("LimbCheck only handles 0 and 1");
 	}
-	
-	
-	
-	/**
-	 * Drops all items. Called by PlayTurn based on the results of limbCheck
-	 * 
-	 * @param map : GameMap for getting the location at which to drop weapons 
-	 */
-	private void dropItems(GameMap map) {
-		Actions dropActions = new Actions();
-		for (Item item: this.getInventory())
-			dropActions.add(item.getDropAction());
-		for (Action drop : dropActions)
-			drop.execute(this, map);
-	}
-
 	
 
 	/**

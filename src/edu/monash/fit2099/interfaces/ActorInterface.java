@@ -11,6 +11,7 @@ import game.Corpse;
  */
 
 public interface ActorInterface {
+	public void dropItems(GameMap map);
 	public Limb dismember();
 	public float getHealthPercantage();
 	public Corpse death();

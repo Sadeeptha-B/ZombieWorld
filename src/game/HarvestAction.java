@@ -23,9 +23,10 @@ public class HarvestAction extends Action {
 		if (!(actor instanceof Human))
 			throw new IllegalArgumentException("Only farmers and players can harvest");
 		
-		Human human = (Human) actor;
-		map.locationOf(human).setGround(new Dirt());
-		human.harvest(map);
+		Human harvester = (Human) actor;
+		map.locationOf(harvester).setGround(new Dirt());
+		map.locationOf(harvester).addItem(new Food());
+		//harvester.harvest(map);
 		return menuDescription(actor);
 	}
 	

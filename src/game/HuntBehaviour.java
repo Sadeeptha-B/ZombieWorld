@@ -26,13 +26,13 @@ public class HuntBehaviour implements Behaviour {
 	private String targetName; 
 	private int maxRange;
 	private HashSet<Location> visitedLocations = new HashSet<Location>();
-	private ZombieCapability hunter;
+	private ZombieCapability mobility;
 	
-	public HuntBehaviour(Class<?> cls, int range, ZombieCapability hunter) {
+	public HuntBehaviour(Class<?> cls, int range, ZombieCapability mobility) {
 		this.targetClass = cls;
 		this.targetName = targetClass.getSimpleName();
 		this.maxRange = range;
-		this.hunter = hunter;
+		this.mobility = mobility;
 	}
 	
 	private Action hunt(Actor actor, Location here) {
@@ -91,7 +91,7 @@ public class HuntBehaviour implements Behaviour {
 
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		if (actor.hasCapability(hunter)) {
+		if (actor.hasCapability(mobility)) {
 			return hunt(actor, map.locationOf(actor));
 		}
 		return null;

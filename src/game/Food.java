@@ -14,7 +14,7 @@ public class Food extends PortableItem {
 
 	
 	public Food() {
-		super("food", '$');
+		super("food", 'o');
 	}
 	
 	/**
@@ -41,11 +41,11 @@ public class Food extends PortableItem {
 	/**
 	 * Allowable actions for food.
 	 */
-	public List<Action> getAllowableActions() {
-		List<Action> actions = super.getAllowableActions();
-		actions.add(new EatAction(this));
-		return actions;
-	}
+//	public List<Action> getAllowableActions() {
+//		List<Action> actions = super.getAllowableActions();
+//		actions.add(new EatAction(this));
+//		return actions;
+//	}
 	
 	
 }

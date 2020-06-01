@@ -48,4 +48,8 @@ public class Player extends Actor {
 	public Action pickUpItem(GameMap map) {
 		return null;
 	}
+	
+
+	@Override
+	public void dropItems(GameMap map) {}
 }
