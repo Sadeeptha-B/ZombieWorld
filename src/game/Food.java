@@ -22,7 +22,6 @@ public class Food extends PortableItem {
 	 * 
 	 * @return int the amount of health points
 	 */
-	@Override
 	public int getHealPoints() {
 		return 10;
 	}

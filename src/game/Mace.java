@@ -20,13 +20,6 @@ public class Mace extends WeaponItem {
 	public CraftableItem asCraftableItem(){
 		return null;
 	}
-
-	@Override
-	/**
-	 * Mace cannot heal
-	 */
-	public int getHealPoints() {return 0;
-	}
 	
 	@Override
 	/**
