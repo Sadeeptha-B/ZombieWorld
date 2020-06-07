@@ -14,6 +14,8 @@ import edu.monash.fit2099.engine.Item;
  */
 public class EatBehaviour implements Behaviour {
 
+	private final int DEFAULT_EAT_HEALTH_CAP = 75;
+	
 	/**
 	 * returns an EatAction if the health of the actor is less than 75%
 	 * 
@@ -26,10 +28,10 @@ public class EatBehaviour implements Behaviour {
 		if (!(actor instanceof Human))
 			throw new IllegalArgumentException("Only humans can eat");
 		
-		if (actor.getHealthPercantage()< 75 )
+		if (actor.getHealthPercantage()< this.DEFAULT_EAT_HEALTH_CAP)
 			for(Item item: actor.getInventory())
 				if(item.isEdible())
-					return new EatAction(item);
+					return new EatAction((Food) item);
 		return null;
 	}
 }

@@ -18,9 +18,6 @@ public class MartianItem extends Item{
 		return null;
 	}
 
-	@Override
-	public int getHealPoints() {return 0;
-	}
 	
 	@Override
 	public boolean isEdible() {

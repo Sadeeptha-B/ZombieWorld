@@ -16,7 +16,7 @@ import edu.monash.fit2099.engine.DoNothingAction;
  */
 public class Human extends ZombieActor {
 
-	private Behaviour behaviours[] = {
+	private static Behaviour behaviours[] = {
 			new PickUpBehaviour(),
 			new EatBehaviour(),
 			new WanderBehaviour(ZombieCapability.MOBILE)
@@ -30,6 +30,7 @@ public class Human extends ZombieActor {
 	 */	
 	public Human(String name) {
 		super(name, 'H', 50, ZombieCapability.ALIVE, ZombieCapability.MOBILE);
+
 	}
 	
 	
@@ -62,9 +63,9 @@ public class Human extends ZombieActor {
 	 * Returns the behaviours of a Human
 	 */
 	public Behaviour[] getBehaviours() {
-		Behaviour [] behaviours = new Behaviour[this.behaviours.length];
-		for (int i = 0; i < this.behaviours.length; i++)
-			behaviours[i] = this.behaviours[i];
+		Behaviour [] behaviours = new Behaviour[Human.behaviours.length];
+		for (int i = 0; i < Human.behaviours.length; i++)
+			behaviours[i] = Human.behaviours[i];
 		return behaviours;
 	}
 	
@@ -81,4 +82,5 @@ public class Human extends ZombieActor {
 	 * Hence, does not implement. 
 	 */
 	public void harvest(GameMap map) {};
+	
 }

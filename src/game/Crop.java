@@ -14,6 +14,7 @@ public class Crop extends Ground {
 	
 	private int count = 0;
 	private boolean harvestable = false;
+	private final int HARVEST_TIME = 20;
 	
 	public Crop() {
 		super('_');
@@ -33,7 +34,7 @@ public class Crop extends Ground {
 		if (location.getActor() instanceof Farmer)
 			count += 2;
 		
-		if (count > 20) {
+		if (count > HARVEST_TIME) {
 			displayChar = '$';
 			harvestable = true;
 		}

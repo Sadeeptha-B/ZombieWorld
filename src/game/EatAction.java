@@ -12,9 +12,9 @@ import edu.monash.fit2099.engine.Item;
  */
 public class EatAction extends Action {
 	
-	private Item food;
+	private Food food;
 	
-	public EatAction(Item item) {
+	public EatAction(Food item) {
 		this.food = item;
 	}
 	

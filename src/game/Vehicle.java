@@ -20,11 +20,6 @@ public class Vehicle extends Item {
 	}
 
 	@Override
-	public int getHealPoints() {
-		return 0;
-	}
-
-	@Override
 	public boolean isEdible() {
 		return false;
 	}
