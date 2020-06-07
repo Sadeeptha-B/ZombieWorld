@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
@@ -14,6 +15,7 @@ import edu.monash.fit2099.engine.GameMap;
  *
  */
 public abstract class ZombieActor extends Actor {
+	
 	
 	/**
 	 * Constructor for Zombie Actor, sets it's ZombieCapability, whether it's attackable or not
@@ -86,7 +88,7 @@ public abstract class ZombieActor extends Actor {
 		float hitpoints = this.hitPoints;
 		float maxHitPoints = this.maxHitPoints;
 		float percentage = (hitpoints/maxHitPoints) * 100;
-		return (int) Math.round(percentage);
+		return Math.round(percentage);
 	}
 	
 	

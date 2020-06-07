@@ -17,6 +17,7 @@ public class MartianItem extends Item{
 	public CraftableItem asCraftableItem(){
 		return null;
 	}
+	
 	@Override
 	public boolean isEdible() {
 		return false;

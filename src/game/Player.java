@@ -20,7 +20,7 @@ public class Player extends Human {
 	
 	private Menu menu = new Menu();
 
-	
+
 	/**
 	 * Constructor.
 	 *
@@ -44,6 +44,7 @@ public class Player extends Human {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null) 
 			return lastAction.getNextAction();
+		
 		display.println("Player Health : " + this.getHealthPercantage());
 	
 		addSpecificActions(actions, map);
@@ -73,8 +74,8 @@ public class Player extends Human {
 			if (item.asCraftableItem() != null)
 				actions.add(new CraftAction(item.asCraftableItem()));
 			
-			if (item.asWeapon() != null ) 
-				weapons.add((WeaponItem) item.asWeapon());
+			if (item.asWeapon() != null) 
+				weapons.add((WeaponItem) item);
 		}
 		
 		if (weapons.size() > 1)

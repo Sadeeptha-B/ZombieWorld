@@ -64,7 +64,7 @@ public class World {
 		if (player == null)
 			throw new IllegalStateException();
 
-		// initialize the last action map to nothing actions;
+		// Initialize the last action map to nothing actions;
 		for (Actor actor : actorLocations) {
 			lastActionMap.put(actor, new DoNothingAction());
 		}

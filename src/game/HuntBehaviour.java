@@ -44,7 +44,7 @@ public class HuntBehaviour implements Behaviour {
 		ArrayList<ArrayList<Location>> layer = new ArrayList<ArrayList<Location>>();
 		layer.add(now);
 
-		for (int i = 0; i<maxRange; i++) {
+		for (int i = 0; i < maxRange; i++) {
 			layer = getNextLayer(actor, layer);
 			Location there = search(layer);
 			if (there != null)
@@ -74,7 +74,6 @@ public class HuntBehaviour implements Behaviour {
 	}
 	
 	private Location search(ArrayList<ArrayList<Location>> layer) {
-
 		for (ArrayList<Location> path : layer) {
 			if (containsTarget(path.get(path.size() - 1))) {
 				return path.get(1);
@@ -88,12 +87,10 @@ public class HuntBehaviour implements Behaviour {
 				targetClass.isInstance(here.getActor()));
 	}
 
-
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		if (actor.hasCapability(mobility)) {
+		if (actor.hasCapability(mobility)) 
 			return hunt(actor, map.locationOf(actor));
-		}
 		return null;
 	}
 

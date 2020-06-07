@@ -18,7 +18,7 @@ import edu.monash.fit2099.engine.IntrinsicWeapon;
  * 
  *
  */
-public class Zombie extends ZombieActor {
+public class Zombie extends ZombieActor  {
 	
 	private int armCount = 2;
 	private int legCount = 2;
