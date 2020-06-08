@@ -98,8 +98,8 @@ public class Application {
 		addHumansToMap(humans, 30.0, 20.0, 5.0, 7.0, compound);
 		
 		// place a simple weapon
-		compound.at(41, 15).addItem(new Plank());
-		//gameMap.at(50, 18).addItem(new Plank());
+		compound.at(41, 15).addItem(new Sniper());
+		compound.at(43, 15).addItem(new SniperAmmo());
 		
 		
 		// FIXME: Add more Zombies!

@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
-import edu.monash.fit2099.engine.Weapon;
 import edu.monash.fit2099.engine.WeaponItem;
 import edu.monash.fit2099.engine.Item;
 
@@ -54,7 +53,6 @@ public class Player extends Human {
 	}
 	
 	
-	
 	/**
 	 * Private method to add specific actions, including crafting and choosing weapons.
 	 * 
@@ -82,9 +80,12 @@ public class Player extends Human {
 			for (WeaponItem weapon: weapons) 
 				if (weapon != this.getWeapon())
 					actions.add(new ChooseWeaponAction(weapon));
+		
+		actions.add(new QuitAction());
 
 		return actions;
 	}
+	
 	
 //	/**
 //	 * Method for when player harvests crops.

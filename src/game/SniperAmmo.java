@@ -2,7 +2,7 @@ package game;
 
 public class SniperAmmo extends Ammunition {
 
-	public SniperAmmo(String name, char displayChar) {
+	public SniperAmmo() {
 		super("Sniper Ammo", '*');
 	}
 
