@@ -5,10 +5,8 @@ package game;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 
 import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.ActorLocations;
 import edu.monash.fit2099.engine.World;
 import edu.monash.fit2099.engine.Display;
 
@@ -20,11 +18,12 @@ import edu.monash.fit2099.engine.Display;
 public class GameHandler extends World {
 	
 	private boolean winStatus = false;
-	private GameMessages gameMessages = new GameMessages();
+	private GameDisplay gameDisplay;
 	
 	
-	public GameHandler(Display display) {
+	public GameHandler(Display display, GameDisplay gameDisplay) {
 		super(display);
+		this.gameDisplay = gameDisplay;
 	}
 	
 	
@@ -53,9 +52,9 @@ public class GameHandler extends World {
 	protected String endGameMessage() {
 		String msg;
 		if (winStatus)
-			msg = gameMessages.getWinMsg();
+			msg = gameDisplay.getWinMsg();
 		else
-			msg = gameMessages.getLoseMsg();
+			msg = gameDisplay.getLoseMsg();
 		
 		return msg + System.lineSeparator() + super.endGameMessage();
 	}
