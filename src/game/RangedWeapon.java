@@ -9,7 +9,7 @@ public abstract class RangedWeapon extends WeaponItem {
 	
 	public RangedWeapon(String name, char displayChar, int damage) {
 		super(name, displayChar, damage, "shoots");
-		ammo_count = getMaxAmmo();
+		ammo_count = 0;
 	}
 	
 	
@@ -25,6 +25,9 @@ public abstract class RangedWeapon extends WeaponItem {
 		return ammo_count;
 	}
 	
+	protected void reload(int ammo) {
+		ammo_count += ammo;
+	}
 	
 	@Override
 	public CraftableItem asCraftableItem() {
