@@ -207,4 +207,9 @@ public class Zombie extends ZombieActor  {
 		return behaviours;
 	}
 	
+	@Override
+	public boolean determineResult() {
+		return false;
+	}
+	
 }

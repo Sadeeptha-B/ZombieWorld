@@ -83,4 +83,8 @@ public class Human extends ZombieActor {
 	 */
 	public void harvest(GameMap map) {};
 	
+	@Override
+	public boolean determineResult() {
+		return true;
+	}
 }

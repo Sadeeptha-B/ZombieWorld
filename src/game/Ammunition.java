@@ -14,4 +14,7 @@ public class Ammunition extends PortableItem {
 		return ammo_capacity;
 	}
 	
+	
+	
+	
 }
