@@ -20,7 +20,6 @@ public class Mace extends WeaponItem {
 	public CraftableItem asCraftableItem(){
 		return null;
 	}
-
 	
 	@Override
 	/**

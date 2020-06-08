@@ -18,7 +18,6 @@ public class Plank extends WeaponItem {
 	public CraftableItem asCraftableItem(){
 		return null;
 	}
-
 	@Override
 	public boolean isEdible() {
 		return false;

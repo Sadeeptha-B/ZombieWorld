@@ -31,7 +31,7 @@ public class EatBehaviour implements Behaviour {
 		if (actor.getHealthPercantage()< this.DEFAULT_EAT_HEALTH_CAP)
 			for(Item item: actor.getInventory())
 				if(item.isEdible())
-					return new EatAction((Food) item);
+					return new EatAction((Food)item);
 		return null;
 	}
 }

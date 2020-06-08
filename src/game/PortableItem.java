@@ -24,7 +24,6 @@ public class PortableItem extends Item {
 	public CraftableItem asCraftableItem(){
 		return this instanceof CraftableItem ? (CraftableItem) this : null;
 	}
-
 	
 	@Override
 	/**

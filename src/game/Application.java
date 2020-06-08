@@ -95,15 +95,7 @@ public class Application {
 		compound.at(31, 7).addActor(new Farmer("Ceres", 'F', 75));
 		String[] humans = {"Carlton", "May", "Vicente", "Andrea", "Wendy",
 				"Elina", "Winter", "Clem", "Jacob", "Jaquelyn"};
-		int x, y;
-		for (String name : humans) {
-			do {
-				x = (int) Math.floor(Math.random() * 20.0 + 30.0);
-				y = (int) Math.floor(Math.random() * 7.0 + 5.0);
-			} 
-			while (compound.at(x, y).containsAnActor());
-			compound.at(x,  y).addActor(new Human(name));	
-		}
+		addHumansToMap(humans, 30.0, 20.0, 5.0, 7.0, compound);
 		
 		// place a simple weapon
 		compound.at(41, 15).addItem(new Plank());
@@ -135,17 +127,20 @@ public class Application {
         
         String[] townHumans = {"Tobias", "Tom", "Dick", "Harry", "Samwise",
 				"Elsa", "Clarissa", "X Æ A12", "Simon", "Kristy"};
-		int townX, townY;
-		for (String name : townHumans) {
-			do {
-				townX = (int) Math.floor(Math.random() * 14.0 + 42.0);
-				townY = (int) Math.floor(Math.random() * 10.0 + 4.0);
-			} 
-			while (town.at(townX, townY).containsAnActor());
-			town.at(townX, townY).addActor(new Human(name));	
-		}
-		
+		addHumansToMap(townHumans, 42.0, 14.0, 4.0, 10.0, town);
 		
 		world.run();
+	}
+	
+	public static void addHumansToMap(String[] names,double xStartCoordinate,double xRange,double yStartCoordinate, double yRange, GameMap map) {
+		int x, y;
+		for (String name : names) {
+			do {
+				x = (int) Math.floor(Math.random() * xRange + xStartCoordinate);
+				y = (int) Math.floor(Math.random() * yRange + yStartCoordinate);
+			} 
+			while (map.at(x, y).containsAnActor());
+			map.at(x, y).addActor(new Human(name));	
+		}
 	}
 }

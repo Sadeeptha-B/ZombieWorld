@@ -17,7 +17,6 @@ public class Club extends WeaponItem {
 	public CraftableItem asCraftableItem(){
 		return null;
 	}
-
 	
 	@Override
 	public boolean isEdible() {

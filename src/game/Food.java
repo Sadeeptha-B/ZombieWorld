@@ -21,7 +21,7 @@ public class Food extends PortableItem {
 	 * Gives the amount of health points that will be given to an actor upon consumption
 	 * 
 	 * @return int the amount of health points
-	 **/
+	*/
 	public int getHealPoints() {
 		return 10;
 	}
