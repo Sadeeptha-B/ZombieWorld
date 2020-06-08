@@ -49,7 +49,11 @@ public class Player extends Actor {
 		return null;
 	}
 	
-
+	@Override
+	public boolean determineResult() {
+		return true;
+	}
+	
 	@Override
 	public void dropItems(GameMap map) {}
 }

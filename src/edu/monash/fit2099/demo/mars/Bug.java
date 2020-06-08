@@ -61,4 +61,9 @@ public class Bug extends Actor {
 	public void dropItems(GameMap map) {}
 	
 	
+	@Override
+	public boolean determineResult() {
+		return false;
+	}
+	
 }

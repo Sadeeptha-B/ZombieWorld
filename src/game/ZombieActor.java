@@ -111,5 +111,6 @@ public abstract class ZombieActor extends Actor {
 			drop.execute(this, map);
 	}
 	
-
+	public abstract boolean determineResult();
+	
 }

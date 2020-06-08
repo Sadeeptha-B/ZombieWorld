@@ -9,6 +9,5 @@ import game.CraftableItem;
 public interface ItemInterface {
 	
 	public CraftableItem asCraftableItem();
-
 	public boolean isEdible();
 }
