@@ -66,12 +66,10 @@ public class Player extends Human {
 		if (map.locationOf(this).getGround().isHarvestable())
 			actions.add(new HarvestAction());
 			
-		for (Item item : this.getInventory()) {
-			if (item.isEdible()) 
-				actions.add(new EatAction((Food) item));
 		
-			if (item.asCraftableItem() != null)
-				actions.add(new CraftAction(item.asCraftableItem()));
+		for (Item item : this.getInventory()) {
+			if (item.allowableActions(this) != null)
+				actions.add(item.allowableActions(this));
 			
 			if (item.asWeapon() != null) 
 				weapons.add((WeaponItem) item);
@@ -84,17 +82,20 @@ public class Player extends Human {
 					actions.add(new ChooseWeaponAction(weapon));
 		
 		actions.add(new QuitAction());
-
 		return actions;
 	}
 	
+
+	/**
+	 * Method for when player harvests crops.
+	 */
+	public void harvest(GameMap map) {
+		this.addItemToInventory(new Food());
+	}
 	
-//	/**
-//	 * Method for when player harvests crops.
-//	 */
-//	public void harvest(GameMap map) {
-//		this.addItemToInventory(new Food());
-//	}
-	
+	@Override
+	public boolean isPlayer() {
+		return true;
+	}
 
 }

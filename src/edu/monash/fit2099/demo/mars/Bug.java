@@ -65,5 +65,10 @@ public class Bug extends Actor {
 	public boolean determineResult() {
 		return false;
 	}
+
+	@Override
+	public boolean isPlayer() {
+		return false;
+	}
 	
 }

@@ -1,5 +1,9 @@
 package game;
 
+import java.util.List;
+
+import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.WeaponItem;
 
 /**
@@ -9,6 +13,7 @@ import edu.monash.fit2099.engine.WeaponItem;
  *
  */
 public class Club extends WeaponItem {
+	
 	
 	public Club() {
 		super("club", '|', 25, "whams");
@@ -21,5 +26,10 @@ public class Club extends WeaponItem {
 	@Override
 	public boolean isEdible() {
 		return false;
+	}
+
+	@Override
+	public List<Action> allowableActions(Actor actor) {
+		return null;
 	}
 }

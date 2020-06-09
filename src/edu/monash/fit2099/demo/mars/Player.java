@@ -56,4 +56,9 @@ public class Player extends Actor {
 	
 	@Override
 	public void dropItems(GameMap map) {}
+
+	@Override
+	public boolean isPlayer() {
+		return true;
+	}
 }

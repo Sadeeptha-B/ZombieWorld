@@ -25,8 +25,7 @@ public class HarvestAction extends Action {
 		
 		Human harvester = (Human) actor;
 		map.locationOf(harvester).setGround(new Dirt());
-		map.locationOf(harvester).addItem(new Food());
-		//harvester.harvest(map);
+		harvester.harvest(map);
 		return menuDescription(actor);
 	}
 	

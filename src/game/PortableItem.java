@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actor;
 
 
 /**
@@ -46,4 +47,8 @@ public class PortableItem extends Item {
 	public boolean isEdible() {
 		return false;
 	}	
+	
+	public List<Action> allowableActions(Actor actor){
+		return getAllowableActions();
+	}
 }

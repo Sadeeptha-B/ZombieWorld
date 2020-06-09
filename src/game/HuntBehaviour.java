@@ -20,78 +20,111 @@ import edu.monash.fit2099.engine.Location;
  * @author ram
  *
  */
-public class HuntBehaviour implements Behaviour {
+//public class HuntBehaviour implements Behaviour {
+//	
+//	private Class<?> targetClass;
+//	private String targetName; 
+//	private int maxRange;
+//	private HashSet<Location> visitedLocations = new HashSet<Location>();
+//	private ZombieCapability mobility;
+//	
+//	public HuntBehaviour(Class<?> cls, int range, ZombieCapability mobility) {
+//		this.targetClass = cls;
+//		this.targetName = targetClass.getSimpleName();
+//		this.maxRange = range;
+//		this.mobility = mobility;
+//	}
+//	
+//	private Action hunt(Actor actor, Location here) {
+//		visitedLocations.clear();
+//		ArrayList<Location> now = new ArrayList<Location>();
+//		
+//		now.add(here);
+//		
+//		ArrayList<ArrayList<Location>> layer = new ArrayList<ArrayList<Location>>();
+//		layer.add(now);
+//
+//		for (int i = 0; i < maxRange; i++) {
+//			layer = getNextLayer(actor, layer);
+//			Location there = search(layer);
+//			if (there != null)
+//				return there.getMoveAction(actor, "towards a " + targetName, null);
+//		}
+//
+//		return null;
+//	}
+//
+//	private ArrayList<ArrayList<Location>> getNextLayer(Actor actor, ArrayList<ArrayList<Location>> layer) {
+//		ArrayList<ArrayList<Location>> nextLayer = new ArrayList<ArrayList<Location>>();
+//
+//		for (ArrayList<Location> path : layer) {
+//			List<Exit> exits = new ArrayList<Exit>(path.get(path.size() - 1).getExits());
+//			Collections.shuffle(exits);
+//			for (Exit exit : path.get(path.size() - 1).getExits()) {
+//				Location destination = exit.getDestination();
+//				if (!destination.getGround().canActorEnter(actor) || visitedLocations.contains(destination))
+//					continue;
+//				visitedLocations.add(destination);
+//				ArrayList<Location> newPath = new ArrayList<Location>(path);
+//				newPath.add(destination);
+//				nextLayer.add(newPath);
+//			}
+//		}
+//		return nextLayer;
+//	}
+//	
+//	private Location search(ArrayList<ArrayList<Location>> layer) {
+//		for (ArrayList<Location> path : layer) {
+//			if (containsTarget(path.get(path.size() - 1))) {
+//				return path.get(1);
+//			}
+//		}
+//		return null;
+//	}
+//	
+//	private boolean containsTarget(Location here) {
+//		return (here.getActor() != null &&
+//				targetClass.isInstance(here.getActor()));
+//	}
+//
+//	@Override
+//	public Action getAction(Actor actor, GameMap map) {
+//		if (actor.hasCapability(mobility)) 
+//			return hunt(actor, map.locationOf(actor));
+//		return null;
+//	}
+//
+//}
+
+public class HuntBehaviour extends Scan implements Behaviour {
 	
-	private Class<?> targetClass;
 	private String targetName; 
-	private int maxRange;
-	private HashSet<Location> visitedLocations = new HashSet<Location>();
 	private ZombieCapability mobility;
 	
+	
 	public HuntBehaviour(Class<?> cls, int range, ZombieCapability mobility) {
-		this.targetClass = cls;
-		this.targetName = targetClass.getSimpleName();
-		this.maxRange = range;
+		super(cls,range);
+		this.targetName = cls.getSimpleName();
 		this.mobility = mobility;
 	}
 	
-	private Action hunt(Actor actor, Location here) {
-		visitedLocations.clear();
-		ArrayList<Location> now = new ArrayList<Location>();
-		
-		now.add(here);
-		
-		ArrayList<ArrayList<Location>> layer = new ArrayList<ArrayList<Location>>();
-		layer.add(now);
-
-		for (int i = 0; i < maxRange; i++) {
-			layer = getNextLayer(actor, layer);
-			Location there = search(layer);
-			if (there != null)
-				return there.getMoveAction(actor, "towards a " + targetName, null);
-		}
-
+	public Action getAction(Actor actor, GameMap map) {
+		if (actor.hasCapability(mobility)) 
+			return super.scan(actor, map.locationOf(actor));
 		return null;
-	}
-
-	private ArrayList<ArrayList<Location>> getNextLayer(Actor actor, ArrayList<ArrayList<Location>> layer) {
-		ArrayList<ArrayList<Location>> nextLayer = new ArrayList<ArrayList<Location>>();
-
-		for (ArrayList<Location> path : layer) {
-			List<Exit> exits = new ArrayList<Exit>(path.get(path.size() - 1).getExits());
-			Collections.shuffle(exits);
-			for (Exit exit : path.get(path.size() - 1).getExits()) {
-				Location destination = exit.getDestination();
-				if (!destination.getGround().canActorEnter(actor) || visitedLocations.contains(destination))
-					continue;
-				visitedLocations.add(destination);
-				ArrayList<Location> newPath = new ArrayList<Location>(path);
-				newPath.add(destination);
-				nextLayer.add(newPath);
-			}
-		}
-		return nextLayer;
-	}
-	
-	private Location search(ArrayList<ArrayList<Location>> layer) {
-		for (ArrayList<Location> path : layer) {
-			if (containsTarget(path.get(path.size() - 1))) {
-				return path.get(1);
-			}
-		}
-		return null;
-	}
-	
-	private boolean containsTarget(Location here) {
-		return (here.getActor() != null &&
-				targetClass.isInstance(here.getActor()));
 	}
 
 	@Override
-	public Action getAction(Actor actor, GameMap map) {
-		if (actor.hasCapability(mobility)) 
-			return hunt(actor, map.locationOf(actor));
-		return null;
+	protected Location foundTarget(ArrayList<Location> locations, Location location) {
+		return locations.get(1);
 	}
 
+	@Override
+	protected Action locationAction(Actor actor, Location there) {
+		return there.getMoveAction(actor, "towards a " + targetName, null);
+	}
+	
 }
+
+
+

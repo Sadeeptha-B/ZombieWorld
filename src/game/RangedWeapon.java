@@ -1,5 +1,9 @@
 package game;
 
+import java.util.List;
+
+import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.WeaponItem;
 
 public abstract class RangedWeapon extends WeaponItem {
@@ -28,6 +32,7 @@ public abstract class RangedWeapon extends WeaponItem {
 		ammoCount += ammo;
 	}
 	
+	
 	@Override
 	public CraftableItem asCraftableItem() {
 		return null;
@@ -40,6 +45,11 @@ public abstract class RangedWeapon extends WeaponItem {
 
 	public boolean isRanged() {
 		return true;
+	}
+	@Override
+	public List<Action> allowableActions(Actor actor) {
+		return null;
+
 	}
 	
 }

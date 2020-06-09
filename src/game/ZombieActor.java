@@ -113,4 +113,7 @@ public abstract class ZombieActor extends Actor {
 	
 	public abstract boolean determineResult();
 	
+	public boolean isPlayer() {
+		return false;
+	}
 }

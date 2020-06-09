@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.WeaponItem;
 public class Leg extends Limb {
 
 	public Leg() {
-		super("Leg", 'J', "mace");
+		super("Leg", 'j', "mace");
 	}
 	
 	
