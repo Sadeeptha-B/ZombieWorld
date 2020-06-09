@@ -42,7 +42,6 @@ public class GameHandler extends World {
 		
 	}
 	
-	
 	protected boolean stillRunning() {
 		boolean endCond = winLose();
 		winStatus = winStatus && actorLocations.contains(player);

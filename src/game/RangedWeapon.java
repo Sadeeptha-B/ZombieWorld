@@ -4,12 +4,12 @@ import edu.monash.fit2099.engine.WeaponItem;
 
 public abstract class RangedWeapon extends WeaponItem {
 
-	private int ammo_count;
+	private int ammoCount;
 	
 	
 	public RangedWeapon(String name, char displayChar, int damage) {
 		super(name, displayChar, damage, "shoots");
-		ammo_count = 0;
+		ammoCount = getMaxAmmo();
 	}
 	
 	
@@ -20,13 +20,12 @@ public abstract class RangedWeapon extends WeaponItem {
 	
 	protected abstract int getMaxAmmo();
 	
-	
 	protected int getAmmoCount() {
-		return ammo_count;
+		return ammoCount;
 	}
 	
 	protected void reload(int ammo) {
-		ammo_count += ammo;
+		ammoCount += ammo;
 	}
 	
 	@Override
@@ -39,5 +38,8 @@ public abstract class RangedWeapon extends WeaponItem {
 		return false;
 	}
 
+	public boolean isRanged() {
+		return true;
+	}
 	
 }

@@ -1,6 +1,6 @@
 package game;
 
-public class Shotgun extends RangedWeapon {
+public abstract class Shotgun extends RangedWeapon {
 	
 	private static final int MAX_AMMO = 5;
 
@@ -12,5 +12,5 @@ public class Shotgun extends RangedWeapon {
 	protected int getMaxAmmo() {
 		return MAX_AMMO;
 	}
-	
+
 }

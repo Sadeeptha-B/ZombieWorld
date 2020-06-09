@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.MoveActorAction;
 import edu.monash.fit2099.engine.World;
 
@@ -81,7 +82,6 @@ public class Application {
 		GameMap town = new GameMap(groundFactory, townMap);
 		world.addGameMap(town);
 		
-		
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, compound.at(42, 15));
 		
@@ -90,7 +90,6 @@ public class Application {
         compoundVehicle.addAction(new MoveActorAction(town.at(65, 20), "to Town!"));
         compound.at(50, 17).addItem(compoundVehicle);
 		
-		
 	    // Place some random humans
 		compound.at(31, 7).addActor(new Farmer("Ceres", 'F', 75));
 		String[] humans = {"Carlton", "May", "Vicente", "Andrea", "Wendy",
@@ -98,11 +97,9 @@ public class Application {
 		addHumansToMap(humans, 30.0, 20.0, 5.0, 7.0, compound);
 		
 		// place a simple weapon
-		compound.at(41, 15).addItem(new Sniper());
-		compound.at(43, 15).addItem(new SniperAmmo());
-		
-		
-		// FIXME: Add more Zombies!
+		compound.at(41, 15).addItem(new Plank());
+
+
 		compound.at(30, 20).addActor(new Zombie("Groan"));
 		compound.at(30,  18).addActor(new Zombie("Boo"));
 		compound.at(10,  4).addActor(new Zombie("Uuuurgh"));

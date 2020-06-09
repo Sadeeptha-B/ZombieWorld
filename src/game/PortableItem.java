@@ -25,15 +25,7 @@ public class PortableItem extends Item {
 		return this instanceof CraftableItem ? (CraftableItem) this : null;
 	}
 	
-	@Override
-	/**
-	 * Whether item is edible
-	 */
-	public boolean isEdible() {
-		return false;
-	}
 
-	
 	/**
 	 * Allowable actions for portable items.
 	 */
@@ -47,4 +39,11 @@ public class PortableItem extends Item {
 		return actions;
 	}
 	
+	@Override
+	/**
+	 * Whether item is edible
+	 */
+	public boolean isEdible() {
+		return false;
+	}	
 }

@@ -62,6 +62,7 @@ public class Player extends Human {
 	private Actions addSpecificActions(Actions actions, GameMap map) {
 		ArrayList<WeaponItem> weapons = new ArrayList<WeaponItem>();
 		
+		
 		if (map.locationOf(this).getGround().isHarvestable())
 			actions.add(new HarvestAction());
 			
@@ -74,6 +75,7 @@ public class Player extends Human {
 			
 			if (item.asWeapon() != null) 
 				weapons.add((WeaponItem) item);
+			
 		}
 		
 		if (weapons.size() > 1)
