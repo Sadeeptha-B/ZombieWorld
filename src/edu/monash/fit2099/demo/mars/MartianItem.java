@@ -1,6 +1,9 @@
 package edu.monash.fit2099.demo.mars;
 
+import java.util.List;
+
 import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Item;
 import game.CraftableItem;
 
@@ -21,5 +24,10 @@ public class MartianItem extends Item{
 	@Override
 	public boolean isEdible() {
 		return false;
+	}
+
+	@Override
+	public List<Action> allowableActions(Actor actor) {
+		return null;
 	}
 }

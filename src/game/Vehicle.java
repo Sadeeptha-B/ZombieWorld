@@ -1,6 +1,11 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actions;
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Item;
 
 public class Vehicle extends Item {
@@ -21,6 +26,11 @@ public class Vehicle extends Item {
 	@Override
 	public boolean isEdible() {
 		return false;
+	}
+
+
+	public List<Action> allowableActions(Actor actor) {
+		return null;
 	}
 
 }

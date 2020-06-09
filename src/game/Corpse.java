@@ -67,5 +67,8 @@ public class Corpse extends PortableItem {
 		}
 		return true;
 	}
+	
+	
+	
 
 }

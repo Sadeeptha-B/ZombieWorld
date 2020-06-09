@@ -17,4 +17,5 @@ public interface ActorInterface {
 	public Corpse death();
 	public Action pickUpItem(GameMap map);
 	public boolean determineResult();
+	public boolean isPlayer();
 }

@@ -35,11 +35,11 @@ public class Farmer extends Human {
 		return behaviours;
 	}
 	
-//	/**
-//	 * Harvesting for farmer. Farmers drops ripened crops at location
-//	 */
-//	public void harvest(GameMap map) {
-//		map.locationOf(this).addItem(new Food());
-//	}
+	/**
+	 * Harvesting for farmer. Farmers drops ripened crops at location
+	 */
+	public void harvest(GameMap map) {
+		map.locationOf(this).addItem(new Food());
+	}
 
 }

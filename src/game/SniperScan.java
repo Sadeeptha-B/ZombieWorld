@@ -14,11 +14,9 @@ public class SniperScan extends Scan {
 		super(Zombie.class, range);
 	}
 	
-	
 	public ArrayList<Actor> getTargets() {
 		return new ArrayList<Actor>(targets);
 	}
-	
 	
 	@Override
 	protected Location foundTarget(ArrayList<Location> locations, Location location) {
@@ -26,9 +24,12 @@ public class SniperScan extends Scan {
 		return null;
 	}
 
-	
-	protected  Action locationAction(Actor actor, Location location) {
+	protected Action locationAction(Actor actor, Location location) {
 		return null;
+	}
+	
+	public boolean targetsFound() {
+		return !targets.isEmpty();
 	}
 	
 }

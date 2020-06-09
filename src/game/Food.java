@@ -2,6 +2,7 @@ package game;
 
 import java.util.List;
 
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Action;
 
 /**
@@ -39,11 +40,10 @@ public class Food extends PortableItem {
 	/**
 	 * Allowable actions for food.
 	 */
-//	public List<Action> getAllowableActions() {
-//		List<Action> actions = super.getAllowableActions();
-//		actions.add(new EatAction(this));
-//		return actions;
-//	}
-	
-	
+	public List<Action> allowableActions(Actor actor) {
+		List<Action> actions = super.allowableActions(actor);
+		if (actor.getInventory().contains(this))
+			actions.add(new EatAction(this));
+		return actions;
+	}
 }

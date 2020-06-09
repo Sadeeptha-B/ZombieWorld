@@ -89,4 +89,9 @@ public class Player extends Actor {
 	public boolean determineResult() {
 		return true;
 	}
+
+	@Override
+	public boolean isPlayer() {
+		return true;
+	}
 }

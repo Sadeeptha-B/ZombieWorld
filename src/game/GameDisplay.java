@@ -105,5 +105,12 @@ public class GameDisplay {
 		return loseMsg;
 	}
 	
+	public String getEndMsg(boolean win) {
+		if (win)
+			return getWinMsg();
+		else
+			return getLoseMsg();
+	}
+	
 }
 

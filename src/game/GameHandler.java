@@ -25,9 +25,9 @@ public class GameHandler extends World {
 		super(display);
 		this.gameDisplay = gameDisplay;
 	}
+		
 	
-	
-	protected boolean winLose() {			
+	protected boolean winLoseScenario() {		
 		ArrayList<Boolean> winLose = new ArrayList<Boolean>();
 		
 		for (Actor actor: actorLocations) {
@@ -38,12 +38,11 @@ public class GameHandler extends World {
 		ArrayList<Boolean> container = new ArrayList<Boolean>(Arrays.asList(true, false));
 		winStatus = winLose.contains(true);
 		return winLose.containsAll(container);
-		
 	}
 	
 	
 	protected boolean stillRunning() {
-		boolean endCond = winLose();
+		boolean endCond = winLoseScenario();
 		winStatus = winStatus && actorLocations.contains(player);
 		return super.stillRunning() && endCond;
 	}
@@ -51,11 +50,12 @@ public class GameHandler extends World {
 	
 	protected String endGameMessage() {
 		String msg;
-		if (winStatus)
-			msg = gameDisplay.getWinMsg();
-		else
-			msg = gameDisplay.getLoseMsg();
+		if (player.hasCapability(ZombieCapability.QUITTED))
+			return super.endGameMessage();
 		
+		msg = gameDisplay.getEndMsg(winStatus);
 		return msg + System.lineSeparator() + super.endGameMessage();
 	}
 }
+
+
