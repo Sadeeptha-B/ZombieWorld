@@ -33,4 +33,9 @@ public class Vehicle extends Item {
 		return null;
 	}
 
+	@Override
+	public Ammunition asAmmo() {
+		return null;
+	}
+
 }

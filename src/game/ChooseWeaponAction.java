@@ -29,16 +29,18 @@ public class ChooseWeaponAction extends Action {
 		if (!(actor instanceof Player))
 			throw new IllegalArgumentException("Only player can choose weapons");
 		
-		ArrayList<Item> inventory_collection = new ArrayList<Item>();
+		ArrayList<Item> inventoryCollection = new ArrayList<Item>(actor.getInventory());
 		
-		for (Item item : actor.getInventory()) {
-			if (item != chosenWeapon) {
-				actor.removeItemFromInventory(item);
-				inventory_collection.add(item);
-			}
+		for (Item item : inventoryCollection) {
+			actor.removeItemFromInventory(item);
 		}
 		
-		for (Item item : inventory_collection) {
+		int weaponIndex = inventoryCollection.indexOf(chosenWeapon);
+		inventoryCollection.remove(weaponIndex);
+		inventoryCollection.add(0, chosenWeapon);
+		
+
+		for (Item item : inventoryCollection) {
 			actor.addItemToInventory(item);
 		}
 		

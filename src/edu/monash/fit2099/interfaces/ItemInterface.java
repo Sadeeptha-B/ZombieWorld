@@ -1,6 +1,7 @@
 package edu.monash.fit2099.interfaces;
 
 
+import game.Ammunition;
 import game.CraftableItem;
 import java.util.List;
 import edu.monash.fit2099.engine.Action;
@@ -14,6 +15,7 @@ public interface ItemInterface {
 	
 	public List<Action> allowableActions(Actor actor);
 	public CraftableItem asCraftableItem();
-	
 	public boolean isEdible();
+	public Ammunition asAmmo();
+	
 }

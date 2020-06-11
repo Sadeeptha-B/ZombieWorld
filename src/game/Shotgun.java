@@ -18,4 +18,9 @@ public class Shotgun extends RangedWeapon {
 		return MAX_AMMO;
 	}
 
+	@Override
+	public Ammunition asAmmo() {
+		return null;
+	}
+
 }

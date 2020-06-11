@@ -5,6 +5,7 @@ import java.util.List;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Item;
+import game.Ammunition;
 import game.CraftableItem;
 
 public class MartianItem extends Item{
@@ -28,6 +29,11 @@ public class MartianItem extends Item{
 
 	@Override
 	public List<Action> allowableActions(Actor actor) {
+		return null;
+	}
+
+	@Override
+	public Ammunition asAmmo() {
 		return null;
 	}
 }

@@ -33,7 +33,6 @@ public class UtilityGameMap extends GameMap {
 
 	public void tick() {
 		super.tick();
-		
 		for (Actor actor: actorLocations) {
 			actor.tick(this);
 		}

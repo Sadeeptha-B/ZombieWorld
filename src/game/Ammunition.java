@@ -15,12 +15,14 @@ public class Ammunition extends PortableItem {
 	}
 	
 	public void reduceAmmo(int ammo) {
-		ammoCount -= ammo;
+		ammoCount = Math.max(0, ammoCount - ammo);
 	}
 	
 	protected int getAmmoCount() {
 		return ammoCount;
 	}
 	
-	
+	public Ammunition asAmmo() {
+		return this instanceof Ammunition ? (Ammunition) this : null;
+	}
 }

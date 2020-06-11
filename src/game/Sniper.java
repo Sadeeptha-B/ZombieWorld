@@ -21,5 +21,11 @@ public class Sniper extends RangedWeapon {
 	}
 
 
+	@Override
+	public Ammunition asAmmo() {
+		return null;
+	}
+
+
 	
 }

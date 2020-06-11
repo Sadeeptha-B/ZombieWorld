@@ -12,24 +12,15 @@ import edu.monash.fit2099.engine.WeaponItem;
  * @author Kaveesha Nissanka
  *
  */
-public class Club extends WeaponItem {
-	
+public class Club extends WeaponHandler {
 	
 	public Club() {
 		super("club", '|', 25, "whams");
-	}
-	
-	public CraftableItem asCraftableItem(){
-		return null;
-	}
-	
-	@Override
-	public boolean isEdible() {
-		return false;
 	}
 
 	@Override
 	public List<Action> allowableActions(Actor actor) {
 		return null;
 	}
+	
 }

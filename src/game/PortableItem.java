@@ -51,4 +51,9 @@ public class PortableItem extends Item {
 	public List<Action> allowableActions(Actor actor){
 		return getAllowableActions();
 	}
+
+	@Override
+	public Ammunition asAmmo() {
+		return this instanceof Ammunition ? (Ammunition) this : null;
+	}
 }

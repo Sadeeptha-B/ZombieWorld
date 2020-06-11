@@ -11,40 +11,30 @@ import edu.monash.fit2099.engine.Item;
  *
  */
 public class ReloadAction extends Action {
+	
+	private Ammunition ammo;
+	private RangedWeapon weapon;
+	
+	public ReloadAction(RangedWeapon weapon, Ammunition ammo) {
+		this.weapon = weapon;
+		this.ammo = ammo;
+	}
+	
 
 	@Override
-	public String execute(Actor actor, GameMap map) {
-		RangedWeapon weapon = (RangedWeapon) actor.getWeapon();
-		Ammunition ammo = null;
+	public String execute(Actor actor, GameMap map) {	
+		int ammoAdded = weapon.reload(ammo.getAmmoCount());
+		ammo.reduceAmmo(ammoAdded);
 		
-		for (Item item: actor.getInventory()) {
-			if (item instanceof Ammunition) {
-				ammo = (Ammunition) item;
-			}
-		}
-		
-		int availableAmmo = ammo.getAmmoCount();
-		int ammoNeeded = weapon.getMaxAmmo() -  weapon.getAmmoCount();
-		if (weapon.getAmmoCount() < weapon.getMaxAmmo()) {
-			
-			if (ammoNeeded <= availableAmmo) {
-				weapon.reload(ammoNeeded);
-				ammo.reduceAmmo(ammoNeeded);
-				return actor + " reloads the " + actor.getWeapon();
-			}
-			weapon.reload(availableAmmo);
-			ammo.reduceAmmo(availableAmmo);
+		if (ammo.getAmmoCount() == 0)
 			actor.removeItemFromInventory(ammo);
-			return actor + " reloads the " + actor.getWeapon();
-			
-		}
 		
-		return actor.getWeapon() + " is not reloadable";
+		return actor + " reloads the " + weapon;
 	}
-
+	
+	
 	@Override
 	public String menuDescription(Actor actor) {
 		return "Reload gun";
 	}
-
 }
