@@ -110,12 +110,12 @@ public class HuntBehaviour extends Scan implements Behaviour {
 	
 	public Action getAction(Actor actor, GameMap map) {
 		if (actor.hasCapability(mobility)) 
-			return super.scan(actor, map.locationOf(actor));
+			return super.scan(actor, map.locationOf(actor), map);
 		return null;
 	}
 
 	@Override
-	protected Location foundTarget(ArrayList<Location> locations, Location location) {
+	protected Location foundTarget(ArrayList<Location> locations, Location location, Location ActorLocation, GameMap map) {
 		return locations.get(1);
 	}
 
