@@ -74,6 +74,12 @@ public class Player extends Human {
 			if (item.asWeapon() != null) 
 				weapons.add((WeaponItem) item);
 			
+			if (item instanceof Ammunition  && weapons.get(0) instanceof RangedWeapon) {
+				Ammunition ammo = (Ammunition) item;
+				RangedWeapon gun = (RangedWeapon) weapons.get(0);
+				if(ammo.getAmmoCount() >= gun.getAmmoCount())
+					actions.add(new ReloadAction());
+			}
 		}
 		
 		if (weapons.size() > 1)

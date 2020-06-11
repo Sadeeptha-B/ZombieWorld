@@ -11,7 +11,9 @@ import edu.monash.fit2099.engine.Item;
  *
  */
 public class ReloadAction extends Action {
-
+	
+	int ammoNeeded;
+	
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		RangedWeapon weapon = (RangedWeapon) actor.getWeapon();
@@ -24,7 +26,6 @@ public class ReloadAction extends Action {
 		}
 		
 		int availableAmmo = ammo.getAmmoCount();
-		int ammoNeeded = weapon.getMaxAmmo() -  weapon.getAmmoCount();
 		if (weapon.getAmmoCount() < weapon.getMaxAmmo()) {
 			
 			if (ammoNeeded <= availableAmmo) {

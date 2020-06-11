@@ -11,7 +11,7 @@ import edu.monash.fit2099.engine.NumberRange;
 public class MamboMarie extends ZombieActor {
 
 	private Random rand = new Random();
-	
+
 	private int turnCount;
 	private Behaviour[] behaviours = {
 			new AttackBehaviour(ZombieCapability.ALIVE),
@@ -30,17 +30,20 @@ public class MamboMarie extends ZombieActor {
 	
 	public void tick(UtilityGameMap map) {
 		turnCount += 1;
+		if (turnCount % 1 == 0) {
+			chant(map);
+		}
 		
 		if (map.contains(this) && !map.isActorInDimension(this) && turnCount >= 30) {
 			map.removeActor(this);
 			map.addActorToDimension(this);
 	    }
-		else if (rand.nextInt(19) == 0) {
+		else if (rand.nextInt(1) == 0) {
 			map.removeActor(this);
 			map.addActor(this, mamboLocation(map));
 			resetCount();
 		}
-			
+		
 	}
 	
 	
@@ -80,8 +83,19 @@ public class MamboMarie extends ZombieActor {
 	}
 	
 	
-	public void chant() {
+	public void chant(GameMap map) {
 		
+		int count = 0;
+		while (count < 5){
+			Zombie zombie = new Zombie(name);
+			int x = rand.nextInt(80);
+			int y = rand.nextInt(25);
+			if(map.at(x, y).canActorEnter(zombie)  && !map.at(x, y).containsAnActor()){
+				map.at(x, y).addActor(zombie);
+				count += 1;
+			}
+		}
+			
 	}
 	
 
