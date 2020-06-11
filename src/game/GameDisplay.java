@@ -111,6 +111,5 @@ public class GameDisplay {
 		else
 			return getLoseMsg();
 	}
-	
 }
 

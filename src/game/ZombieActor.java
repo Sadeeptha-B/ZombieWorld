@@ -56,8 +56,11 @@ public abstract class ZombieActor extends Actor {
 	 */
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		Actions list = super.getAllowableActions(otherActor, direction, map);
-		if (otherActor.hasCapability(ZombieCapability.UNDEAD) != this.hasCapability(ZombieCapability.UNDEAD))
+		boolean team = this.hasCapability(ZombieCapability.UNDEAD) || this.hasCapability(ZombieCapability.WITCH);
+		if (otherActor.hasCapability(ZombieCapability.UNDEAD) != team)
 			list.add(new AttackAction(this));
+		
+		
 		return list;
 	}
 	
@@ -116,4 +119,6 @@ public abstract class ZombieActor extends Actor {
 	public boolean isPlayer() {
 		return false;
 	}
+	
+	public void tick(UtilityGameMap map) {};
 }

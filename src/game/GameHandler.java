@@ -26,6 +26,10 @@ public class GameHandler extends World {
 		this.gameDisplay = gameDisplay;
 	}
 		
+	public void run() {
+		super.run();
+	}
+	
 	
 	protected boolean winLoseScenario() {		
 		ArrayList<Boolean> winLose = new ArrayList<Boolean>();
@@ -55,6 +59,8 @@ public class GameHandler extends World {
 		msg = gameDisplay.getEndMsg(winStatus);
 		return msg + System.lineSeparator() + super.endGameMessage();
 	}
+	
+
 }
 
 

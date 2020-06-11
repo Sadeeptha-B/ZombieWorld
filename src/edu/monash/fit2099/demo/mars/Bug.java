@@ -6,6 +6,7 @@ import game.Behaviour;
 import game.Corpse;
 import edu.monash.fit2099.engine.*;
 import game.Limb;
+import game.UtilityGameMap;
 
 
 public class Bug extends Actor {
@@ -70,5 +71,8 @@ public class Bug extends Actor {
 	public boolean isPlayer() {
 		return false;
 	}
+
+	@Override
+	public void tick(UtilityGameMap map) {}
 	
 }

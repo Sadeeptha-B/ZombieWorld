@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
 import game.Limb;
+import game.UtilityGameMap;
 import game.Corpse;
 
 
@@ -94,4 +95,7 @@ public class Player extends Actor {
 	public boolean isPlayer() {
 		return true;
 	}
+
+	@Override
+	public void tick(UtilityGameMap map) {}
 }

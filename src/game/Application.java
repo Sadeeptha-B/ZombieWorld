@@ -1,8 +1,9 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Random;
 
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
@@ -10,6 +11,7 @@ import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.MoveActorAction;
+import edu.monash.fit2099.engine.NumberRange;
 import edu.monash.fit2099.engine.World;
 
 /**
@@ -18,6 +20,7 @@ import edu.monash.fit2099.engine.World;
  */
 public class Application {
 	
+	private static Random rand = new Random();
 	static GameDisplay gameDisplay = new GameDisplay();
 	static World world = new GameHandler(new Display(), gameDisplay);
 	static FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Fence(), new Tree(), new Brick());
@@ -52,7 +55,7 @@ public class Application {
 				".........................................................................++++...",
 				"..........................................................................++....",
 				"................................................................................");
-		GameMap compound = addMaps(groundFactory, compoundMap);
+		UtilityGameMap compound = addUtilityMaps(groundFactory, compoundMap);
 		
 		
 		List<String> townMap = Arrays.asList(
@@ -87,6 +90,10 @@ public class Application {
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, compound.at(42, 15));
 		
+		MamboMarie mambo = new MamboMarie("Mambo Marie", 'M', 100, compound);
+		
+
+		
 		// Placing a vehicle for player to move between maps
 		Vehicle compoundVehicle = new Vehicle();
         compoundVehicle.addAction(new MoveActorAction(town.at(65, 20), "to Town!"));
@@ -110,7 +117,7 @@ public class Application {
 		compound.at(62, 12).addActor(new Zombie("Aaargh"));	
 		
 		
- /*****************************************************************************************/
+ /**********************************************************************************************************************/
 		// Town 
 		town.at(29, 18).addActor(new Zombie("Gorbag"));
 		town.at(37, 20).addActor(new Zombie("Shagrat"));
@@ -152,10 +159,22 @@ public class Application {
 	}
 	
 	
+	public static UtilityGameMap addUtilityMaps(FancyGroundFactory groundFactory, List<String> bluePrint) {
+		UtilityGameMap map = new UtilityGameMap(groundFactory, bluePrint);
+		world.addGameMap(map);
+		return map;
+	}
+	
 	public static GameMap addMaps(FancyGroundFactory groundFactory, List<String> bluePrint) {
 		GameMap map = new GameMap(groundFactory, bluePrint);
 		world.addGameMap(map);
 		return map;
+	}
+	
+	public static int[] mamboLocationAux(int heights, int widths) {
+		int x = rand.nextInt(80);
+		int y = rand.nextInt(25);
+		return new int[] {x,y};
 	}
 	
 }
