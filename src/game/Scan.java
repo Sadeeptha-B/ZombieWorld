@@ -74,13 +74,29 @@ public abstract class Scan {
 	}
 	
 	protected boolean pathValid(Location location, Location actorLocation, GameMap map) {
-		int xDistance = Math.abs(actorLocation.x() - location.x());
-		int yDistance = Math.abs(actorLocation.y() - location.y());
+		int xDistance = Math.abs(location.x() - actorLocation.x());
+		int yDistance = Math.abs(location.y() - actorLocation.y());
 		
 		if (xDistance == 0 || yDistance == 0)
 			return straightPathValid(location, actorLocation, xDistance, yDistance, map);
+		int actorX = actorLocation.x();
+		int targetX = location.x();
+		int actorY =  actorLocation.y();
+		int targetY = location.y();
+
+		if (yDistance < xDistance) {
+			if (actorX > targetX)
+				return lowAnglePathValid(targetX, targetY, actorX, actorY, map);
+			else
+				return lowAnglePathValid(actorX, actorY, targetX, targetY,  map);
+		}
+		else {
+			if (actorY > targetY) 
+				return highAnglePathValid(targetX, targetY, actorX, actorY, map);
+			else
+				return lowAnglePathValid(actorX, actorY, targetX, targetY,  map);
+		}
 		
-		return false;
 	}
 	
 	protected boolean straightPathValid(Location targetLocation, Location actorLocation, int x, int y, GameMap map) {
@@ -99,7 +115,8 @@ public abstract class Scan {
 			int lesserY = Math.min(targetLocation.y(), actorLocation.y());
 			
 			while (lesserY < greaterY) {
-				canBulletPassThrough(x, lesserY, map);
+				if (!canBulletPassThrough(x, lesserY, map))
+					return false;
 				lesserY += 1;
 			}
 		}
@@ -115,9 +132,51 @@ public abstract class Scan {
 		return true;
 	}
 	
-	protected boolean angledPath(Location targetLocation, Location actorLocation, GameMap map) {
-		return false;
+	protected boolean lowAnglePathValid(int x0, int y0, int x1, int y1, GameMap map) {
+		int dx = x1 - x0;
+		int dy = y1 - y0;
+		int yi = 1;
+		if (dy < 0){
+	        yi = -1;
+	        dy = -dy;
+		}
+		int D = 2*dy - dx;
+		int y = y0;
+		for(int x = x0; x0 < x1; x0++) {
+			if (!canBulletPassThrough(x, y, map))
+				return false;
+			if (D > 0) {
+				y = y + yi;
+				D = D - 2*dx;
+			}
+			D = D + 2*dy;
+		}
+		return true;
 	}
+	
+	protected boolean highAnglePathValid(int x0, int y0, int x1, int y1, GameMap map) {
+		int dx = x1 - x0;
+		int dy = y1 - y0;
+		int xi = 1;
+		if (dx < 0){
+	        xi = -1;
+	        dx = -dx;
+		}
+		int D = 2*dx - dy;
+		int x = x0;
+		for(int y = y0; y0 < y1; y0++) {
+			if (!canBulletPassThrough(x, y, map))
+				return false;
+			if (D > 0) {
+				x = x + xi;
+				D = D - 2*dy;
+			}
+			D = D + 2*dx;
+		}
+		return true;
+	}
+	
+	
 	
 	protected boolean containsTarget(Location here) {
 		return (here.getActor() != null &&
