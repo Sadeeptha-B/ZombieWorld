@@ -5,12 +5,16 @@ import java.util.List;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.Item;
+import edu.monash.fit2099.engine.Menu;
 import edu.monash.fit2099.engine.WeaponItem;
 
 public abstract class RangedWeapon extends WeaponHandler {
 
 	private int ammoCount;
+	protected Menu menu = new Menu();
+	protected Display shootDisplay = new Display();
 	
 	
 	public RangedWeapon(String name, char displayChar, int damage) {
@@ -47,6 +51,9 @@ public abstract class RangedWeapon extends WeaponHandler {
 		System.out.println(this + " Ammo Rounds - " + ammoCount + "  ||   Max Capacity - " + getMaxAmmo());
 	}
 	
+	public boolean isEmpty() {
+		return this.getAmmoCount() == 0;
+	}
 	
 	
 	@Override
@@ -59,7 +66,6 @@ public abstract class RangedWeapon extends WeaponHandler {
 		rangedWeaponDisplay();
 		Ammunition ammo = null;
 		
-		
 		for (Item item: player.getInventory()) {
 			if(item.asAmmo() != null) {
 				ammo = (Ammunition) item;
@@ -69,9 +75,12 @@ public abstract class RangedWeapon extends WeaponHandler {
 			}
 		}
 		
-		
 		if (ammo != null && !fullyLoaded()) 
 			actions.add(new ReloadAction(this, ammo));
+		
+		if (!this.isEmpty()) {
+			actions.add(new ShootAction(this));
+		}
 		
 		return actions;
 	}
@@ -84,8 +93,9 @@ public abstract class RangedWeapon extends WeaponHandler {
 		return null;
 	}
 	
-	
+	public abstract void shoot(Actor target);
 	public abstract ReloadCapability getAmmoCapability();
+	public abstract Action subMenuActions(Actor actor, Actor target);
 	
 	protected abstract int getMaxAmmo();
 }
