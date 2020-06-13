@@ -31,9 +31,8 @@ public class ShootAction extends Action {
 		
 		Actions actions = new Actions();
 		
-		for (Actor target: targets) {
+		for (Actor target: targets)
 			actions.add(new SelectTargetAction(weapon,target));
-		}
 		actions.add(new GoToMainMenuAction());
 		
 		targetDisplay.println("-------------------------------");

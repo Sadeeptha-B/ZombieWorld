@@ -71,9 +71,11 @@ public abstract class ZombieActor extends Actor {
 	 * @param diedAsHuman : Boolean that holds whether or not dead actor is a human
 	 * @return	: Created Corpse class
 	 */
-	public Corpse death(GameMap map, boolean diedAsHuman) {
+	public void death(GameMap map, boolean diedAsHuman) {
+		Corpse corpse =  new Corpse(this.toString(), diedAsHuman);
+		map.locationOf(this).addItem(corpse);
+		this.dropItems(map);
 		map.removeActor(this);
-		return new Corpse(this.toString(), diedAsHuman);
 	}
 	
 	/**

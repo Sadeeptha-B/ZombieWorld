@@ -49,23 +49,32 @@ public class Shotgun extends RangedWeapon {
 			minY -= 3;
 		else
 			maxY += 3;
-		
-		for (int x = minX; minX < maxX; x++) {
-			for(int y = minY; minY < maxY; y++) {
-				if(map.at(x, y).containsAnActor() && map.at(x, y) != targetLocation)
-					collateral.add(map.getActorAt(map.at(x, y)));
+		for (int x = minX; x < maxX; x++) {
+			for(int y = minY; y < maxY; y++) {
+				if(x != actorLocation.x() && y != actorLocation.y()) {
+					if(map.at(x, y).containsAnActor() && map.at(x, y) != targetLocation)
+						collateral.add(map.getActorAt(map.at(x, y)));
+				}
 			}
 		}
 			
-		
-		if (!(rand.nextInt(4) == 0))
+		String result = "Player misses " + target;
+		if (!(rand.nextInt(4) == 0)) {
 			target.hurt(this.damage());
-		
-		for (Actor human: collateral) {
-			if ((rand.nextInt(3) == 0))
-				human.hurt(this.damage());
+			result = "Player shoots " + target + " for " + this.damage();
+			if (!target.isConscious())
+				target.death(map);
 		}
-		return null;
+		
+		for (Actor otherTarget: collateral) {
+			if (!(rand.nextInt(4) == 0)) {
+				otherTarget.hurt(this.damage());
+				result += "\nPlayer also shoots " + otherTarget + " for " + this.damage();
+				if (!otherTarget.isConscious())
+					otherTarget.death(map);
+			}
+		}
+		return result;
 	}
 
 	public Action subMenuActions(Actor actor, Actor target) {

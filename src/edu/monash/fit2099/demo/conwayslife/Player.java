@@ -98,4 +98,6 @@ public class Player extends Actor {
 	@Override
 	public void death(GameMap map) {
 	}
+
+>>>>>>> 8317e2b6553d2119f08c66ce2492157c5bf474f8
 }
