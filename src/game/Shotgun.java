@@ -12,6 +12,7 @@ public class Shotgun extends RangedWeapon {
 	
 	private static final int MAX_AMMO = 5;
 	private ReloadCapability ammoCapability = ReloadCapability.SHOTGUN;
+	private static final int MELEE_DAMAGE = 20;
 	
 	public Shotgun() {
 		super("Shotgun", '~', 35);
@@ -69,6 +70,11 @@ public class Shotgun extends RangedWeapon {
 
 	public Action subMenuActions(Actor actor, Actor target) {
 		return new ShootTargetAction(this, target);
+	}
+
+	@Override
+	public int getMeleeDamage() {
+		return MELEE_DAMAGE;
 	}
 
 	

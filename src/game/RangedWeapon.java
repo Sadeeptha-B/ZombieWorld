@@ -89,6 +89,7 @@ public abstract class RangedWeapon extends WeaponHandler {
 	}
 
 	
+	
 	public Ammunition ammoPresent(Ammunition ammo) {
 		if (ammo.getWeaponCapability() == this.getAmmoCapability()) {
 			return ammo;
@@ -96,10 +97,18 @@ public abstract class RangedWeapon extends WeaponHandler {
 		return null;
 	}
 	
+
+	public boolean isRangedWeapon() {
+		return true;
+	};
+
+	
 	public abstract String shoot(Actor target, GameMap map, Location actorLocation);
 	public abstract ReloadCapability getAmmoCapability();
 	public abstract Action subMenuActions(Actor actor, Actor target);
 	public abstract Scan weaponScan();
+	public abstract int getMeleeDamage();
+	
 	
 	protected abstract int getMaxAmmo();
 }

@@ -75,10 +75,6 @@ public class Player extends Actor {
 		return 0;
 	}
 	
-	public Corpse death() {
-		return null;
-	}
-	
 	public Action pickUpItem(GameMap map) {
 		return null;
 	}
@@ -98,4 +94,8 @@ public class Player extends Actor {
 
 	@Override
 	public void tick(UtilityGameMap map) {}
+
+	@Override
+	public void death(GameMap map) {
+	}
 }
