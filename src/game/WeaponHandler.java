@@ -8,6 +8,12 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.WeaponItem;
 
+/**
+ * Implements common methods for weapons
+ * 
+ * @author Sadeeptha Bandara
+ *
+ */
 public abstract class WeaponHandler extends WeaponItem {
 	
 	public WeaponHandler(String name, char displayChar, int damage, String verb) {

@@ -8,7 +8,12 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Menu;
-
+/**
+ * The sniper class
+ * 
+ * @author Saddeptha Bandara/Kaveesha Nissanka
+ *
+ */
 public class Sniper extends RangedWeapon {
 	
 	protected Menu menu = new Menu();
@@ -40,20 +45,32 @@ public class Sniper extends RangedWeapon {
 	public SniperScan weaponScan() {
 		return new SniperScan();
 	}
-
+	
+	/**
+	 * This method will shoot the target with a probability of 75% if the player has not aimed at all
+	 * The more the player aims the more damage and more accurate the shot will be
+	 * If the player aims for 2 rounds then the target is killed instantly
+	 * 
+	 * @param target: The target actor
+	 * @param map: The GameMap 
+	 * @param actorLocation: The location of the player
+	 * @return: String The string containing details about the execution
+	 * 
+	 */
 	@Override
 	public String shoot(Actor target, GameMap map, Location actorLocation) {
+		ammoCount -= 1;
 		String printMsg;
 		
-		if (!(rand.nextInt(4) == 0) &&  aimCount == 0) {
+		if (!(rand.nextInt(4) == 0) &&  aimCount == 1) {
 			target.hurt(noAimDamage);
 			printMsg = actorLocation.getActor() + " shoots " + target + " for " + noAimDamage;
 			
-		}else if (!(rand.nextInt(10) == 1) && aimCount == 1) {
+		}else if (!(rand.nextInt(10) == 1) && aimCount == 2) {
 			target.hurt(oneRoundAim);
 			printMsg = actorLocation.getActor() + " shoots " + target + " for " + oneRoundAim;
 			
-		}else if (aimCount == 2) {
+		}else if (aimCount == 3) {
 			target.death(map);
 			printMsg = actorLocation.getActor() + " instakills " + target;
 			
@@ -65,7 +82,15 @@ public class Sniper extends RangedWeapon {
 		return printMsg;
 	}
 	
-	
+	/**
+	 * displays a ShootTargetAction, AimAction or a GoToMainMenuAction for the player to choose the sub menu
+	 * 
+	 * 
+	 * @param actor: The player
+	 * @param target: The actor that is being targeted
+	 * @return: Action The action the player chooses
+	 * 
+	 */
 
 	@Override
 	public Action subMenuActions(Actor actor, Actor target) {

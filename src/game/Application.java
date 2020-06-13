@@ -54,10 +54,12 @@ public class Application {
 		addHumansToMap(humans, 30, 20.0, 5, 7.0, compound);
 		
 		//Items
-		add(compound, 42, 15, new Shotgun());
-		add(compound, 41, 15, new ShotgunAmmo());
-		add(compound, 41, 17, new Sniper());
-		add(compound, 43, 15, new SniperAmmo());
+		add(compound, 42, 15, new Plank());
+		
+		add(town, 43, 12, new Shotgun());
+		add(town, 45, 13, new ShotgunAmmo());
+		add(town, 53, 9, new Sniper());
+		add(town, 51, 11, new SniperAmmo());
 		
 		//Zombies
 		add(compound, 30, 20, new Zombie("Groan"));
@@ -143,7 +145,16 @@ public class Application {
 		}
 		return location;
 	}
-	
+	/**
+	 * A method to add humans to a given map within a given range
+	 * 
+	 * @param names The names of the humans that need to be placed on the map
+	 * @param xStartCoordinate The starting point of the x coordinates
+	 * @param xRange the range in the x direction
+	 * @param yStartCoordinate The starting point of the y coordinates
+	 * @param yRange the range in the x direction
+	 * @param map The map that the humans need to be added in
+	 */
 	public static void addHumansToMap(String[] names,int xStartCoordinate,double xRange,int yStartCoordinate, double yRange, GameMap map) {
 		for (String name : names) {
 			Human human = new Human(name);

@@ -13,6 +13,9 @@ import edu.monash.fit2099.engine.Location;
 
 
 /**
+ * The game handler for the game
+ * gives access to world functions 
+ * 
  * @author Sadeeptha
  *
  */
@@ -27,7 +30,11 @@ public class GameHandler extends World {
 		this.gameDisplay = gameDisplay;
 	}
 
-	
+	/**
+	 * Checks to see if the moment is a win or a loss for the player
+	 * 
+	 * @return boolean whether or not it is a win/loose scenario
+	 */
 	protected boolean winLoseScenario() {		
 		ArrayList<Boolean> winLose = new ArrayList<Boolean>();
 		
@@ -41,6 +48,11 @@ public class GameHandler extends World {
 		return winLose.containsAll(container);
 	}
 	
+	/**
+	 * checks to see if the game conditions for running the game are still valid
+	 * 
+	 * @return boolean 
+	 */
 	protected boolean stillRunning() {
 		boolean endCond = winLoseScenario();
 		winStatus = winStatus && actorLocations.contains(player);

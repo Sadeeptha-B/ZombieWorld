@@ -20,7 +20,7 @@ public class CraftAction extends Action {
 	/**
 	 * Constructor
 	 * Takes the item to be crafted
-	 * @param item
+	 * @param item: The item that it is craftable to
 	 */
 	public CraftAction(CraftableItem item) {
 		this.item = item;

@@ -15,7 +15,7 @@ import edu.monash.fit2099.engine.Menu;
 
 public abstract class RangedWeapon extends WeaponHandler {
 
-	private int ammoCount;
+	protected int ammoCount;
 	protected Menu menu = new Menu();
 	protected Display shootDisplay = new Display();
 	protected Random rand = new Random();
@@ -35,7 +35,12 @@ public abstract class RangedWeapon extends WeaponHandler {
 		return ammoCount;
 	}
 	
-	
+	/**
+	 * Reloads the weapon
+	 * 
+	 * @param ammo The amount of ammo needed
+	 * @return The amount of ammo that has been reloaded
+	 */
 	protected int reload(int ammo) {
 		int ammoToAdd;
 		int ammoNeeded = this.getMaxAmmo() -  this.getAmmoCount();
@@ -58,7 +63,13 @@ public abstract class RangedWeapon extends WeaponHandler {
 		return this.getAmmoCount() == 0;
 	}
 	
-	
+	/**
+	 * 
+	 * Returns a list of allowable actions for the items in the players inventory
+	 * @param player: The player
+	 * @return : List<Action> The allowed actions
+	 * 
+	 */
 	@Override
 	public List<Action> playerAllowableActions(Player player) {	
 		List<Action> actions = super.playerAllowableActions(player);
@@ -88,7 +99,12 @@ public abstract class RangedWeapon extends WeaponHandler {
 		return actions;
 	}
 
-	
+	/**
+	 * Checks if the ammo is of that gun type and returns it
+	 * 
+	 * @param ammo: The ammo
+	 * @return Ammunition the correct type of ammo or null
+	 */
 	public Ammunition ammoPresent(Ammunition ammo) {
 		if (ammo.getWeaponCapability() == this.getAmmoCapability()) {
 			return ammo;

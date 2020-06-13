@@ -6,7 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.monash.fit2099.engine.GameMap;
-
+/**
+ * A storage class for the game
+ * holds the maps and special messages
+ * 
+ * @author Sadeeptha Bandara
+ *
+ */
 public class GameDisplay {
 	
 	private static HashMap<String, List<String>> maps = new HashMap<String, List<String>>();

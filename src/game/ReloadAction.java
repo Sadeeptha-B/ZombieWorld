@@ -20,7 +20,14 @@ public class ReloadAction extends Action {
 		this.ammo = ammo;
 	}
 	
-
+	/**
+	 * Reloads the ammo and reduces ammo from the ammo box
+	 * 
+	 * @param actor: The player
+	 * @param map: The game map
+	 * @return: A string of the reload action
+	 * 
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {	
 		int ammoAdded = weapon.reload(ammo.getAmmoCount());

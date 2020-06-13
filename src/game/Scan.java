@@ -10,7 +10,13 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Exit;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
-
+/**
+ * Scans a map and returns targets
+ * Uses code written by Spike to find targets
+ * 
+ * @author Kaveesha Nissanka/ Sadeeptha Bandara
+ *
+ */
 public abstract class Scan {
 
 	
@@ -22,7 +28,15 @@ public abstract class Scan {
 		this.targetClass = cls;
 		this.maxRange = range;
 	}
-
+	
+	/**
+	 * looks for targets and returns actions if required
+	 * 
+	 * @param actor The actor That is scanning
+	 * @param hereThe location of the actor
+	 * @param map The map
+	 * @return 
+	 */
 	protected Action scan(Actor actor, Location here, GameMap map) {
 		visitedLocations.clear();
 		ArrayList<Location> now = new ArrayList<Location>();
@@ -61,6 +75,14 @@ public abstract class Scan {
 		return nextLayer;
 	}
 	
+	/**
+	 * Looks through a layer to find targets
+	 * 
+	 * @param layer
+	 * @param actor
+	 * @param map
+	 * @return
+	 */
 	protected Location search(ArrayList<ArrayList<Location>> layer, Actor actor, GameMap map) {
 		for (ArrayList<Location> path : layer) {
 			Location location = path.get(path.size() - 1);
@@ -73,6 +95,14 @@ public abstract class Scan {
 		return null;
 	}
 	
+	/**
+	 * Calls methoods that use Bresenhams line algorithm to validate target path to see if a bullet will pass through
+	 * 
+	 * @param location The location of the target
+	 * @param actorLocation The actors target
+	 * @param map The map
+	 * @return boolean Returns true if the path is valid false if it is not
+	 */
 	protected boolean pathValid(Location location, Location actorLocation, GameMap map) {
 		int xDistance = Math.abs(location.x() - actorLocation.x());
 		int yDistance = Math.abs(location.y() - actorLocation.y());
@@ -96,13 +126,31 @@ public abstract class Scan {
 		
 	}
 	
-	
+	/** 
+	 * Checks to see if a bullet can pass through a location
+	 * 
+	 * @param x The x coordinate of the location
+	 * @param y The y coordinate of the location
+	 * @param map The map
+	 * @return boolean Returns true and false depending on the ground
+	 */
 	protected boolean canBulletPassThrough(int x, int y, GameMap map) {
 		if(map.at(x, y).getGround() instanceof Dirt) 
 			return true;
 		return false;		
 	}
 	
+	/**
+	 * if the angle from the player to the zombie is small then this method is used to check the paths validity
+	 * The algorithm forms a close approximation to the path and checks if each location allows a bullet to pass through
+	 * 
+	 * @param x0 an actors x coordinate
+	 * @param y0 an actors y coordinate
+	 * @param x1 an actors x coordinate
+	 * @param y1 an actors y coordinate
+	 * @param map
+	 * @return boolean Validity of the path
+	 */
 	protected boolean lowAnglePathValid(int x0, int y0, int x1, int y1, GameMap map) {
 		int dx = x1 - x0;
 		int dy = y1 - y0;
@@ -126,7 +174,17 @@ public abstract class Scan {
 		}
 		return true;
 	}
-	
+	/**
+	 * if the angle from the player to the zombie is large then this method is used to check the paths validity
+	 * The algorithm forms a close approximation to the path and checks if each location allows a bullet to pass through
+	 * 
+	 * @param x0 an actors x coordinate
+	 * @param y0 an actors y coordinate
+	 * @param x1 an actors x coordinate
+	 * @param y1 an actors y coordinate
+	 * @param map
+	 * @return boolean Validity of the path
+	 */
 	protected boolean highAnglePathValid(int x0, int y0, int x1, int y1, GameMap map) {
 		int dx = x1 - x0;
 		int dy = y1 - y0;
@@ -151,8 +209,12 @@ public abstract class Scan {
 		return true;
 	}
 	
-	
-	
+	/**
+	 * Checks to see if the given location has the target
+	 * 
+	 * @param here the location that is being checked
+	 * @return boolean Returns true or false 
+	 */
 	protected boolean containsTarget(Location here) {
 		return (here.getActor() != null &&
 				targetClass.isInstance(here.getActor()));

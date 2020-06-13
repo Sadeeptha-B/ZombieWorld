@@ -4,9 +4,14 @@ package game;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-
+/**
+ * Allows the player to quit the game
+ * 
+ * @author Kaveesha Nissanka
+ *
+ */
 public class QuitAction extends Action {
-
+	
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		actor.addCapability(ZombieCapability.QUITTED);

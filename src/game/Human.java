@@ -80,6 +80,8 @@ public class Human extends ZombieActor {
 	/**
 	 * Harvesting for humans. Only human types, players and farmers harvest
 	 * Hence, does not implement. 
+	 * 
+	 * @param map: The map
 	 */
 	public void harvest(GameMap map) {};
 	

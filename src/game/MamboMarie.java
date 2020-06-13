@@ -7,7 +7,12 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.NumberRange;
-
+/**
+ * Mambo Maries class
+ * 
+ * @author Kaveesha Nissanka/ Sadeepatha Bandara
+ *
+ */
 public class MamboMarie extends ZombieActor {
 
 	private Random rand = new Random();
@@ -31,7 +36,12 @@ public class MamboMarie extends ZombieActor {
 	}
 	
 	
-	
+	/**
+	 * Ticks mambo marie to keep count of her turns and calls methods when needed
+	 * 
+	 * @param map: A map that allows actors to be ticked
+	 * 
+	 */	
 	public void tick(UtilityGameMap map) {
 		turnCount ++;
 		if (turnCount % 10 == 0) {
@@ -50,7 +60,12 @@ public class MamboMarie extends ZombieActor {
 	}
 	
 	
-	
+	/**
+	 * Gives all the possible locations for mambo marie
+	 * 
+	 * @param map The map
+	 * @return Location a randomly selected location for mambo marie to spawn in
+	 */
 	public Location getMamboLocation(UtilityGameMap map){
 		NumberRange xCoords = map.getXRange();
 		NumberRange yCoords = map.getYRange();
@@ -87,11 +102,16 @@ public class MamboMarie extends ZombieActor {
 		turnCount = 0;
 	}
 	
-	
+	/**
+	 * Spawns 5 zombies in random locations of the map
+	 * 
+	 * @param map The map that the zombies are spawned in
+	 * 
+	 */
 	public void chant(GameMap map) {
 		int count = 0;
 		while (count < 5){
-			Zombie zombie = new Zombie(name);
+			Zombie zombie = new Zombie("Zombie Minion");
 			int x = rand.nextInt(80);
 			int y = rand.nextInt(25);
 			if(map.at(x, y).canActorEnter(zombie)){

@@ -12,7 +12,12 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.GroundFactory;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.NumberRange;
-
+/**
+ * extending gamemap to allow some actions
+ * 
+ * @author Sadeeptha Bandara
+ *
+ */
 public class UtilityGameMap extends GameMap {
 
 	protected Random rand = new Random();
@@ -30,7 +35,10 @@ public class UtilityGameMap extends GameMap {
 		this(groundFactory, Files.readAllLines(Paths.get(mapFile)));
 	}
 	
-
+	/**
+	 * Ticks the super class and actors
+	 * 
+	 */
 	public void tick() {
 		super.tick();
 		for (Actor actor: actorLocations) {
@@ -38,7 +46,11 @@ public class UtilityGameMap extends GameMap {
 		}
 	}
 	
-	
+	/**
+	 * Allows an actor to be ticked independent of the map they are in
+	 * 
+	 * @param actor The actor That is moved to another dimension
+	 */
 	public void addActorToDimension(Actor actor) {
 		int x = rand.nextInt() + this.getXRange().max();
 		int y = rand.nextInt() + this.getYRange().max();

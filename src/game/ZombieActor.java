@@ -69,6 +69,7 @@ public abstract class ZombieActor extends Actor {
 	 * Creates corpse for ZombieActor if killed and returns it
 	 * Method is called whenever an actor dies
 	 * @param diedAsHuman : Boolean that holds whether or not dead actor is a human
+	 * @param map: The map
 	 * @return	: Created Corpse class
 	 */
 	public void death(GameMap map, boolean diedAsHuman) {

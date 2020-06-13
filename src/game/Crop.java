@@ -25,7 +25,7 @@ public class Crop extends Ground {
 	 * 
 	 * The growth of the crops happen with each tick 
 	 * will grow after 20 ticks
-	 * @param map the location of the item
+	 * @param map: the location of the item
 	 * 
 	 */
 	public void tick(Location location) {

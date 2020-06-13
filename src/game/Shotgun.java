@@ -7,7 +7,12 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
-
+/**
+ * The sniper class
+ * 
+ * @author Kaveesha Nissanka/ Sadeeptha Bandara
+ *
+ */
 public class Shotgun extends RangedWeapon {
 	
 	private static final int MAX_AMMO = 5;
@@ -30,9 +35,21 @@ public class Shotgun extends RangedWeapon {
 	public ShotgunScan weaponScan() {
 		return new ShotgunScan();
 	}
-
+	
+	/**
+	 * This method will shoot the target with a probability of 75% 
+	 * Other targets in the vicinity and in a 90 degree area will also have a probability of being shot
+	 * 
+	 * @param target: The target actor
+	 * @param map: The GameMap 
+	 * @param actorLocation: The location of the player
+	 * @return: String The string containing details about the execution
+	 * 
+	 */
 	@Override
 	public String shoot(Actor target, GameMap map, Location actorLocation) {
+		ammoCount -= 1;
+		
 		Location targetLocation = map.locationOf(target);
 		ArrayList<Actor> collateral = new ArrayList<Actor>();
 		
@@ -75,7 +92,15 @@ public class Shotgun extends RangedWeapon {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * returns a ShootTargetAction in the sub menu
+	 * 
+	 * @param actor: The player
+	 * @param target: The actor that is being targeted
+	 * @return: Action A ShootTargetAction
+	 * 
+	 */
 	public Action subMenuActions(Actor actor, Actor target) {
 		return new ShootTargetAction(this, target);
 	}

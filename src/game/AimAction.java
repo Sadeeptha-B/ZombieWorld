@@ -3,7 +3,13 @@ package game;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-
+/**
+ * Lets the players aim at zombies
+ * Used in snipers
+ * 
+ * @author Sadeeptha Bandara
+ *
+ */
 public class AimAction extends Action {
 
 	private Actor target;

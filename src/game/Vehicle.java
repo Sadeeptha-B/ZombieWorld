@@ -7,12 +7,19 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Item;
-
+/**
+ * The vehicle class 
+ * Allows players to move between maps
+ * 
+ * @author Kaveesha Nissanka
+ *
+ */
 public class Vehicle extends Item {
 
 	public Vehicle() {
 		super("vehicle", 'D', false);
 	}
+
 	
 	public void addAction(Action action) {
 		this.allowableActions.add(action);

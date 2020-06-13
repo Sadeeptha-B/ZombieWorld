@@ -3,7 +3,12 @@ package game;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-
+/**
+ * Lets a player go back to the main menu
+ * 
+ * @author Sadeeptha Bandara
+ *
+ */
 public class GoToMainMenuAction extends Action {
 
 	@Override
