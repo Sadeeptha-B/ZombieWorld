@@ -96,7 +96,7 @@ public abstract class RangedWeapon extends WeaponHandler {
 		return null;
 	}
 	
-	public abstract void shoot(Actor target, GameMap map, Location actorLocation);
+	public abstract String shoot(Actor target, GameMap map, Location actorLocation);
 	public abstract ReloadCapability getAmmoCapability();
 	public abstract Action subMenuActions(Actor actor, Actor target);
 	public abstract Scan weaponScan();

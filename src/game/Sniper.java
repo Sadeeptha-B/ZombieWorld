@@ -42,15 +42,27 @@ public class Sniper extends RangedWeapon {
 	}
 
 	@Override
-	public void shoot(Actor target, GameMap map, Location actorLocation) {
-		if (!(rand.nextInt(4) == 0) &&  aimCount == 0)
-			target.hurt(noAimDamage);
-		else if (!(rand.nextInt(10) == 1) && aimCount == 1)
-			target.hurt(oneRoundAim);
-		else {
-			target.death(map);
-		}	
+	public String shoot(Actor target, GameMap map, Location actorLocation) {
+		String printMsg;
 		
+		if (!(rand.nextInt(4) == 0) &&  aimCount == 0) {
+			target.hurt(noAimDamage);
+			printMsg = actorLocation.getActor() + " shoots " + target + " for " + noAimDamage;
+			
+		}else if (!(rand.nextInt(10) == 1) && aimCount == 1) {
+			target.hurt(oneRoundAim);
+			printMsg = actorLocation.getActor() + " shoots " + target + " for " + oneRoundAim;
+			
+		}else if (aimCount == 2) {
+			target.death(map);
+			printMsg = actorLocation.getActor() + " instakills " + target;
+			
+		} else {
+			printMsg = actorLocation.getActor() + " misses " + target;
+		}
+		
+		
+		return printMsg;
 	}
 	
 	

@@ -54,7 +54,7 @@ public class Bug extends Actor {
 		return null;
 	}
 	
-	public Action pickUpItem(GameMap map) {
+	pvoiublic Action pickUpItem(GameMap map) {
 		return null;
 	}
 
@@ -76,9 +76,7 @@ public class Bug extends Actor {
 	public void tick(UtilityGameMap map) {}
 
 	@Override
-	public Corpse death(GameMap map) {
-		// TODO Auto-generated method stub
-		return null;
+	public void death(GameMap map) {
 	}
 	
 }
