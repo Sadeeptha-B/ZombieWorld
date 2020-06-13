@@ -34,10 +34,10 @@ public class MamboMarie extends ZombieActor {
 	
 	public void tick(UtilityGameMap map) {
 		turnCount ++;
-//		if (turnCount % 1 == 0) {
-//			chant(map);
-//		}
-//		
+		if (turnCount % 10 == 0) {
+			chant(map);
+		}
+		
 		if (map.contains(this) && !map.isActorInDimension(this) && turnCount >= STAY_TURNS) {
 			map.removeActor(this);
 			map.addActorToDimension(this);
