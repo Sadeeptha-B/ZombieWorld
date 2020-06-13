@@ -54,7 +54,7 @@ public class Bug extends Actor {
 		return null;
 	}
 	
-	pvoiublic Action pickUpItem(GameMap map) {
+	public Action pickUpItem(GameMap map) {
 		return null;
 	}
 
