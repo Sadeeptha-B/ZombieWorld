@@ -12,7 +12,7 @@ public class ShootAction extends Action {
 	private RangedWeapon weapon;
 	protected Menu menu = new Menu();
 	protected Display targetDisplay = new Display();
-	
+	private Action nextAction;
 	
 	public ShootAction(RangedWeapon weapon) {
 		this.weapon = weapon;
@@ -21,6 +21,7 @@ public class ShootAction extends Action {
 	
 	@Override
 	public String execute(Actor actor, GameMap map) {
+		
 		Actor[] targets = {new Zombie("Lol"), new Zombie("Lmao")};
 		Actions actions = new Actions();
 		
@@ -31,8 +32,8 @@ public class ShootAction extends Action {
 		
 		targetDisplay.println("-------------------------------");
 		Action action = menu.showMenu(actor, actions, targetDisplay);
-		
 		String result = action.execute(actor, map);
+		nextAction = action.getNextAction();
 		
 		return result;
 	}
@@ -41,5 +42,10 @@ public class ShootAction extends Action {
 	public String menuDescription(Actor actor) {
 		return "Player shoots with " + weapon;
 	}
+	
+	public Action getNextAction() {
+		return nextAction;
+	}
+
 
 }

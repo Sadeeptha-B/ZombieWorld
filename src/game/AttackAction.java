@@ -53,7 +53,7 @@ public class AttackAction extends Action {
 		}
 		
 		if (!target.isConscious()) {
-			Item corpse = target.death();
+			Item corpse = target.death(map);
 			map.locationOf(target).addItem(corpse);
 			
 			target.dropItems(map);
@@ -69,4 +69,5 @@ public class AttackAction extends Action {
 	public String menuDescription(Actor actor) {
 		return actor + " attacks " + target;
 	}
+
 }

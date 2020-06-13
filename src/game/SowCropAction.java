@@ -36,5 +36,4 @@ public class SowCropAction extends Action {
 	public String menuDescription(Actor actor) {
 		return actor + " sows crop";
 	}
-
 }

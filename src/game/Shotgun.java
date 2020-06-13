@@ -31,13 +31,8 @@ public class Shotgun extends RangedWeapon {
 	}
 	
 	public Action subMenuActions(Actor actor, Actor target) {
-		Actions actions = new Actions();
-		actions.add(new ShootTargetAction(this, target));
-		shootDisplay.println("------------------------");
-		Action action = menu.showMenu(actor, actions, shootDisplay);
-		return action;
+		return new ShootTargetAction(this, target);
 	}
-
 
 	
 }

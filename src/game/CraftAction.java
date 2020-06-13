@@ -47,5 +47,5 @@ public class CraftAction extends Action {
 	public String menuDescription(Actor actor) {
 		return actor + " crafts " + item + " to " + item.getCraftedItem();
 	}
-	
+
 }

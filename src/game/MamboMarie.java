@@ -113,8 +113,8 @@ public class MamboMarie extends ZombieActor {
 
 	
 	@Override
-	public Corpse death() {
-		return super.death(false);
+	public Corpse death(GameMap map) {
+		return super.death(map, false);
 	}
 	
 	@Override

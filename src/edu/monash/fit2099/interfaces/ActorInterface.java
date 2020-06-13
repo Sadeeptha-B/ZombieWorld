@@ -15,7 +15,7 @@ public interface ActorInterface {
 	public void dropItems(GameMap map);
 	public Limb dismember();
 	public float getHealthPercantage();
-	public Corpse death();
+	public Corpse death(GameMap map);
 	public Action pickUpItem(GameMap map);
 	public boolean determineResult();
 	public boolean isPlayer();

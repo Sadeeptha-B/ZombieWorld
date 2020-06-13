@@ -41,7 +41,6 @@ public class Player extends Human {
 	 * Displays the menu of the actions available.
 	 */
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null) 
 			return lastAction.getNextAction();
 		

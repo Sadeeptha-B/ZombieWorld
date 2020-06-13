@@ -194,8 +194,8 @@ public class Zombie extends ZombieActor  {
 	/**
 	 * Creates corpse if Zombie dies.
 	 */
-	public Corpse death() {
-		return super.death(false);
+	public Corpse death(GameMap map) {
+		return super.death(map, false);
 	}
 	
 	

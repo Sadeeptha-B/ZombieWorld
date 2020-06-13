@@ -8,6 +8,7 @@ public class SelectTargetAction extends Action {
 
 	private Actor target;
 	private RangedWeapon weapon;
+	private Action nextAction;
 
 	public SelectTargetAction(RangedWeapon weapon, Actor target) {
 		this.weapon = weapon;
@@ -17,6 +18,7 @@ public class SelectTargetAction extends Action {
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		Action action = weapon.subMenuActions(actor, target);
+		nextAction = action.getNextAction();
 		return action.execute(actor, map);
 	}
 
@@ -25,5 +27,8 @@ public class SelectTargetAction extends Action {
 		return "target: "+  target;
 	}
 
-	
+	public Action getNextAction() {
+		return nextAction;
+	}
+
 }

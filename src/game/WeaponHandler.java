@@ -9,11 +9,10 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.WeaponItem;
 
 public abstract class WeaponHandler extends WeaponItem {
-
+	
 	public WeaponHandler(String name, char displayChar, int damage, String verb) {
 		super(name, displayChar, damage, verb);
 	}
-
 
 	@Override
 	public CraftableItem asCraftableItem() {
@@ -25,11 +24,6 @@ public abstract class WeaponHandler extends WeaponItem {
 		return false;
 	}
 
-	@Override
-	public Ammunition asAmmo() {
-		return null;
-	}
-
 
 	public List<Action> playerAllowableActions(Player player) {
 		List<Action> actions = new ArrayList<Action>();
@@ -38,5 +32,17 @@ public abstract class WeaponHandler extends WeaponItem {
 		}
 		return actions;
 	}
+	
+	@Override
+	public Ammunition asAmmo() {
+		return null;
+	}
+	
+	
+	
+//	public int damage() {
+//		int damage = super.damage();
+//		return damage;
+//	}
 
 }

@@ -41,5 +41,4 @@ public class HarvestAction extends Action {
 	public String menuDescription(Actor actor) {
 		return actor + " harvests the crop";
 	}
-
 }

@@ -126,7 +126,6 @@ public class Application {
 		getMapValidLocation(map, x, y).addItem(item);
 	}
 	
-		
 	public static void add(GameMap map, int x, int y, Actor actor) {
 		Location location = actorValidLocation(actor, getMapValidLocation(map, x, y), 2,2);
 		if (actor.isPlayer())
@@ -144,7 +143,6 @@ public class Application {
 		}
 		return location;
 	}
-	
 	
 	public static void addHumansToMap(String[] names,int xStartCoordinate,double xRange,int yStartCoordinate, double yRange, GameMap map) {
 		for (String name : names) {

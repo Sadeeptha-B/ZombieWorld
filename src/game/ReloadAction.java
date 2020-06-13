@@ -37,4 +37,5 @@ public class ReloadAction extends Action {
 	public String menuDescription(Actor actor) {
 		return "Reload " + weapon;
 	}
+
 }

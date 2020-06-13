@@ -2,11 +2,15 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
+import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
+import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Menu;
 import edu.monash.fit2099.engine.WeaponItem;
 
@@ -15,7 +19,7 @@ public abstract class RangedWeapon extends WeaponHandler {
 	private int ammoCount;
 	protected Menu menu = new Menu();
 	protected Display shootDisplay = new Display();
-	
+	protected Random rand = new Random();
 	
 	public RangedWeapon(String name, char displayChar, int damage) {
 		super(name, displayChar, damage, "shoots");
@@ -93,7 +97,7 @@ public abstract class RangedWeapon extends WeaponHandler {
 		return null;
 	}
 	
-	public abstract void shoot(Actor target);
+	public abstract void shoot(Actor target, GameMap map, Location actorLocation);
 	public abstract ReloadCapability getAmmoCapability();
 	public abstract Action subMenuActions(Actor actor, Actor target);
 	

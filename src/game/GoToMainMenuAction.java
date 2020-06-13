@@ -16,4 +16,5 @@ public class GoToMainMenuAction extends Action {
 		return "Return to main menu";
 	}
 
+
 }
