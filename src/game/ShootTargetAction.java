@@ -20,6 +20,7 @@ public class ShootTargetAction extends Action {
 	public String execute(Actor actor, GameMap map) {
 		weapon.shoot(target, map, map.locationOf(actor));
 		return actor + " shoots " + target;
+
 	}
 
 	@Override

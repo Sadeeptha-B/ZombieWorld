@@ -35,14 +35,18 @@ public class Sniper extends RangedWeapon {
 	public ReloadCapability getAmmoCapability() {
 		return ammoCapability;
 	}
-
+	
+	@Override
+	public SniperScan weaponScan() {
+		return new SniperScan();
+	}
 
 	@Override
 	public void shoot(Actor target, GameMap map, Location actorLocation) {
 		if (!(rand.nextInt(4) == 0) &&  aimCount == 0)
-			target.hurt(this.damage());
+			target.hurt(noAimDamage);
 		else if (!(rand.nextInt(10) == 1) && aimCount == 1)
-			target.hurt(this.damage() * 2);
+			target.hurt(oneRoundAim);
 		else {
 			target.death(map);
 		}	

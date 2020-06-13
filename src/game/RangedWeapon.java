@@ -1,6 +1,6 @@
 package game;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
@@ -12,7 +12,6 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Menu;
-import edu.monash.fit2099.engine.WeaponItem;
 
 public abstract class RangedWeapon extends WeaponHandler {
 
@@ -100,6 +99,7 @@ public abstract class RangedWeapon extends WeaponHandler {
 	public abstract void shoot(Actor target, GameMap map, Location actorLocation);
 	public abstract ReloadCapability getAmmoCapability();
 	public abstract Action subMenuActions(Actor actor, Actor target);
+	public abstract Scan weaponScan();
 	
 	protected abstract int getMaxAmmo();
 }

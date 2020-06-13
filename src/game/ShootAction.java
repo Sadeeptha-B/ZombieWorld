@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
@@ -21,8 +23,12 @@ public class ShootAction extends Action {
 	
 	@Override
 	public String execute(Actor actor, GameMap map) {
+
+		Scan weaponScan = weapon.weaponScan();
 		
-		Actor[] targets = {new Zombie("Lol"), new Zombie("Lmao")};
+		weaponScan.scan(actor, map.locationOf(actor), map);
+		ArrayList<Actor> targets = weaponScan.getTargets();
+		
 		Actions actions = new Actions();
 		
 		for (Actor target: targets) {

@@ -11,17 +11,23 @@ public class SniperScan extends Scan {
 	private ArrayList<Actor> targets = new ArrayList<Actor>();
 	
 	
-	public SniperScan(int range) {
-		super(Zombie.class, range);
+	public SniperScan() {
+		super(Zombie.class, 20);
 	}
 	
+	@Override
 	public ArrayList<Actor> getTargets() {
 		return new ArrayList<Actor>(targets);
 	}
 	
+	public boolean hasTargets() {
+		return !targets.isEmpty();
+	}
+	
 	@Override
 	protected Location foundTarget(ArrayList<Location> locations, Location location, Location actorLocation, GameMap map) {
-		targets.add(location.getActor());
+		if (pathValid(location, actorLocation, map))
+			targets.add(location.getActor());
 		return null;
 	}
 

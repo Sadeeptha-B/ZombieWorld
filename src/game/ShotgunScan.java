@@ -16,9 +16,14 @@ public class ShotgunScan extends Scan {
 	public ShotgunScan() {
 		super(Zombie.class, 3);
 	}
-
+	
+	@Override
 	public ArrayList<Actor> getTargets() {
 		return new ArrayList<Actor>(targets);
+	}
+	
+	public boolean hasTargets() {
+		return !targets.isEmpty();
 	}
 	
 	@Override

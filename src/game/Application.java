@@ -55,7 +55,7 @@ public class Application {
 		
 		//Items
 		add(compound, 42, 15, new Shotgun());
-		add(compound, 41, 15, new Plank());
+		add(compound, 41, 15, new ShotgunAmmo());
 		add(compound, 41, 17, new Sniper());
 		add(compound, 43, 15, new SniperAmmo());
 		

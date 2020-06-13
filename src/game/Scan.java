@@ -76,14 +76,11 @@ public abstract class Scan {
 	protected boolean pathValid(Location location, Location actorLocation, GameMap map) {
 		int xDistance = Math.abs(location.x() - actorLocation.x());
 		int yDistance = Math.abs(location.y() - actorLocation.y());
-		
-		if (xDistance == 0 || yDistance == 0)
-			return straightPathValid(location, actorLocation, xDistance, yDistance, map);
+
 		int actorX = actorLocation.x();
 		int targetX = location.x();
 		int actorY =  actorLocation.y();
 		int targetY = location.y();
-
 		if (yDistance < xDistance) {
 			if (actorX > targetX)
 				return lowAnglePathValid(targetX, targetY, actorX, actorY, map);
@@ -94,42 +91,16 @@ public abstract class Scan {
 			if (actorY > targetY) 
 				return highAnglePathValid(targetX, targetY, actorX, actorY, map);
 			else
-				return lowAnglePathValid(actorX, actorY, targetX, targetY,  map);
+				return highAnglePathValid(actorX, actorY, targetX, targetY,  map);
 		}
 		
 	}
 	
-	protected boolean straightPathValid(Location targetLocation, Location actorLocation, int x, int y, GameMap map) {
-		
-		if (x == 0) {
-			int greaterX = Math.max(targetLocation.x(), actorLocation.x());
-			int lesserX = Math.min(targetLocation.x(), actorLocation.x());
-			
-			while (lesserX < greaterX) {
-				canBulletPassThrough(lesserX, y, map);
-				lesserX += 1;
-			}
-		}
-		else if (y == 0) {
-			int greaterY = Math.max(targetLocation.y(), actorLocation.y());
-			int lesserY = Math.min(targetLocation.y(), actorLocation.y());
-			
-			while (lesserY < greaterY) {
-				if (!canBulletPassThrough(x, lesserY, map))
-					return false;
-				lesserY += 1;
-			}
-		}
-		
-		return true;
-	}
 	
 	protected boolean canBulletPassThrough(int x, int y, GameMap map) {
-		if(map.at(x, y).getGround() instanceof Fence)
-			return false;
-		else if(map.at(x, y).getGround() instanceof Brick)
-			return false;
-		return true;
+		if(map.at(x, y).getGround() instanceof Dirt) 
+			return true;
+		return false;		
 	}
 	
 	protected boolean lowAnglePathValid(int x0, int y0, int x1, int y1, GameMap map) {
@@ -142,7 +113,8 @@ public abstract class Scan {
 		}
 		int D = 2*dy - dx;
 		int y = y0;
-		for(int x = x0; x0 < x1; x0++) {
+		while( x0 < x1) {
+			int x = x0;
 			if (!canBulletPassThrough(x, y, map))
 				return false;
 			if (D > 0) {
@@ -150,6 +122,7 @@ public abstract class Scan {
 				D = D - 2*dx;
 			}
 			D = D + 2*dy;
+			x0 += 1;
 		}
 		return true;
 	}
@@ -164,7 +137,8 @@ public abstract class Scan {
 		}
 		int D = 2*dx - dy;
 		int x = x0;
-		for(int y = y0; y0 < y1; y0++) {
+		while(y0 < y1) {
+			int y = y0;
 			if (!canBulletPassThrough(x, y, map))
 				return false;
 			if (D > 0) {
@@ -172,6 +146,7 @@ public abstract class Scan {
 				D = D - 2*dy;
 			}
 			D = D + 2*dx;
+			y0 += 1;
 		}
 		return true;
 	}
@@ -186,4 +161,5 @@ public abstract class Scan {
 	
 	protected abstract Location foundTarget(ArrayList<Location> locations, Location location, Location actorLocation,GameMap map);
 	protected abstract Action locationAction(Actor actor, Location location);
+	public abstract ArrayList<Actor> getTargets();
 }
