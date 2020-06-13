@@ -48,17 +48,17 @@ public class Shotgun extends RangedWeapon {
 			minY -= 3;
 		else
 			maxY += 3;
-		
-		for (int x = minX; minX < maxX; x++) {
-			for(int y = minY; minY < maxY; y++) {
-				if(map.at(x, y).containsAnActor() && map.at(x, y) != targetLocation)
+		for (int x = minX; x < maxX; x++) {
+			for(int y = minY; y < maxY; y++) {
+				if(map.at(x, y).containsAnActor())
 					collateral.add(map.getActorAt(map.at(x, y)));
 			}
 		}
 			
 		
-		if (!(rand.nextInt(4) == 0))
+		if (!(rand.nextInt(4) == 0)) {
 			target.hurt(this.damage());
+		}
 		
 		for (Actor human: collateral) {
 			if ((rand.nextInt(3) == 0))

@@ -65,4 +65,10 @@ public class Player extends Actor {
 
 	@Override
 	public void tick(UtilityGameMap map) {}
+
+	@Override
+	public Corpse death(GameMap map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
