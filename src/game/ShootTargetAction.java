@@ -16,7 +16,7 @@ public class ShootTargetAction extends Action {
 
 	@Override
 	public String execute(Actor actor, GameMap map) {
-		weapon.shoot(target);
+		weapon.shoot(target, map, map.locationOf(actor));
 		return menuDescription(actor);
 	}
 

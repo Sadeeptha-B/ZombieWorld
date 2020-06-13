@@ -5,6 +5,8 @@ import java.util.List;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.Menu;
 
 public class Sniper extends RangedWeapon {
@@ -28,11 +30,14 @@ public class Sniper extends RangedWeapon {
 	public ReloadCapability getAmmoCapability() {
 		return ammoCapability;
 	}
-
+	
+	@Override
+	public SniperScan weaponScan() {
+		return new SniperScan();
+	}
 
 	@Override
-	public void shoot(Actor target) {
-		
+	public void shoot(Actor target, GameMap map, Location actorLocation) {
 	}
 
 

@@ -4,7 +4,7 @@ public class ShotgunAmmo extends Ammunition {
 	
 	private ReloadCapability weaponCapability = ReloadCapability.SHOTGUN;
 
-	public ShotgunAmmo(String name, char displayChar) {
+	public ShotgunAmmo() {
 		super("Shotgun Ammo", 'p');
 	}
 	

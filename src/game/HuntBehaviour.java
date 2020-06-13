@@ -123,6 +123,11 @@ public class HuntBehaviour extends Scan implements Behaviour {
 	protected Action locationAction(Actor actor, Location there) {
 		return there.getMoveAction(actor, "towards a " + targetName, null);
 	}
+
+	@Override
+	public ArrayList<Actor> getTargets() {
+		return null;
+	}
 	
 }
 
