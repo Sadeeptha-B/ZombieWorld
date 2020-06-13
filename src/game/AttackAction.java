@@ -42,6 +42,11 @@ public class AttackAction extends Action {
 		}
 			
 		int damage = weapon.damage();
+		if (weapon instanceof RangedWeapon) 
+			damage = ((WeaponHandler) weapon).getMeleeDamage();
+		
+		
+
 		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 
 		target.hurt(damage);
@@ -54,7 +59,6 @@ public class AttackAction extends Action {
 		
 		if (!target.isConscious()) {
 			target.death(map);
-			
 			result += System.lineSeparator() + target + " is killed.";
 		}
 

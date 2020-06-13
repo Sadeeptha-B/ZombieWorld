@@ -1,5 +1,6 @@
 package game;
 
+import java.util.HashMap;
 import java.util.List;
 
 import edu.monash.fit2099.engine.Action;
@@ -15,16 +16,17 @@ import edu.monash.fit2099.engine.Menu;
  *
  */
 public class Sniper extends RangedWeapon {
-	
+
 	protected Menu menu = new Menu();
 	
 	private static final int MAX_AMMO = 5;
-	private ReloadCapability ammoCapability = ReloadCapability.SNIPER;
-	private int aimCount = 0;
+	private static ReloadCapability ammoCapability = ReloadCapability.SNIPER;
+	private static final int MELEE_DAMAGE = 20;
 	
+	private int aimCount = 0;
 	private final int noAimDamage = this.damage();
 	private final int oneRoundAim = this.damage() * 2;
-	
+
 
 	public Sniper() {
 		super("Sniper", '^', 40);
@@ -42,7 +44,7 @@ public class Sniper extends RangedWeapon {
 	}
 	
 	@Override
-	public SniperScan weaponScan() {
+	public Scan weaponScan() {
 		return new SniperScan();
 	}
 	
@@ -78,7 +80,6 @@ public class Sniper extends RangedWeapon {
 			printMsg = actorLocation.getActor() + " misses " + target;
 		}
 		
-		
 		return printMsg;
 	}
 	
@@ -104,8 +105,12 @@ public class Sniper extends RangedWeapon {
 		aimCount++;
 		return action;
 	}
-		
+
+
+	@Override
+	public int getMeleeDamage() {
+		return MELEE_DAMAGE;
+	}
+	
+
 }
-
-
-

@@ -49,10 +49,7 @@ public class Bug extends Actor {
 	public float getHealthPercantage() {
 		return 0;
 	}
-	
-	public Corpse death() {
-		return null;
-	}
+
 	
 	public Action pickUpItem(GameMap map) {
 		return null;

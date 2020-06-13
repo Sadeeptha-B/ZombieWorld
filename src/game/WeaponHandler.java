@@ -30,7 +30,6 @@ public abstract class WeaponHandler extends WeaponItem {
 		return false;
 	}
 
-
 	public List<Action> playerAllowableActions(Player player) {
 		List<Action> actions = new ArrayList<Action>();
 		if (this != player.getWeapon() && player.getInventory().contains(this)) {
@@ -44,11 +43,12 @@ public abstract class WeaponHandler extends WeaponItem {
 		return null;
 	}
 	
+	public boolean isRangedWeapon() {
+		return false;
+	};
 	
-	
-//	public int damage() {
-//		int damage = super.damage();
-//		return damage;
-//	}
+	public int getMeleeDamage() {
+		return this.damage();
+	}
 
 }
