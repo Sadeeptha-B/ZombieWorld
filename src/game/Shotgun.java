@@ -32,7 +32,7 @@ public class Shotgun extends RangedWeapon {
 	}
 
 	@Override
-	public void shoot(Actor target, GameMap map, Location actorLocation) {
+	public String shoot(Actor target, GameMap map, Location actorLocation) {
 		Location targetLocation = map.locationOf(target);
 		ArrayList<Actor> collateral = new ArrayList<Actor>();
 		
@@ -64,8 +64,7 @@ public class Shotgun extends RangedWeapon {
 			if ((rand.nextInt(3) == 0))
 				human.hurt(this.damage());
 		}
-		
-		
+		return null;
 	}
 
 	public Action subMenuActions(Actor actor, Actor target) {
