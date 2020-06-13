@@ -40,9 +40,9 @@ public class Food extends PortableItem {
 	/**
 	 * Allowable actions for food.
 	 */
-	public List<Action> allowableActions(Actor actor) {
-		List<Action> actions = super.allowableActions(actor);
-		if (actor.getInventory().contains(this))
+	public List<Action> playerAllowableActions(Player player) {
+		List<Action> actions = super.playerAllowableActions(player);
+		if (player.getInventory().contains(this))
 			actions.add(new EatAction(this));
 		return actions;
 	}

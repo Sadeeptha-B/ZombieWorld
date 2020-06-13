@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
@@ -68,20 +69,13 @@ public class Player extends Human {
 			
 		
 		for (Item item : this.getInventory()) {
-			if (item.allowableActions(this) != null)
-				actions.add(item.allowableActions(this));
+			List<Action> itemAllowableActions = item.playerAllowableActions(this);
+			if (itemAllowableActions != null)
+				actions.add(itemAllowableActions);
 			
 			if (item.asWeapon() != null) 
 				weapons.add((WeaponItem) item);
-		}
-		
-		if (weapons.size() > 1)
-			for (WeaponItem weapon: weapons) 
-				if (weapon != this.getWeapon()) {
-					actions.add(new ChooseWeaponAction(weapon));
-				}
-					
-		
+		}		
 		actions.add(new QuitAction());
 		return actions;
 	}

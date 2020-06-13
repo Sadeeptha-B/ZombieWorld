@@ -24,12 +24,14 @@ public class Zombie extends ZombieActor  {
 	private int legCount = 2;
 	
 	protected Random rand = new Random();
+	protected static final ZombieCapability attackableTeam = ZombieCapability.ALIVE;
+	protected ZombieCapability mobility = ZombieCapability.MOBILE;
 	
 	private Behaviour[] behaviours = {
 			new PickUpBehaviour(),
-			new AttackBehaviour(ZombieCapability.ALIVE),
-			new HuntBehaviour(Human.class, 10, ZombieCapability.MOBILE),
-			new WanderBehaviour(ZombieCapability.MOBILE)
+			new AttackBehaviour(attackableTeam),
+			new HuntBehaviour(Human.class, 10, mobility),
+			new WanderBehaviour(mobility)
 	};
 
 

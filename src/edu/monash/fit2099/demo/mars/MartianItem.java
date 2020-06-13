@@ -28,12 +28,12 @@ public class MartianItem extends Item{
 	}
 
 	@Override
-	public List<Action> allowableActions(Actor actor) {
+	public Ammunition asAmmo() {
 		return null;
 	}
 
 	@Override
-	public Ammunition asAmmo() {
+	public List<Action> playerAllowableActions(game.Player player) {
 		return null;
 	}
 }

@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.Actor;
 public class Sniper extends RangedWeapon {
 	
 	private static final int MAX_AMMO = 5;
-	
+	private ReloadCapability ammoCapability = ReloadCapability.SNIPER;
 	
 	public Sniper() {
 		super("Sniper", '^', 40);
@@ -19,13 +19,13 @@ public class Sniper extends RangedWeapon {
 	protected int getMaxAmmo() {
 		return MAX_AMMO;
 	}
+	
 
-
-	@Override
-	public Ammunition asAmmo() {
-		return null;
+	public ReloadCapability getAmmoCapability() {
+		return ammoCapability;
 	}
-
-
 	
 }
+
+
+

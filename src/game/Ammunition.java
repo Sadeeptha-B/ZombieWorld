@@ -1,6 +1,6 @@
 package game;
 
-public class Ammunition extends PortableItem {
+public abstract class Ammunition extends PortableItem {
 
 	private int ammoCount;
 	private final int ammoCapacity = 30;
@@ -8,8 +8,11 @@ public class Ammunition extends PortableItem {
 	public Ammunition(String name, char displayChar) {
 		super(name, displayChar);
 		ammoCount = getAmmoCapacity();
+		this.addCapability(getWeaponCapability());
 	}
 	
+	protected abstract ReloadCapability getWeaponCapability();
+
 	protected int getAmmoCapacity() {
 		return ammoCapacity;
 	}
@@ -22,7 +25,5 @@ public class Ammunition extends PortableItem {
 		return ammoCount;
 	}
 	
-	public Ammunition asAmmo() {
-		return this instanceof Ammunition ? (Ammunition) this : null;
-	}
+	
 }

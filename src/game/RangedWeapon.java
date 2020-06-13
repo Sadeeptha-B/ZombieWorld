@@ -15,7 +15,7 @@ public abstract class RangedWeapon extends WeaponHandler {
 	
 	public RangedWeapon(String name, char displayChar, int damage) {
 		super(name, displayChar, damage, "shoots");
-		ammoCount = 0;
+		this.ammoCount = 0;
 	}
 	
 	
@@ -33,34 +33,59 @@ public abstract class RangedWeapon extends WeaponHandler {
 		int ammoToAdd;
 		int ammoNeeded = this.getMaxAmmo() -  this.getAmmoCount();
 		ammoToAdd = Math.min(ammoNeeded, ammo);
-		ammoCount += ammoToAdd;
+		ammoCount += ammoToAdd;			
 		return ammoToAdd;
 	}
 	
 	
-	public boolean fullyReloaded() {
+	public boolean fullyLoaded() {
 		return this.getAmmoCount() == this.getMaxAmmo();
 	}
 	
 	
+	private void rangedWeaponDisplay() {
+		System.out.println(this + " Ammo Rounds - " + ammoCount + "  ||   Max Capacity - " + getMaxAmmo());
+	}
+	
+	
+	
 	@Override
-	public List<Action> allowableActions(Actor actor) {
-		List<Action> actions = super.getAllowableActions();
+	public List<Action> playerAllowableActions(Player player) {	
+		List<Action> actions = super.playerAllowableActions(player);
+		
+		if (player.getWeapon() != this)
+			return actions;
+		
+		rangedWeaponDisplay();
 		Ammunition ammo = null;
 		
-		for (Item item: actor.getInventory()) {
-			if (item.asAmmo() != null) {
-				ammo = item.asAmmo();
-			}		
+		
+		for (Item item: player.getInventory()) {
+			if(item.asAmmo() != null) {
+				ammo = (Ammunition) item;
+				ammo = ammoPresent(ammo);
+				if (ammo != null)
+					break;
+			}
 		}
 		
-		boolean weaponAmmoCond = actor.getWeapon() == this && ammo != null;
-		if (weaponAmmoCond && !fullyReloaded()) {
+		
+		if (ammo != null && !fullyLoaded()) 
 			actions.add(new ReloadAction(this, ammo));
-		}
+		
 		return actions;
 	}
 
+	
+	public Ammunition ammoPresent(Ammunition ammo) {
+		if (ammo.getWeaponCapability() == this.getAmmoCapability()) {
+			return ammo;
+		}
+		return null;
+	}
+	
+	
+	public abstract ReloadCapability getAmmoCapability();
 	
 	protected abstract int getMaxAmmo();
 }

@@ -29,7 +29,7 @@ public class Vehicle extends Item {
 	}
 
 
-	public List<Action> allowableActions(Actor actor) {
+	public List<Action> playerAllowableActions(Player player) {
 		return null;
 	}
 

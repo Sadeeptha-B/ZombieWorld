@@ -11,43 +11,47 @@ import edu.monash.fit2099.engine.NumberRange;
 public class MamboMarie extends ZombieActor {
 
 	private Random rand = new Random();
-
+	private static final ZombieCapability attackableTeam = ZombieCapability.ALIVE;
+	private ZombieCapability mobility = ZombieCapability.MOBILE;
+	private final int STAY_TURNS = 30;
 	private int turnCount;
+	
+	
+	
 	private Behaviour[] behaviours = {
-			new AttackBehaviour(ZombieCapability.ALIVE),
-			new HuntBehaviour(Human.class, 10, ZombieCapability.MOBILE),
-			new WanderBehaviour(ZombieCapability.MOBILE)
+			new AttackBehaviour(attackableTeam),
+			new HuntBehaviour(Human.class, 10, mobility),
+			new WanderBehaviour(mobility)
 	};
 	
 	
-	public MamboMarie(String name, char displayChar, int hitPoints, UtilityGameMap ... maps) {
+	
+	public MamboMarie(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints, ZombieCapability.WITCH, ZombieCapability.MOBILE);
-		for (UtilityGameMap map: maps) {
-			map.addActorToDimension(this);
-		}
 	}
+	
 	
 	
 	public void tick(UtilityGameMap map) {
 		turnCount ++;
-		if (turnCount % 1 == 0) {
-			chant(map);
-		}
-		
-		if (map.contains(this) && !map.isActorInDimension(this) && turnCount >= 30) {
+//		if (turnCount % 1 == 0) {
+//			chant(map);
+//		}
+//		
+		if (map.contains(this) && !map.isActorInDimension(this) && turnCount >= STAY_TURNS) {
 			map.removeActor(this);
 			map.addActorToDimension(this);
-	    }
-		else if (rand.nextInt(1) == 0) {
-			map.removeActor(this);
-			map.addActor(this, mamboLocation(map));
+	    } else if (map.isActorInDimension(this) && rand.nextInt(20) == 0) {
+			map.removeActorFromDimension(this);
+			map.addActor(this, getMamboLocation(map));
 			resetCount();
 		}
 		
 	}
 	
 	
-	public Location mamboLocation(UtilityGameMap map){
+	
+	public Location getMamboLocation(UtilityGameMap map){
 		NumberRange xCoords = map.getXRange();
 		NumberRange yCoords = map.getYRange();
 		ArrayList<int[]> mamboCoordinates = new ArrayList<int[]>();

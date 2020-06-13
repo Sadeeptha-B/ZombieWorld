@@ -16,11 +16,5 @@ public class Club extends WeaponHandler {
 	
 	public Club() {
 		super("club", '|', 25, "whams");
-	}
-
-	@Override
-	public List<Action> allowableActions(Actor actor) {
-		return null;
-	}
-	
+	}	
 }

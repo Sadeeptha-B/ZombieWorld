@@ -9,6 +9,7 @@ import java.util.Arrays;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.World;
 import edu.monash.fit2099.engine.Display;
+import edu.monash.fit2099.engine.Location;
 
 
 /**
@@ -25,11 +26,7 @@ public class GameHandler extends World {
 		super(display);
 		this.gameDisplay = gameDisplay;
 	}
-		
-	public void run() {
-		super.run();
-	}
-	
+
 	
 	protected boolean winLoseScenario() {		
 		ArrayList<Boolean> winLose = new ArrayList<Boolean>();

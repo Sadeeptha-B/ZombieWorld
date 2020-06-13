@@ -51,4 +51,9 @@ public class UtilityGameMap extends GameMap {
 	public boolean isActorInDimension(Actor actor) {
 		return actorDimensionLocations.containsKey(actor);
 	}
+	
+	public void removeActorFromDimension(Actor actor) {
+		this.removeActor(actor);
+		actorDimensionLocations.remove(actor);
+	}
 }

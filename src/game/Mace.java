@@ -16,10 +16,4 @@ public class Mace extends WeaponHandler {
 	public Mace() {
 		super("mace", '!', 35, "ker-plunks");
 	}
-
-	@Override
-	public List<Action> allowableActions(Actor actor) {
-		return null;
-	}
-
 }

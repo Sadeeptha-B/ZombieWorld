@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.MoveActorAction;
 import edu.monash.fit2099.engine.NumberRange;
@@ -25,139 +26,76 @@ public class Application {
 	static World world = new GameHandler(new Display(), gameDisplay);
 	static FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Fence(), new Tree(), new Brick());
 	
-	
 	public static void main(String[] args) {
 		
+		UtilityGameMap compound = addUtilityMaps(groundFactory, gameDisplay.getMap("Compound"));
+		GameMap town = addMaps(groundFactory, gameDisplay.getMap("Town"));
 		
-		List<String> compoundMap = Arrays.asList(
-				"................................................................................",
-				"................................................................................",
-				"....................................##########..................................",
-				"..........................###########........#####..............................",
-				"............++...........##......................########.......................",
-				"..............++++.......#..............................##......................",
-				".............+++...+++...#...............................#......................",
-				".........................##..............................##.....................",
-				"..........................#...............................#.....................",
-				".........................##...............................##....................",
-				".........................#...............................##.....................",
-				".........................###..............................##....................",
-				"...........................####......................######.....................",
-				"..............................#########.........####............................",
-				"............+++.......................#.........#...............................",
-				".............+++++....................#.........#...............................",
-				"...............++........................................+++++..................",
-				".............+++....................................++++++++....................",
-				"............+++.......................................+++.......................",
-				"................................................................................",
-				".........................................................................++.....",
-				"........................................................................++.++...",
-				".........................................................................++++...",
-				"..........................................................................++....",
-				"................................................................................");
-		UtilityGameMap compound = addUtilityMaps(groundFactory, compoundMap);
-		
-		
-		List<String> townMap = Arrays.asList(
-				"................................................................................",
-				"........................................#####################...................",
-				".....................................####....................########...........",
-				"......+++........................#####..+...........................####........",
-				".....+.++........................#.....+..................=========....#####....",
-				"......++.........................#........................=.......=........#....",
-				".................................#........................=.......=........#....",
-				".................................##.......................=.......=........#....",
-				"..................................#.......................====.====........#....",
-				"..................................#........................................#....",
-				"..................................#........................................#....",
-				"..................................####....................................##....",
-				".....................................#...................................##.....",
-				".....................................######............................###......",
-				"..........................................#########..................###........",
-				".................................................#####............#####.........",
-				".....................................................#####....######............",
-				".........................................................#....#.................",
-				".........................................................#....#.................",
-				"................................................................................",
-				"................................................................................",
-				"................................................................................",
-				"................................................................................",
-				"................................................................................",
-				"................................................................................");
-
-		GameMap town = addMaps(groundFactory, townMap);
-		
+		//Player
 		Actor player = new Player("Player", '@', 100);
-		world.addPlayer(player, compound.at(42, 15));
+		add(compound, 38, 15, player);
 		
-		MamboMarie mambo = new MamboMarie("Mambo Marie", 'M', 100, compound);
+		//MamboMarie
+		MamboMarie mambo = new MamboMarie("Mambo Marie", 'M', 100);
+		compound.addActorToDimension(mambo);
 		
 
-		
 		// Placing a vehicle for player to move between maps
 		Vehicle compoundVehicle = new Vehicle();
         compoundVehicle.addAction(new MoveActorAction(town.at(65, 20), "to Town!"));
-        compound.at(50, 17).addItem(compoundVehicle);
+        add(compound, 50, 17, compoundVehicle);
+    
 		
-	    // Place some random humans
-		compound.at(31, 7).addActor(new Farmer("Ceres", 'F', 75));
+	    // Farmer
+        add(compound, 31, 7, new Farmer("Ceres", 'F', 75));
+
+        //Humans
 		String[] humans = {"Carlton", "May", "Vicente", "Andrea", "Wendy","Elina", "Winter", "Clem", "Jacob", "Jaquelyn"};
-		addHumansToMap(humans, 30.0, 20.0, 5.0, 7.0, compound);
+		addHumansToMap(humans, 30, 20.0, 5, 7.0, compound);
+		
+		//Items
+		add(compound, 42, 15, new Shotgun());
+		add(compound, 41, 15, new Plank());
+		add(compound, 41, 17, new Sniper());
+		add(compound, 43, 15, new SniperAmmo());
+		
+		//Zombies
+		add(compound, 30, 20, new Zombie("Groan"));
+		add(compound, 30, 18, new Zombie("Boo"));
+		add(compound, 10, 4, new Zombie("Uuuurgg"));
+		add(compound, 50, 18, new Zombie("Mortalis"));
+		add(compound, 1, 10, new Zombie("Gaaaah"));
+		add(compound, 62, 12, new Zombie("Aaargh"));
 		
 
-		compound.at(41, 15).addItem(new Plank());
-		compound.at(41, 17).addItem(new Sniper());
-		compound.at(43, 15).addItem(new SniperAmmo());
-
-		compound.at(30, 20).addActor(new Zombie("Groan"));
-		compound.at(30,  18).addActor(new Zombie("Boo"));
-		compound.at(10,  4).addActor(new Zombie("Uuuurgh"));
-		compound.at(50, 18).addActor(new Zombie("Mortalis"));
-		compound.at(1, 10).addActor(new Zombie("Gaaaah"));
-		compound.at(62, 12).addActor(new Zombie("Aaargh"));	
-		
-		
  /**********************************************************************************************************************/
 		// Town 
-		town.at(29, 18).addActor(new Zombie("Gorbag"));
-		town.at(37, 20).addActor(new Zombie("Shagrat"));
-		town.at(19, 2).addActor(new Zombie("Gollum"));
-		town.at(14, 23).addActor(new Zombie("Azog"));
-		town.at(50, 23).addActor(new Zombie("Bolg"));
-		town.at(75, 24).addActor(new Zombie("Uglúk"));
+		add(town, 29, 18, new Zombie("Gorbag"));
+		add(town, 37, 20, new Zombie("Shagrat"));
+		add(town, 19, 2, new Zombie("Gollum"));
+		add(town, 14, 23, new Zombie("Azog"));
+		add(town, 50, 23, new Zombie("Bolg"));
+		add(town, 75, 24, new Zombie("Uglúk"));
 		
-		
+		//Vehicle
 		Vehicle townVehicle = new Vehicle();
         townVehicle.addAction(new MoveActorAction(compound.at(50, 17), "to the Compound!"));
-        town.at(65, 20).addItem(townVehicle);
-        
+        add(town, 65, 20, townVehicle);
+
+        //Humans
         String[] townHumans = {"Tobias", "Tom", "Dick", "Harry", "Samwise","Elsa", "Clarissa", "X Æ A12", "Simon", "Kristy"};
-		addHumansToMap(townHumans, 42.0, 14.0, 4.0, 10.0, town);
+		addHumansToMap(townHumans, 42, 14.0, 4, 10.0, town);
 		
 		
 		try {
 			world.run();
 		}catch (IllegalStateException e) {
 			Actor player_failsafe = new Player("Player", '@', 100);
-			world.addPlayer(player_failsafe, compound.at(42, 15));
+			add(compound, 42, 15, player_failsafe);
 			world.run();
 		}
 		
 	}
-	
-	
-	public static void addHumansToMap(String[] names,double xStartCoordinate,double xRange,double yStartCoordinate, double yRange, GameMap map) {
-		int x, y;
-		for (String name : names) {
-			do {
-				x = (int) Math.floor(Math.random() * xRange + xStartCoordinate);
-				y = (int) Math.floor(Math.random() * yRange + yStartCoordinate);
-			} 
-			while (map.at(x, y).containsAnActor());
-			map.at(x, y).addActor(new Human(name));	
-		}
-	}
-	
 	
 	public static UtilityGameMap addUtilityMaps(FancyGroundFactory groundFactory, List<String> bluePrint) {
 		UtilityGameMap map = new UtilityGameMap(groundFactory, bluePrint);
@@ -171,10 +109,49 @@ public class Application {
 		return map;
 	}
 	
-	public static int[] mamboLocationAux(int heights, int widths) {
-		int x = rand.nextInt(80);
-		int y = rand.nextInt(25);
-		return new int[] {x,y};
+	
+	private static Location getMapValidLocation(GameMap map, int x, int y) {
+		Location location;
+		try {
+			location = map.at(x, y);
+		} catch (Exception e) {
+			x = rand.nextInt(map.getXRange().max());
+			y = rand.nextInt(map.getYRange().min());
+			location = map.at(x, y);
+		}
+		return location;
+	}
+	
+	public static void add(GameMap map, int x, int y, Item item) {
+		getMapValidLocation(map, x, y).addItem(item);
+	}
+	
+		
+	public static void add(GameMap map, int x, int y, Actor actor) {
+		Location location = actorValidLocation(actor, getMapValidLocation(map, x, y), 2,2);
+		if (actor.isPlayer())
+			world.addPlayer(actor, location);
+		else 
+			location.addActor(actor);
+	}
+	
+	private static Location actorValidLocation(Actor actor, Location location, double xRange, double yRange) {
+		int x, y;
+		while (!location.canActorEnter(actor)) {
+			x = (int) Math.floor(Math.random() * xRange + location.x());
+			y = (int) Math.floor(Math.random() * yRange + location.y()); 
+			location = getMapValidLocation(location.map(),x, y);
+		}
+		return location;
+	}
+	
+	
+	public static void addHumansToMap(String[] names,int xStartCoordinate,double xRange,int yStartCoordinate, double yRange, GameMap map) {
+		for (String name : names) {
+			Human human = new Human(name);
+			Location location = actorValidLocation(human, map.at(xStartCoordinate, yStartCoordinate), xRange, yRange);
+			add(map,location.x(), location.y(), human);
+		}
 	}
 	
 }

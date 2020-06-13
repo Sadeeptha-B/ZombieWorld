@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.monash.fit2099.engine.Action;
+import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 
 
@@ -26,19 +27,6 @@ public class PortableItem extends Item {
 		return this instanceof CraftableItem ? (CraftableItem) this : null;
 	}
 	
-
-	/**
-	 * Allowable actions for portable items.
-	 */
-	public List<Action> getAllowableActions() {
-		List<Action> list = super.getAllowableActions();
-		List<Action> actions = new ArrayList<Action>();
-		
-		for (Action action: list) {
-			actions.add(action);
-		}
-		return actions;
-	}
 	
 	@Override
 	/**
@@ -48,8 +36,10 @@ public class PortableItem extends Item {
 		return false;
 	}	
 	
-	public List<Action> allowableActions(Actor actor){
-		return getAllowableActions();
+	
+	public List<Action> playerAllowableActions(Player player){
+		List<Action> actions = new ArrayList<Action>();
+		return actions;
 	}
 
 	@Override

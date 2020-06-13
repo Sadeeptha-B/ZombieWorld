@@ -12,7 +12,6 @@ import edu.monash.fit2099.engine.Item;
  */
 public class ReloadAction extends Action {
 	
-
 	private Ammunition ammo;
 	private RangedWeapon weapon;
 	
@@ -36,6 +35,6 @@ public class ReloadAction extends Action {
 	
 	@Override
 	public String menuDescription(Actor actor) {
-		return "Reload gun";
+		return "Reload " + weapon;
 	}
 }

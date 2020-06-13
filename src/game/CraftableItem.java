@@ -34,9 +34,9 @@ public abstract class CraftableItem extends PortableItem {
 	public abstract WeaponItem craft();
 	
 
-	public List<Action> allowableActions(Actor actor) {
-		List<Action> actions = super.allowableActions(actor);
-		if (actor.getInventory().contains(this))
+	public List<Action> playerAllowableActions(Player player) {
+		List<Action> actions = super.playerAllowableActions(player);
+		if (player.getInventory().contains(this))
 			actions.add(new CraftAction(this));
 		return actions;
 	}
